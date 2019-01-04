@@ -1,0 +1,32 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "plugins": [
+    "babel",
+    "react",
+    "promise",
+    "prettier"
+  ],
+  "env": {
+    "es6": true,
+    "browser" : true
+  },
+  "rules": {
+    "key-spacing"          : 0,
+    "jsx-quotes"           : [2, "prefer-double"],
+    "object-curly-spacing" : [2, "always"],
+    "quotes": 0,
+    "semi": [1, "never"],
+    "no-trailing-spaces": 0,
+    "no-multi-spaces": 0,
+    "space-before-function-paren": 0,
+    "space-before-blocks": 0,
+    "jsx-boolean-value": 0,
+    "no-multiple-empty-lines": 0,
+    "camelcase": "off",
+    "prettier/prettier": 1
+  }
+}
