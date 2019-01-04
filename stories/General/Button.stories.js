@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
-import { Button } from '@storybook/react/demo';
+import { Button } from '../../src/components'
 
 storiesOf('Button', module)
   .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
@@ -13,4 +13,4 @@ storiesOf('Button', module)
         😀 😎 👍 💯🙃
       </span>
     </Button>
-  ));
+  ))
