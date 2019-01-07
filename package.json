@@ -8,6 +8,7 @@
     "test:watch": "./node_modules/.bin/jest --watch",
     "test:coverage": "./node_modules/.bin/jest --coverage",
     "test:memory": "./node_modules/.bin/jest --env=node --logHeapUsage",
+    "ci": "./node_modules/.bin/eslint src/**/*.js && ./node_modules/.bin/jest --coverage",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
