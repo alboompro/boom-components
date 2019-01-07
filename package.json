@@ -54,7 +54,8 @@
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^23.6.0",
     "prettier": "^1.15.3",
-    "prop-types": "^15.6.2"
+    "prop-types": "^15.6.2",
+    "react-storybook-addon-props-combinations": "^1.1.0"
   },
   "jest": {
     "setupFiles": [

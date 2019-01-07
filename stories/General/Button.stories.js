@@ -1,16 +1,15 @@
-import React from 'react'
-
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
+import withPropsCombinations from 'react-storybook-addon-props-combinations'
 
 import { Button } from '../../src/components'
 
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => (
-    <Button onClick={action('clicked')}>
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯🙃
-      </span>
-    </Button>
-  ))
+storiesOf('Button', module).add(
+  'Standard usage',
+  withPropsCombinations(Button, {
+    children: ['Hello Button'],
+    disabled: [true, false],
+    onClick: [action('clicked')],
+    textStyle: [null, { color: '#f00' }]
+  })
+)

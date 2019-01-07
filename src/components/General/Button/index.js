@@ -3,6 +3,12 @@ import PropTypes from 'prop-types'
 
 import { DefaultBtn, Icon, Text } from './styles'
 
+/**
+ * Component that behaves like a button
+ *
+ * @param {*} { className, children, textStyle, style, type, icon, iconStyle, disabled, onClick }
+ * @returns {Component}
+ */
 const Button = ({ className, children, textStyle, style, type, icon, iconStyle, disabled, onClick }) => {
   return (
     <DefaultBtn type={type} className={className} onClick={onClick} disabled={disabled} style={style}>
