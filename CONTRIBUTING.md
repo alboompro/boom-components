@@ -4,12 +4,12 @@ Contributing to Boom Components isn't limited to just filing bugs, users are mor
 
 ### Development process
 
-boom-elements uses [Storybook](https://storybook.js.org/) to get an interactive UI and improve our development workflow.
+Boom Components uses [Storybook](https://storybook.js.org/) to get an interactive UI and improve our development workflow.
 
 To start developing fork/clone this repo and run the following:
 
 ```bash
-$ cd boom-elements
+$ cd boom-components
 $ npm i
 $ npm run storybook
 ```
