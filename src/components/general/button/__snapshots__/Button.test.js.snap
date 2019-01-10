@@ -3,13 +3,16 @@
 exports[`Button Snapshot 1`] = `
 <Button
   disabled={false}
-  type="button"
+  htmlType="button"
+  type="default"
 >
   <styled.button
+    colorType="default"
     disabled={false}
     type="button"
   >
     <StyledComponent
+      colorType="default"
       disabled={false}
       forwardedComponent={
         Object {
@@ -17,11 +20,11 @@ exports[`Button Snapshot 1`] = `
           "attrs": Array [],
           "componentStyle": ComponentStyle {
             "componentId": "sc-bdVaJa",
-            "isStatic": true,
-            "lastClassName": "hyTKFx",
+            "isStatic": false,
+            "lastClassName": "gZAtua",
             "rules": Array [
               "
-  display: flex;
+  display: inline-block;
   align-items: center;
   justify-content: center;
   height: 35px;
@@ -31,6 +34,14 @@ exports[`Button Snapshot 1`] = `
   font-size: 16px;
   cursor: pointer;
   transition: opacity 150ms ease-in-out;
+  background-color: ",
+              [Function],
+              ";
+  color: ",
+              [Function],
+              ";
+  margin-right: 8px;
+  margin-bottom: 12px;
 
   &:hover {
     opacity: 0.8;
@@ -60,7 +71,7 @@ exports[`Button Snapshot 1`] = `
       type="button"
     >
       <button
-        className="sc-bdVaJa hyTKFx"
+        className="sc-bdVaJa gZAtua"
         disabled={false}
         type="button"
       >

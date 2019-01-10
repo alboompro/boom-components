@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
+import colors from '../../../constants/colors'
+
 export const DefaultBtn = styled.button`
-  display: flex;
+  display: inline-block;
   align-items: center;
   justify-content: center;
   height: 35px;
@@ -11,6 +13,10 @@ export const DefaultBtn = styled.button`
   font-size: 16px;
   cursor: pointer;
   transition: opacity 150ms ease-in-out;
+  background-color: ${props => colors[props.colorType] || colors.default};
+  color: ${props => (props.colorType === 'primary' ? '#fff' : '#000')};
+  margin-right: 8px;
+  margin-bottom: 12px;
 
   &:hover {
     opacity: 0.8;

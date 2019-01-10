@@ -11,14 +11,14 @@
     "themeConfig": {}
   },
   "entries": {
-    "src/components/general/buttons/index.mdx": {
+    "src/components/general/button/index.mdx": {
       "name": "Button",
       "menu": "General",
-      "id": "64ecd6cf83dec548ff14f81c1f83822e",
-      "filepath": "src/components/general/buttons/index.mdx",
-      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/general/buttons/index.mdx",
-      "slug": "src-components-general-buttons-index",
-      "route": "/src-components-general-buttons-index",
+      "id": "f82c8173ba3a87a5a540521cbe653e48",
+      "filepath": "src/components/general/button/index.mdx",
+      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/general/button/index.mdx",
+      "slug": "src-components-general-button-index",
+      "route": "/src-components-general-button-index",
       "order": 0,
       "headings": [
         {

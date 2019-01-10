@@ -9,8 +9,8 @@ import { DefaultBtn, Icon, Text } from './styles'
  * @param {*} { className, children, textStyle, style, type, icon, iconStyle, disabled, onClick }
  * @returns {Component}
  */
-const Button = ({ children, textStyle, icon, iconStyle, ...props }) => (
-  <DefaultBtn {...props}>
+const Button = ({ children, textStyle, icon, iconStyle, htmlType, type, ...props }) => (
+  <DefaultBtn type={htmlType} colorType={type} {...props}>
     {icon && <Icon style={iconStyle}>{icon}</Icon>}
     <Text style={textStyle}>{children}</Text>
   </DefaultBtn>
@@ -23,6 +23,8 @@ Button.propTypes = {
   className: PropTypes.string,
   /** disabled state of the button */
   disabled: PropTypes.bool,
+  /** HTML type of button */
+  htmlType: PropTypes.oneOf(['button', 'reset', 'submit']),
   /** set the icon of button */
   icon: PropTypes.element,
   /** set the style of icon */
@@ -33,14 +35,15 @@ Button.propTypes = {
   style: PropTypes.object,
   /** set the style of text */
   textStyle: PropTypes.object,
-  /** HTML type of button */
-  type: PropTypes.oneOf(['button', 'reset', 'submit'])
+  /** set the pattern of button */
+  type: PropTypes.oneOf(['default', 'primary'])
 }
 
 Button.defaultProps = {
   children: '',
   disabled: false,
-  type: 'button'
+  htmlType: 'button',
+  type: 'default'
 }
 
 export default Button
