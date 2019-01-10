@@ -6,7 +6,7 @@ import { DefaultBtn, Icon, Text } from './styles'
 /**
  * Component to trigger an operation.
  *
- * @param {*} { className, children, textStyle, style, type, icon, iconStyle, disabled, onClick }
+ * @param {*} { children, textStyle, icon, iconStyle, htmlType, type, ...props }
  * @returns {Component}
  */
 const Button = ({ children, textStyle, icon, iconStyle, htmlType, type, ...props }) => (
