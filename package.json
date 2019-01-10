@@ -10,6 +10,7 @@
     "test:watch": "./node_modules/.bin/jest --watch",
     "test:coverage": "./node_modules/.bin/jest --coverage",
     "test:memory": "./node_modules/.bin/jest --env=node --logHeapUsage",
+    "test:updateSnapshot": "./node_modules/.bin/jest --updateSnapshot",
     "ci": "./node_modules/.bin/eslint src/**/*.js && ./node_modules/.bin/jest --coverage"
   },
   "repository": {
