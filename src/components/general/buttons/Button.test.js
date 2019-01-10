@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import { Button } from '../../../src/components'
+import Button from './Button'
 
 describe('Button', () => {
   test('Snapshot', () => {
