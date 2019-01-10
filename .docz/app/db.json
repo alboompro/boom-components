@@ -1,0 +1,42 @@
+{
+  "config": {
+    "title": "Boom Components",
+    "description": "My awesome app using docz",
+    "menu": [],
+    "ordering": "descending",
+    "version": "0.0.1",
+    "repository": "https://gitlab.com/alboom/boom-components",
+    "native": false,
+    "codeSandbox": true,
+    "themeConfig": {}
+  },
+  "entries": {
+    "src/components/general/buttons/index.mdx": {
+      "name": "Button",
+      "menu": "General",
+      "id": "64ecd6cf83dec548ff14f81c1f83822e",
+      "filepath": "src/components/general/buttons/index.mdx",
+      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/general/buttons/index.mdx",
+      "slug": "src-components-general-buttons-index",
+      "route": "/src-components-general-buttons-index",
+      "order": 0,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "button",
+          "value": "Button"
+        },
+        {
+          "depth": 3,
+          "slug": "basic-usage",
+          "value": "Basic usage"
+        },
+        {
+          "depth": 2,
+          "slug": "api",
+          "value": "API"
+        }
+      ]
+    }
+  }
+}

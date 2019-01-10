@@ -1,9 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button Snapshot 1`] = `
-<Button>
-  <styled.button>
+<Button
+  disabled={false}
+  type="button"
+>
+  <styled.button
+    disabled={false}
+    type="button"
+  >
     <StyledComponent
+      disabled={false}
       forwardedComponent={
         Object {
           "$$typeof": Symbol(react.forward_ref),
@@ -50,9 +57,12 @@ exports[`Button Snapshot 1`] = `
         }
       }
       forwardedRef={null}
+      type="button"
     >
       <button
         className="sc-bdVaJa hyTKFx"
+        disabled={false}
+        type="button"
       >
         <styled.span>
           <StyledComponent
