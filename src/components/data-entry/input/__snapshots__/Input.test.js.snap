@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Snapshot 1`] = `
+<Input
+  readOnly={true}
+  size="default"
+  value="Test"
+>
+  <styled.input
+    readOnly={true}
+    size="default"
+    value="Test"
+  >
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "lastClassName": "cNTepu",
+            "rules": Array [
+              "
+  display: inline-block;
+  position: relative;
+  border: 1px solid ",
+              "#e9e9e9",
+              ";
+  border-radius: 4px;
+  width: 200px;
+  margin: 0 8px 8px 0;
+  line-height: 1.5;
+  padding: ",
+              [Function],
+              ";
+  font-size: ",
+              [Function],
+              ";
+  height: ",
+              [Function],
+              ";
+",
+            ],
+          },
+          "displayName": "styled.input",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "input",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+      readOnly={true}
+      size="default"
+      value="Test"
+    >
+      <input
+        className="sc-bdVaJa cNTepu"
+        readOnly={true}
+        size="default"
+        value="Test"
+      />
+    </StyledComponent>
+  </styled.input>
+</Input>
+`;
