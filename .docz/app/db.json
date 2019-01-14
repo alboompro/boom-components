@@ -11,25 +11,20 @@
     "themeConfig": {}
   },
   "entries": {
-    "src/components/general/button/index.mdx": {
-      "name": "Button",
-      "menu": "General",
-      "id": "f82c8173ba3a87a5a540521cbe653e48",
-      "filepath": "src/components/general/button/index.mdx",
-      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/general/button/index.mdx",
-      "slug": "src-components-general-button-index",
-      "route": "/src-components-general-button-index",
+    "src/components/data-entry/autocomplete/index.mdx": {
+      "name": "Autocomplete",
+      "menu": "Data Entry",
+      "id": "0182c5ad704d7eb0f15ccc1a2a463f17",
+      "filepath": "src/components/data-entry/autocomplete/index.mdx",
+      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/data-entry/autocomplete/index.mdx",
+      "slug": "src-components-data-entry-autocomplete-index",
+      "route": "/src-components-data-entry-autocomplete-index",
       "order": 0,
       "headings": [
         {
           "depth": 1,
-          "slug": "button",
-          "value": "Button"
-        },
-        {
-          "depth": 3,
-          "slug": "basic-usage",
-          "value": "Basic usage"
+          "slug": "autocomplete",
+          "value": "Autocomplete"
         },
         {
           "depth": 2,
@@ -101,6 +96,33 @@
           "depth": 1,
           "slug": "radio",
           "value": "Radio"
+        },
+        {
+          "depth": 2,
+          "slug": "api",
+          "value": "API"
+        }
+      ]
+    },
+    "src/components/general/button/index.mdx": {
+      "name": "Button",
+      "menu": "General",
+      "id": "f82c8173ba3a87a5a540521cbe653e48",
+      "filepath": "src/components/general/button/index.mdx",
+      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/general/button/index.mdx",
+      "slug": "src-components-general-button-index",
+      "route": "/src-components-general-button-index",
+      "order": 0,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "button",
+          "value": "Button"
+        },
+        {
+          "depth": 3,
+          "slug": "basic-usage",
+          "value": "Basic usage"
         },
         {
           "depth": 2,
