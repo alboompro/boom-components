@@ -121,6 +121,28 @@
         }
       ]
     },
+    "src/components/data-entry/slider/index.mdx": {
+      "name": "Slider",
+      "menu": "Data Entry",
+      "id": "445df854a3d84188aeb052019e22e8a6",
+      "filepath": "src/components/data-entry/slider/index.mdx",
+      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/data-entry/slider/index.mdx",
+      "slug": "src-components-data-entry-slider-index",
+      "route": "/src-components-data-entry-slider-index",
+      "order": 0,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "slider",
+          "value": "Slider"
+        },
+        {
+          "depth": 2,
+          "slug": "api",
+          "value": "API"
+        }
+      ]
+    },
     "src/components/data-entry/switch/index.mdx": {
       "name": "Switch",
       "menu": "Data Entry",
