@@ -21,7 +21,7 @@ Input.propTypes = {
   /** initial input content */
   defaultValue: PropTypes.string,
   /** disabled state of the input */
-  disabled: PropTypes.string,
+  disabled: PropTypes.bool,
   /** callback when value changes */
   onChange: PropTypes.func,
   /** callback when enter key is pressed */

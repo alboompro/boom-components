@@ -2,16 +2,21 @@
 
 exports[`Input Snapshot 1`] = `
 <Input
+  disabled={false}
   readOnly={true}
   size="default"
+  type="text"
   value="Test"
 >
   <styled.input
+    disabled={false}
     readOnly={true}
     size="default"
+    type="text"
     value="Test"
   >
     <StyledComponent
+      disabled={false}
       forwardedComponent={
         Object {
           "$$typeof": Symbol(react.forward_ref),
@@ -56,12 +61,15 @@ exports[`Input Snapshot 1`] = `
       forwardedRef={null}
       readOnly={true}
       size="default"
+      type="text"
       value="Test"
     >
       <input
         className="sc-bdVaJa cNTepu"
+        disabled={false}
         readOnly={true}
         size="default"
+        type="text"
         value="Test"
       />
     </StyledComponent>

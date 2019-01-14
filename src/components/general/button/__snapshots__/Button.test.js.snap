@@ -4,11 +4,21 @@ exports[`Button Snapshot 1`] = `
 <Button
   disabled={false}
   htmlType="button"
+  loading={false}
+  outlined={false}
+  rounded={false}
+  size="default"
+  stretched={false}
   type="default"
 >
   <styled.button
     colorType="default"
     disabled={false}
+    loading={false}
+    outlined={false}
+    rounded={false}
+    size="default"
+    stretched={false}
     type="button"
   >
     <StyledComponent
@@ -68,11 +78,17 @@ exports[`Button Snapshot 1`] = `
         }
       }
       forwardedRef={null}
+      loading={false}
+      outlined={false}
+      rounded={false}
+      size="default"
+      stretched={false}
       type="button"
     >
       <button
         className="sc-bdVaJa gZAtua"
         disabled={false}
+        size="default"
         type="button"
       >
         <styled.span>
