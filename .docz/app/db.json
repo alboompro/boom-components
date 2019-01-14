@@ -11,6 +11,55 @@
     "themeConfig": {}
   },
   "entries": {
+    "src/components/general/button/index.mdx": {
+      "name": "Button",
+      "menu": "General",
+      "id": "f82c8173ba3a87a5a540521cbe653e48",
+      "filepath": "src/components/general/button/index.mdx",
+      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/general/button/index.mdx",
+      "slug": "src-components-general-button-index",
+      "route": "/src-components-general-button-index",
+      "order": 0,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "button",
+          "value": "Button"
+        },
+        {
+          "depth": 3,
+          "slug": "basic-usage",
+          "value": "Basic usage"
+        },
+        {
+          "depth": 2,
+          "slug": "api",
+          "value": "API"
+        }
+      ]
+    },
+    "src/components/data-entry/checkbox/index.mdx": {
+      "name": "Checkbox",
+      "menu": "Data Entry",
+      "id": "044bb7a7a01c1576356007a4dac63c18",
+      "filepath": "src/components/data-entry/checkbox/index.mdx",
+      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/data-entry/checkbox/index.mdx",
+      "slug": "src-components-data-entry-checkbox-index",
+      "route": "/src-components-data-entry-checkbox-index",
+      "order": 0,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "checkbox",
+          "value": "Checkbox"
+        },
+        {
+          "depth": 2,
+          "slug": "api",
+          "value": "API"
+        }
+      ]
+    },
     "src/components/data-entry/input/index.mdx": {
       "name": "Input",
       "menu": "Data Entry",
@@ -38,25 +87,20 @@
         }
       ]
     },
-    "src/components/general/button/index.mdx": {
-      "name": "Button",
-      "menu": "General",
-      "id": "f82c8173ba3a87a5a540521cbe653e48",
-      "filepath": "src/components/general/button/index.mdx",
-      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/general/button/index.mdx",
-      "slug": "src-components-general-button-index",
-      "route": "/src-components-general-button-index",
+    "src/components/data-entry/radio/index.mdx": {
+      "name": "Radio",
+      "menu": "Data Entry",
+      "id": "ba53a08c663650df3009bfcc251e70d9",
+      "filepath": "src/components/data-entry/radio/index.mdx",
+      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/data-entry/radio/index.mdx",
+      "slug": "src-components-data-entry-radio-index",
+      "route": "/src-components-data-entry-radio-index",
       "order": 0,
       "headings": [
         {
           "depth": 1,
-          "slug": "button",
-          "value": "Button"
-        },
-        {
-          "depth": 3,
-          "slug": "basic-usage",
-          "value": "Basic usage"
+          "slug": "radio",
+          "value": "Radio"
         },
         {
           "depth": 2,
