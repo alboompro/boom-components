@@ -9,6 +9,8 @@ export const imports = {
     import(/* webpackPrefetch: true, webpackChunkName: "src-components-data-entry-input-index" */ 'src/components/data-entry/input/index.mdx'),
   'src/components/data-entry/radio/index.mdx': () =>
     import(/* webpackPrefetch: true, webpackChunkName: "src-components-data-entry-radio-index" */ 'src/components/data-entry/radio/index.mdx'),
+  'src/components/data-entry/switch/index.mdx': () =>
+    import(/* webpackPrefetch: true, webpackChunkName: "src-components-data-entry-switch-index" */ 'src/components/data-entry/switch/index.mdx'),
   'src/components/general/button/index.mdx': () =>
     import(/* webpackPrefetch: true, webpackChunkName: "src-components-general-button-index" */ 'src/components/general/button/index.mdx'),
 }
