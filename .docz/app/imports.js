@@ -1,4 +1,6 @@
 export const imports = {
+  'src/index.mdx': () =>
+    import(/* webpackPrefetch: true, webpackChunkName: "src-index" */ 'src/index.mdx'),
   'src/components/data-entry/autocomplete/index.mdx': () =>
     import(/* webpackPrefetch: true, webpackChunkName: "src-components-data-entry-autocomplete-index" */ 'src/components/data-entry/autocomplete/index.mdx'),
   'src/components/data-entry/checkbox/index.mdx': () =>

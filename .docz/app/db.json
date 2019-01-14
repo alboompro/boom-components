@@ -11,6 +11,23 @@
     "themeConfig": {}
   },
   "entries": {
+    "src/index.mdx": {
+      "name": "Home",
+      "route": "/",
+      "id": "6576455a124f9aaefd860597f03a8fe4",
+      "filepath": "src/index.mdx",
+      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/index.mdx",
+      "slug": "src-index",
+      "order": 0,
+      "menu": null,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "home",
+          "value": "Home"
+        }
+      ]
+    },
     "src/components/data-entry/autocomplete/index.mdx": {
       "name": "Autocomplete",
       "menu": "Data Entry",
