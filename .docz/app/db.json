@@ -72,6 +72,28 @@
         }
       ]
     },
+    "src/components/data-entry/dropdown/index.mdx": {
+      "name": "Dropdown",
+      "menu": "Data Entry",
+      "id": "581dc4d6cd8e5025317a3e0943761782",
+      "filepath": "src/components/data-entry/dropdown/index.mdx",
+      "link": "https://gitlab.com/alboom/boom-components/edit/master/src/components/data-entry/dropdown/index.mdx",
+      "slug": "src-components-data-entry-dropdown-index",
+      "route": "/src-components-data-entry-dropdown-index",
+      "order": 0,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "dropdown",
+          "value": "Dropdown"
+        },
+        {
+          "depth": 2,
+          "slug": "api",
+          "value": "API"
+        }
+      ]
+    },
     "src/components/data-entry/input/index.mdx": {
       "name": "Input",
       "menu": "Data Entry",
