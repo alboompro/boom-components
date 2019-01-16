@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Avatar = ({ ...props }) => <div />
+const ProfilePicture = ({ ...props }) => <div />
 
-Avatar.propTypes = {
+ProfilePicture.propTypes = {
   /** alternative text describing the image */
   alt: PropTypes.string,
-  /** icon of avatar */
+  /** icon of profile picture */
   icon: PropTypes.string,
   /** callback when image load fail, return false to prevent default behavior */
   onError: PropTypes.func,
-  /** size of avatar */
+  /** size of profile picture */
   size: PropTypes.oneOf(['default', 'large', 'small']),
-  /** whether avatar should be square */
+  /** whether profile picture should be square */
   square: PropTypes.bool,
   /** address of the image */
   src: PropTypes.string,
@@ -20,9 +20,9 @@ Avatar.propTypes = {
   srcSet: PropTypes.string
 }
 
-Avatar.defaultProps = {
+ProfilePicture.defaultProps = {
   size: 'default',
   square: false
 }
 
-export default Avatar
+export default ProfilePicture
