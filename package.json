@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docs": "docz dev",
-    "docs:build": "docz build",
-    "precommit": "npm run ci",
+    "ci": "npm run lint && npm run test:coverage",
+    "docs": "./node_modules/.bin/docz dev",
+    "docs:build": "./node_modules/.bin/docz build",
+    "lint": "./node_modules/.bin/eslint src/**/*.js",
+    "precommit": "npm run lint && npm test",
     "test": "./node_modules/.bin/jest",
     "test:watch": "./node_modules/.bin/jest --watch",
     "test:coverage": "./node_modules/.bin/jest --coverage",
     "test:memory": "./node_modules/.bin/jest --env=node --logHeapUsage",
-    "test:updateSnapshot": "./node_modules/.bin/jest --updateSnapshot",
-    "ci": "./node_modules/.bin/eslint src/**/*.js && ./node_modules/.bin/jest --coverage"
+    "test:updateSnapshot": "./node_modules/.bin/jest --updateSnapshot"
   },
   "repository": {
     "type": "git",
