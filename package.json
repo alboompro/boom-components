@@ -1,5 +1,5 @@
 {
-  "name": "boom-components",
+  "name": "@alboom/boom-components",
   "version": "0.0.1",
   "description": "React UI library containing a set of high quality components for building rich, interactive user interfaces in Alboom applications",
   "main": "index.js",
@@ -22,6 +22,9 @@
     "test:memory": "./node_modules/.bin/jest --env=node --logHeapUsage",
     "test:updateSnapshot": "./node_modules/.bin/jest --updateSnapshot"
   },
+  "files": [
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@gitlab.com/alboom/boom-components.git"
@@ -58,7 +61,6 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.4.4",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.5",
     "cross-env": "^5.2.0",
     "docz": "^1.2.0",
@@ -81,6 +83,7 @@
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-react-hooks": "^1.6.0",
     "eslint-plugin-standard": "^4.0.0",
+    "fs-extra": "^7.0.1",
     "husky": "^2.2.0",
     "jest": "^24.8.0",
     "prettier": "^1.17.0",

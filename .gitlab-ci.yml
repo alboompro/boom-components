@@ -1,7 +1,7 @@
 image: node:9
 
 before_script:
-  - npm prune
+  - npm install
 
 stages:
   - test
@@ -11,6 +11,6 @@ test:
   script:
     - NODE_ENV=ci npm run ci
   cache:
-    key: '$CI_BUILD_REF_NAME'
+    key: "$CI_BUILD_REF_NAME"
     paths:
-      - 'node_modules/'
+      - "node_modules/"
