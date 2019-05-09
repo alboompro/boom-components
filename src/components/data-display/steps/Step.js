@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-const Step = ({ ...props }) => <div />
+const Step = ({ ...props }) => <div />;
 
 Step.propTypes = {
   /** description of the step */
@@ -9,13 +9,15 @@ Step.propTypes = {
   /** icon of the step */
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** status of step */
-  status: PropTypes.oneOf(['error', 'finished', 'processing', 'waiting']),
+  status: PropTypes.oneOf(["error", "finished", "processing", "waiting"]),
   /** title of the step */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired
-}
+};
 
 Step.defaultProps = {
-  status: 'waiting'
-}
+  status: "waiting",
+  icon: null,
+  description: ""
+};
 
-export default Step
+export default Step;

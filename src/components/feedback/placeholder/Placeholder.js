@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-const Placeholder = ({ ...props }) => <div />
+const Placeholder = ({ ...props }) => <div />;
 
 Placeholder.propTypes = {
   /** whether show animation */
@@ -14,7 +14,7 @@ Placeholder.propTypes = {
   paragraph: PropTypes.bool,
   /** whether show title placeholder */
   title: PropTypes.bool
-}
+};
 
 Placeholder.defaultProps = {
   animated: false,
@@ -22,6 +22,6 @@ Placeholder.defaultProps = {
   loading: false,
   paragraph: true,
   title: true
-}
+};
 
-export default Placeholder
+export default Placeholder;

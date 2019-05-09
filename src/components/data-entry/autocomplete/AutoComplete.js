@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import { noop } from "../../../helpers";
 
-const AutoComplete = ({ ...props }) => <div />
+const AutoComplete = ({ ...props }) => <div />;
 
 AutoComplete.propTypes = {
   /** whether activate first option by default */
@@ -30,13 +31,22 @@ AutoComplete.propTypes = {
   placeholder: PropTypes.string,
   /** selected option */
   value: PropTypes.string
-}
+};
 
 AutoComplete.defaultProps = {
   activateFirstOption: true,
+  dataSource: [],
+  defaultOpen: false,
+  defaultValue: null,
   clearable: false,
   disabled: false,
-  fulfill: false
-}
+  fulfill: false,
+  onOpenStateChange: noop,
+  onSearch: noop,
+  onSelect: noop,
+  open: false,
+  placeholder: "",
+  value: null
+};
 
-export default AutoComplete
+export default AutoComplete;

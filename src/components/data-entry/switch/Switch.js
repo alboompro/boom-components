@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import { noop } from "../../../helpers";
 
-const Switch = ({ ...props }) => <div />
+const Switch = ({ ...props }) => <div />;
 
 Switch.propTypes = {
   /** whether switch is checked */
@@ -11,16 +12,17 @@ Switch.propTypes = {
   /** disabled status of switch */
   disabled: PropTypes.bool,
   /** size of switch */
-  size: PropTypes.oneOf(['small', 'default']),
+  size: PropTypes.oneOf(["small", "default"]),
   /** callback when state changes */
   onChange: PropTypes.func
-}
+};
 
 Switch.defaultProps = {
   checked: false,
   defaultChecked: false,
   disabled: false,
-  size: 'default'
-}
+  size: "default",
+  onChange: noop
+};
 
-export default Switch
+export default Switch;

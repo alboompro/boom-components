@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-const Badge = ({ ...props }) => <div />
+const Badge = ({ ...props }) => <div />;
 
 Badge.propTypes = {
   /** number or icon to show in badge */
-  count: PropTypes.oneOfType([PropTypes.number, PropTypes.node]),
+  count: PropTypes.oneOfType([PropTypes.number, PropTypes.node]).isRequired,
   /** whether to display a dot instead of count */
   dot: PropTypes.bool,
   /** offset of the badge in pixels, like [x, y] */
@@ -15,15 +15,24 @@ Badge.propTypes = {
   /** whether show badge when count is zero */
   showZero: PropTypes.bool,
   /** set badge as a status dot */
-  status: PropTypes.oneOf(['default', 'error', 'processing', 'success', 'warning']),
+  status: PropTypes.oneOf([
+    "default",
+    "error",
+    "processing",
+    "success",
+    "warning"
+  ]),
   /** text to show when hovering over the badge */
-  title: PropTypes.string
-}
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+};
 
 Badge.defaultProps = {
   dot: false,
+  offset: [0, 0],
   overflowCount: 99,
-  showZero: false
-}
+  status: "default",
+  showZero: false,
+  title: null
+};
 
-export default Badge
+export default Badge;

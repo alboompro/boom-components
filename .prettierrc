@@ -1,7 +1,11 @@
 {
-  "semi": false,
-  "singleQuote": true,
-  "bracketSpacing": true,
-  "jsxBracketSameLine": true,
-  "printWidth": 120
+  "singleQuote": false,
+  "printWidth": 80,
+  "proseWrap": "never",
+  "overrides": [{
+    "files": ".prettierrc",
+    "options": {
+      "parser": "json"
+    }
+  }]
 }

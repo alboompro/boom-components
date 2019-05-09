@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import { noop } from "../../../helpers";
 
-const Tooltip = ({ ...props }) => <div />
+const Tooltip = ({ ...props }) => <div />;
 
 Tooltip.propTypes = {
   /** whether to adjust popup placement automatically when it is off screen */
@@ -18,24 +19,24 @@ Tooltip.propTypes = {
   onVisibleChange: PropTypes.func,
   /** placement of tooltip relative to its target */
   placement: PropTypes.oneOf([
-    'topLeft',
-    'top',
-    'topRight',
-    'rightTop',
-    'right',
-    'rightBottom',
-    'bottomRight',
-    'bottom',
-    'bottomLeft',
-    'leftBottom',
-    'left',
-    'leftTop'
+    "topLeft",
+    "top",
+    "topRight",
+    "rightTop",
+    "right",
+    "rightBottom",
+    "bottomRight",
+    "bottom",
+    "bottomLeft",
+    "leftBottom",
+    "left",
+    "leftTop"
   ]),
   /** tooltip trigger */
-  trigger: PropTypes.oneOf(['click', 'contextMenu', 'focus', 'hover']),
+  trigger: PropTypes.oneOf(["click", "contextMenu", "focus", "hover"]),
   /** whether tooltip is visible */
   visible: PropTypes.bool
-}
+};
 
 Tooltip.defaultProps = {
   autoAdjustOverflow: true,
@@ -43,9 +44,10 @@ Tooltip.defaultProps = {
   getContainer: () => document.body,
   mouseEnterDelay: 0,
   mouseLeaveDelay: 100,
-  placement: 'top',
-  trigger: 'hover',
+  onVisibleChange: noop,
+  placement: "top",
+  trigger: "hover",
   visible: false
-}
+};
 
-export default Tooltip
+export default Tooltip;

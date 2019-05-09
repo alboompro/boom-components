@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import { noop } from "../../../helpers";
 
-const Modal = ({ ...props }) => <div />
+const Modal = ({ ...props }) => <div />;
 
 Modal.propTypes = {
   /** callback when modal is completely closed */
@@ -40,19 +41,26 @@ Modal.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** z-index property of modal */
   zIndex: PropTypes.number
-}
+};
 
 Modal.defaultProps = {
+  afterClose: noop,
   backdrop: true,
   backdropClosable: true,
-  background: 'white',
+  backdropStyle: {},
+  background: "white",
+  bodyStyle: {},
   closeButton: true,
   destroyOnClose: false,
+  floatingStyle: {},
+  footer: null,
   getContainer: () => document.body,
+  onVisibleChange: noop,
   rounded: true,
+  title: null,
   visible: false,
   width: 520,
   zIndex: 1000
-}
+};
 
-export default Modal
+export default Modal;

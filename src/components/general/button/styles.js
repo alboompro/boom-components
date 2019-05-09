@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import colors from '../../../constants/colors'
+import colors from "../../../constants/colors";
 
 export const DefaultBtn = styled.button`
   display: inline-block;
@@ -14,7 +14,7 @@ export const DefaultBtn = styled.button`
   cursor: pointer;
   transition: opacity 150ms ease-in-out;
   background-color: ${props => colors[props.colorType] || colors.default};
-  color: ${props => (props.colorType === 'primary' ? '#fff' : '#000')};
+  color: ${props => (props.colorType === "primary" ? "#fff" : "#000")};
   margin-right: 8px;
   margin-bottom: 12px;
 
@@ -29,15 +29,11 @@ export const DefaultBtn = styled.button`
       opacity: 1;
     }
   }
-`
+`;
 
 export const Icon = styled.span`
   svg {
     min-height: 10px;
     height: 100%;
   }
-`
-
-export const Text = styled.span`
-  flex: 1;
-`
+`;

@@ -1,13 +1,11 @@
-import React from 'react'
-import { mount } from 'enzyme'
+import React from "react";
+import { shallow, mount, render } from "enzyme";
 
-import Button from './Button'
+import Button from "./Button";
 
-describe('Button', () => {
-  test('Snapshot', () => {
-    const wrapper = mount(<Button>Test</Button>)
-    const tree = wrapper.find(Button)
-
-    expect(tree).toMatchSnapshot()
-  })
-})
+describe("Button", () => {
+  test("renders", () => {
+    const wrapper = shallow(<Button>Me aperte</Button>);
+    expect(wrapper.find("Button")).toBeDefined();
+  });
+});

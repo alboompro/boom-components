@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import { noop } from "../../../helpers";
 
-const Checkbox = ({ ...props }) => <div />
+const Checkbox = ({ ...props }) => <div />;
 
 Checkbox.propTypes = {
   /** whether checkbox is checked */
@@ -14,13 +15,14 @@ Checkbox.propTypes = {
   indeterminate: PropTypes.bool,
   /** callback when state changes */
   onChange: PropTypes.func
-}
+};
 
 Checkbox.defaultProps = {
   checked: false,
   defaultChecked: false,
   disabled: false,
-  indeterminate: false
-}
+  indeterminate: false,
+  onChange: noop
+};
 
-export default Checkbox
+export default Checkbox;

@@ -3,15 +3,20 @@ name: Button
 menu: General
 ---
 
-import { Playground, PropsTable } from 'docz'
-
-import Button from './Button'
+import { Playground, Props } from 'docz'
+import Button from './button'
 
 # Button
 
-Component to trigger an operation.
+Botões ajudam a tornar ações mais óbvias e ajudam usuários as executarem mais facilmente. Botões geralmente são compostos de texto e algumas vezes icones para comunicar a ação que acontecerá quando o usuário clicar no mesmo.
 
-### Basic usage
+## Quando utilizar
+
+Um botão significa uma operação (ou uma série delas). Clicar em um botão deve executar lógica de negócio, assim, utilize botão toda vez que necessitar executar lógica após interação do usuário
+
+## Exemplos
+
+### Uso básico
 
 <Playground>
   <Button>Default</Button>
@@ -20,6 +25,4 @@ Component to trigger an operation.
 
 ## API
 
-<PropsTable of={Button} />
-
-The rest of the props of Button are exactly the same as the original React component.
+<Props of={Button} />

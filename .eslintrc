@@ -1,6 +1,8 @@
 {
   "parser": "babel-eslint",
   "extends": [
+    "airbnb",
+    "prettier",
     "standard",
     "standard-react"
   ],
@@ -13,22 +15,54 @@
   ],
   "env": {
     "es6": true,
-    "browser" : true,
+    "browser": true,
     "jest": true
   },
   "rules": {
-    "key-spacing"          : 0,
-    "jsx-quotes"           : [2, "prefer-double"],
-    "object-curly-spacing" : [2, "always"],
-    "quotes": 0,
-    "semi": [1, "never"],
-    "no-trailing-spaces": 0,
-    "no-multi-spaces": 0,
-    "space-before-function-paren": 0,
-    "space-before-blocks": 0,
-    "jsx-boolean-value": 0,
-    "no-multiple-empty-lines": 0,
     "camelcase": "off",
-    "prettier/prettier": 1
+    "comma-dangle": ["error", "never"],
+    "import/prefer-default-export": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "site/**",
+          "tests/**",
+          "scripts/**",
+          "config/**",
+          "**/*.test.js",
+          "**/__tests__/*",
+          "*.config.js",
+          "**/*.md"
+        ]
+      }
+    ],
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/anchor-has-content": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "jsx-boolean-value": 0,
+    "jsx-quotes": [2, "prefer-double"],
+    "key-spacing": 0,
+    "no-trailing-spaces": 0,
+    "no-multi-spaces": 2,
+    "no-multiple-empty-lines": 2,
+    "object-curly-spacing": [2, "always"],
+    "prettier/prettier": "error",
+    "quotes": ["error", "double"],
+    "react/jsx-one-expression-per-line": 0,
+    "react/prop-types": 0,
+    "react/forbid-prop-types": 0,
+    "react/jsx-indent": 0,
+    "react/jsx-wrap-multilines": ["error", {
+      "declaration": false,
+      "assignment": false
+    }],
+    "react/jsx-filename-extension": [1, {
+      "extensions": [".js", ".jsx", ".md"]
+    }],
+    "semi": ["error", "always"],
+    "space-before-function-paren": 0,
+    "space-before-blocks": 2
   }
 }

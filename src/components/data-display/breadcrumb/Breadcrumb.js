@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import { noop } from "../../../helpers";
 
-const Breadcrumb = ({ ...props }) => <div />
+const Breadcrumb = ({ ...props }) => <div />;
 
 Breadcrumb.propTypes = {
   /** custom item renderer: (route, params, routes, paths) => ReactNode */
@@ -12,10 +13,13 @@ Breadcrumb.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object),
   /** item separator */
   separator: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
-}
+};
 
 Breadcrumb.defaultProps = {
-  separator: '/'
-}
+  itemRenderer: noop,
+  params: {},
+  routes: {},
+  separator: "/"
+};
 
-export default Breadcrumb
+export default Breadcrumb;

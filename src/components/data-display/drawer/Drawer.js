@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import { noop } from "../../../helpers";
 
-const Drawer = ({ ...props }) => <div />
+const Drawer = ({ ...props }) => <div />;
 
 Drawer.propTypes = {
   /** whether to show backdrop or not (area outside of the drawer) */
@@ -23,7 +24,7 @@ Drawer.propTypes = {
   /** callback when visible state changes */
   onVisibleChange: PropTypes.func,
   /** placement of drawer */
-  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  placement: PropTypes.oneOf(["top", "right", "bottom", "left"]),
   /** title of drawer */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** whether drawer is visible or not */
@@ -32,19 +33,23 @@ Drawer.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** z-index property of drawer */
   zIndex: PropTypes.number
-}
+};
 
 Drawer.defaultProps = {
   backdrop: true,
   backdropClosable: true,
+  backdropStyle: {},
+  bodyStyle: {},
   closeButton: true,
   destroyOnClose: false,
   getContainer: () => document.body,
   height: 256,
-  placement: 'right',
+  onVisibleChange: noop,
+  placement: "right",
+  title: null,
   visible: false,
   width: 256,
   zIndex: 1000
-}
+};
 
-export default Drawer
+export default Drawer;

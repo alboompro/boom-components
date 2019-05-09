@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-const Radio = ({ ...props }) => <div />
+const Radio = ({ ...props }) => <div />;
 
 Radio.propTypes = {
   /** whether radio is selected */
@@ -12,13 +12,13 @@ Radio.propTypes = {
   disabled: PropTypes.bool,
   /** for comparison, to determine whether is the selected  */
   value: PropTypes.any
-}
+};
 
 Radio.defaultProps = {
   checked: false,
   defaultChecked: false,
   disabled: false,
-  indeterminate: false
-}
+  value: null
+};
 
-export default Radio
+export default Radio;

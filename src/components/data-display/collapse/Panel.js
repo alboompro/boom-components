@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-const Panel = ({ ...props }) => <div />
+const Panel = ({ ...props }) => <div />;
 
 Panel.propTypes = {
   /** if true, panel cannot be opened or closed */
@@ -12,11 +12,12 @@ Panel.propTypes = {
   key: PropTypes.string.isRequired,
   /** whether show arrow icon */
   showArrow: PropTypes.bool
-}
+};
 
 Panel.defaultProps = {
   disabled: false,
+  header: null,
   showArrow: true
-}
+};
 
-export default Panel
+export default Panel;
