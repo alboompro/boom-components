@@ -3,9 +3,9 @@ const chalk = require("chalk");
 const cp = require("child_process");
 const fse = require("fs-extra");
 const minimist = require("minimist");
+const packageJSON = require("../package.json");
 
 const packagePath = process.cwd();
-const packageJSON = require("../package.json");
 const buildPath = path.join(packagePath, "./build");
 
 /**
