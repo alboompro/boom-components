@@ -30,3 +30,4 @@ export { default as Spin } from "./feedback/spin";
 export { default as Tooltip } from "./feedback/tooltip";
 
 export { default as Button } from "./general/button";
+export { default as Icon } from "./general/icon";
