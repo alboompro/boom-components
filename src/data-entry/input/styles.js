@@ -1,16 +1,98 @@
 import styled from "styled-components";
+import { update } from "../../settings";
 
-import colors from "../../constants/colors";
+const inputSettings = update("input", {
+  labelMargin: "0 0 5px",
+  labelColor: "#000",
+  labelSize: "14px",
+  labelLineHeight: "16px",
+  inputBorder: "1px solid #c9c9c9",
+  inputBorderRadius: "1px",
+  inputMarginBottom: "8px",
+  inputColor: "#1e1e1e",
+  inputPadding: "8px 15px",
+  inputFontSize: "14px",
+  inputErrorSize: "11px",
+  inputPaddingError: "17px",
+  errorColor: "#FF5252"
+});
 
-export const DefaultInput = styled.input`
-  display: inline-block;
+export const DefaultInputContainer = styled.div`
+  * {
+    box-sizing: border-box;
+  }
   position: relative;
-  border: 1px solid ${colors.default};
-  border-radius: 4px;
-  width: 200px;
-  margin: 0 8px 8px 0;
-  line-height: 1.5;
-  padding: ${props => (props.size === "large" ? "6px 11px" : "4px 11px")};
-  font-size: ${props => (props.size === "large" ? "16px" : "14px")};
-  height: ${props => (props.size === "large" ? "40px" : "32px")};
+  display: flex;
+  flex-direction: column;
+  padding-bottom: ${inputSettings.inputPaddingError};
+  margin-bottom: ${inputSettings.inputMarginBottom};
+  ${props => (props.error && props.error.message ? "padding-bottom: 0" : null)};
+`;
+
+export const Label = styled.label`
+  margin: ${inputSettings.labelMargin};
+  color: ${inputSettings.labelColor};
+  font-size: ${inputSettings.labelSize};
+  line-height: ${inputSettings.labelLineHeight};
+  ${props => (props.labelStyle ? props.labelStyle : null)}
+`;
+
+export const InputContent = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+`;
+
+export const InputIcon = styled.span`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  user-select: none;
+  ${props => props.prefix && "left: 7px;"}
+  ${props => props.suffix && "right: 7px;"}
+`;
+
+export const InputDefault = styled.input`
+  width: 100%;
+  padding: ${inputSettings.inputPadding};
+  color: ${inputSettings.inputColor};
+  font-size: ${inputSettings.inputFontSize};
+  border: none;
+  background-color: transparent;
+  border: ${inputSettings.inputBorder};
+  border-radius: ${inputSettings.inputBorderRadius};
+  &:focus{
+    outline: none;
+  }
+  ${props =>
+    props.error ? `border-color: ${inputSettings.errorColor};` : null}
+  ${props => (props.disabled ? "opacity: 0.8;" : null)}
+  ${props => props.inputStyle}
+`;
+
+export const InputField = styled.div`
+  display: flex;
+  align-items: center;
+  flex: 1;
+`;
+
+export const ErrorLabel = styled.div`
+  min-height: ${inputSettings.inputPaddingError};
+  color: ${inputSettings.errorColor};
+  font-size: ${inputSettings.inputErrorSize};
+`;
+
+export const ClearebleIcon = styled.span`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  margin: 0 0 0 5px;
+  height: 100%;
+  cursor: pointer;
+  user-select: none;
+  ${props =>
+    props.clearablePosition ? `right: ${props.clearablePosition};` : null}
 `;

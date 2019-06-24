@@ -38,7 +38,7 @@ const productionPlugins = [
 module.exports = {
   presets: defaultPresets.concat(["@babel/preset-react"]),
   plugins: productionPlugins,
-  ignore: [/@babel[\\|/]runtime/], // Fix a Windows issue.
+  ignore: [], // Fix a Windows issue.
   env: {
     cjs: {
       plugins: productionPlugins

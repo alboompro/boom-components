@@ -30,16 +30,19 @@
     "type": "git",
     "url": "git+ssh://git@gitlab.com/alboom/boom-components.git"
   },
-  "contributors": [{
-    "name": "Elison de Campos",
-    "email": "elison.campos@alboom.com.br"
-  }],
+  "contributors": [
+    {
+      "name": "Elison de Campos",
+      "email": "elison.campos@alboom.com.br"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://gitlab.com/alboom/boom-components/issues"
   },
   "homepage": "https://gitlab.com/alboom/boom-components#README",
   "dependencies": {
+    "formik": "^1.5.7",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
