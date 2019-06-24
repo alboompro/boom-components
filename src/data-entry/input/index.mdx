@@ -4,23 +4,230 @@ menu: Data Entry
 ---
 
 import { Playground, Props } from 'docz'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 
-import Input from './Input'
+import Input, { DefaultInput } from './Input'
+import Icon from '../../general/icon/Icon'
+import Button from '../../general/button/Button'
 
 # Input
 
-Basic text field to get user input.
+Inputs são campos usados para entrada de dados em forma de texto. Inputs geralmente são usados em conjunto dentro de um Form, e podem conter uma label, o campo input e um retorno de erro.
 
-### Basic usage
+## Quando utilizar
+* Construir Forms
+
+## Dependências
+O DefaultInput não possui dependências.
+O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
+
+## Exemplos
+
+### exemplo de input simples
+```jsx
+<DefaultInput
+  name="simpleInput"
+  value="simple input default value"
+  label="Simple input example"
+  onChange={(e,instance) => {
+    console.log(e.target.value);
+    instance.setState({ value: e.target.value });
+  }}
+/>
+```
+
+### exemplo de input com formik implementado
+```jsx
+<Input
+  name="formikInputField"
+  value="simple input using formik"
+  label="Simple input formik example"
+/>
+```
+
+### Uso básico
+<Playground>
+  <div>
+  <DefaultInput
+    name="fieldName"
+    label="Basic input example"
+    error={false}
+    value={"teste"}
+    onChange={(e,instance) => {
+      instance.setState({ value: e.target.value });
+    }}
+  />
+  <DefaultInput
+    name="fieldName"
+    label="Basic input example"
+    error={false}
+    onChange={(e,instance) => {
+      instance.setState({ value: e.target.value });
+    }}
+  />
+  <Formik
+    initialValues={{ "field1": "", "field2": "disabled", "field3": "readonly" }}
+    onSubmit={(values) => {
+      console.log(values)
+    }}
+  >
+  {({handleChange, setFieldValue, values}) => (
+    <Form>
+      <Input
+        name="field1"
+        onChange={handleChange}
+        label="Basic usage input field"
+        clearable
+      />
+       <Input
+        name="field2"
+        onChange={handleChange}
+        label="Basic usage input field disabled"
+        disabled
+      />
+      <Input
+        name="field3"
+        onChange={handleChange}
+        label="Basic usage input field with readonly"
+        readonly
+      />
+      <Button htmlType="submit" type={"primary"} style={{ marginTop: 10, fontSize: 12 }}>Submit</Button>
+    </Form>
+  )} 
+  </Formik>
+  </div>
+</Playground>
+
+### Prefix e suffix
 
 <Playground>
-  <Input placeholder="default size" />
-  <br />
-  <Input size="large" placeholder="large size" />
+  <Formik
+    initialValues={{ "field1": "", "field2": "", "field3": "", "field4": "" }}
+    onSubmit={(values) => {
+      console.log(values)
+    }}
+  >
+  {({handleChange, setFieldValue, values}) => (
+    <Form> 
+      <Input 
+        name="field1"
+        value={values.field1}
+        label="Input using Prefix" 
+        onChange={handleChange}
+        inputStyle={{"paddingLeft": 25}}
+        prefix={<Icon
+          kind="bold"
+          group="interface-essential"
+          category="form-validation"
+          file="check-circle-1.svg"
+          size="15"
+          color="45AE70"
+        />} 
+      />
+      <Input 
+        name="field2"
+        value={values.field2}
+        label="Input using Suffix" 
+        onChange={handleChange}
+        inputStyle={{"paddingRight": 25}}
+        suffix={<Icon
+          kind="bold"
+          group="interface-essential"
+          category="form-validation"
+          file="check-circle-1.svg"
+          size="15"
+          color="45AE70"
+        />} 
+      />
+      <Input 
+        name="field3"
+        value={values.field3}
+        label="Input using Suffix and clearable" 
+        onChange={handleChange}
+        inputStyle={{"paddingRight": 50}}
+        clearablePosition={"30px"}
+        clearable
+        suffix={<Icon
+          kind="bold"
+          group="interface-essential"
+          category="form-validation"
+          file="check-circle-1.svg"
+          size="15"
+          color="45AE70"
+        />} 
+      />
+      <Input 
+        name="field4"
+        value={values.field4}
+        label="Input using clearable" 
+        onChange={handleChange}
+        inputStyle={{"paddingRight": 25}}
+        clearablePosition={"7px"}
+        clearable
+      />
+      <Button htmlType="submit" type={"primary"} style={{ marginTop: 10, fontSize: 12 }}>Submit</Button>
+    </Form>
+  )} 
+  </Formik>
+</Playground>
+
+### Retorno de erro
+
+<Playground>
+  <Formik
+    initialValues={{ "field1": "", "field2": "" }}
+    onSubmit={(values) => {
+      console.log(values)
+    }}
+  >
+  {({handleChange, setFieldValue, values}) => (
+    <Form> 
+      <Input 
+        name="field1"
+        value={values.field1}
+        label="Input using error with message" 
+        onChange={handleChange}
+        error={{message: "Message error example"}}
+      />
+      <Input 
+        name="field2"
+        value={values.field2}
+        label="Input using default error"
+        onChange={handleChange}
+        error
+      />
+      <Button htmlType="submit" type={"primary"} style={{ marginTop: 10, fontSize: 12 }}>Submit</Button>
+    </Form>
+  )} 
+  </Formik>
+</Playground>
+
+### Imput style customizado
+
+<Playground>
+  <Formik
+    initialValues={{ "field1": ""}}
+    onSubmit={(values) => {
+      console.log(values)
+    }}
+  >
+  {({handleChange, setFieldValue, values}) => (
+    <Form> 
+      <Input 
+        name="field1"
+        value={values.field1}
+        label="Input with custom style"
+        inputStyle={{borderColor: "#45ae70", fontSize: 20, color: "#FF5252"}} 
+        labelStyle={{fontSize: 10, color: "#45ae70"}}
+        onChange={handleChange}
+        placeholder={"placeholder"}
+      />
+      <Button htmlType="submit" type={"primary"} style={{ marginTop: 10, fontSize: 12 }}>Submit</Button>
+    </Form>
+  )} 
+  </Formik>
 </Playground>
 
 ## API
 
 <Props of={Input} />
-
-The rest of the props of Input are exactly the same as the original React component.
