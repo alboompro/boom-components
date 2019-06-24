@@ -31,8 +31,7 @@ const productionPlugins = [
   "@babel/plugin-transform-property-literals",
   "@babel/plugin-transform-runtime",
   "@babel/plugin-transform-spread",
-  "@babel/plugin-transform-template-literals",
-  "babel-plugin-styled-components"
+  "@babel/plugin-transform-template-literals"
 ];
 
 module.exports = {
@@ -53,6 +52,9 @@ module.exports = {
       plugins: productionPlugins
     },
     "production-umd": {
+      plugins: productionPlugins
+    },
+    test: {
       plugins: productionPlugins
     }
   }

@@ -6,10 +6,144 @@ menu: Data Display
 import { Playground, Props } from 'docz'
 
 import Modal from './Modal'
+import Button from '../../general/button'
 
 # Modal
 
-Modal component.
+Ao exigir que os usuários interaja com uma aplicação, mas sem interromper o fluxo de uso para por exemplo, mover o usuário para outra página, você pode usar o Modal para criar uma nova camada flutuante sem precisar trocar de tela.
+
+## Quando utilizar
+* Mostrar informações ou executa uma ação sem sair da página.
+
+## Dependências
+O Modal não possui dependências.
+
+## Exemplos
+
+## Exemplo de Modal completo
+
+```jsx
+<Modal
+	title="Titulo do modal"
+	onClose={()=> changeModalStatus}
+	visible={true}
+	width={1000}
+	floatingStyle={{top: "20px"}}
+	backdropStyle={{ backgroundColor: "#fff" }}
+	backdropClosable={false}
+	background={"#fff"}
+	bodyStyle={{ padding: "20px", backgroundColor: "#ddd" }}
+	closeButton={false}
+	rounded={false}
+	zIndex={99999}
+	footer={<div>Footer content</div>}
+>
+  <div style={{ padding: "20px" }}>Modal Content</div>
+</Modal>
+```
+
+### Uso Básico
+<Playground state={{ modalStatus: false }}>
+	{class ModalTest extends React.Component {
+		constructor() {
+      super()
+      this.state = { 
+				modalStatus: false
+			}
+    }
+
+		render() {
+			const { modalStatus } = this.state
+			
+			return <div>
+				<Modal
+          title='Titulo do modal'
+          onClose={()=> this.setState({modalStatus: false})}
+          visible={modalStatus}
+          width={1000}
+          footer={<div><Button onClick={() => this.setState({modalStatus: false})} type="primary">Salvar</Button></div>}
+        >
+          <div style={{ padding: "20px" }}>Modal Content</div>
+        </Modal>
+				<Button onClick={() => this.setState({modalStatus: true})} type="primary">Abrir modal</Button>
+			</div>
+		}
+	}}
+</Playground>
+
+### Posicionamento customizado
+
+<Playground state={{ modalStatus: false }}>
+	{class ModalTest extends React.Component {
+		constructor() {
+      super()
+      this.state = { 
+				modalStatus: false,
+				modalPosition: ""
+			}
+    }
+
+		render() {
+			const { modalStatus, modalPosition } = this.state
+			
+			return <div>
+				<Modal
+          title='Titulo do modal'
+          onClose={()=> this.setState({modalStatus: false})}
+          visible={modalStatus}
+          width={1000}
+					floatingStyle={modalPosition}
+          footer={<div><Button onClick={() => this.setState({modalStatus: false, modalPosition: ""})} type="primary">Salvar</Button></div>}
+        >
+          <div style={{ padding: "20px" }}>Modal Content</div>
+        </Modal>
+				<div style={{ display: "flex" }}>
+					<div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+						<span>Abrir modal alinhado ao topo</span>
+						<Button onClick={() => this.setState({modalStatus: true, modalPosition: { top: "20px" }})} type="primary">Abrir</Button>
+					</div>
+					<div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+						<span>Abrir modal alinhado a base</span>
+						<Button onClick={() => this.setState({modalStatus: true, modalPosition: { bottom: "20%" }})} type="primary">Abrir</Button>
+					</div>
+				</div>
+			</div>
+		}
+	}}
+</Playground>
+
+### Modal customizado
+<Playground state={{ modalStatus: false }}>
+	{class ModalTest extends React.Component {
+		constructor() {
+      super()
+      this.state = { 
+				modalStatus: false
+			}
+    }
+
+		render() {
+			const { modalStatus } = this.state
+			
+			return <div>
+				<Modal
+          title='Titulo do modal'
+          onClose={()=> this.setState({modalStatus: false})}
+          visible={modalStatus}
+          width={1000}
+          footer={<div><Button onClick={() => this.setState({modalStatus: false})} type="primary">Salvar</Button></div>}
+					backdropStyle={{ backgroundColor: "rgba(215, 220, 228, .4)" }}
+					background={"rgba(215, 220, 228)"}
+					bodyStyle={{ padding: "20px", backgroundColor: "#bed0e2" }}
+        >
+          <div style={{ padding: "20px" }}>Modal Content</div>
+        </Modal>
+				<Button onClick={() => this.setState({modalStatus: true})} type="primary">Abrir modal</Button>
+			</div>
+		}
+	}}
+</Playground>
+
 
 ## API
 

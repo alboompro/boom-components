@@ -1,13 +1,97 @@
-import React from "react";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { noop } from "../../helpers";
+import Icon from "../../general/icon";
+import {
+  ModalBackdrop,
+  ModalContainer,
+  ModalHeader,
+  ModalTitle,
+  ModalBody,
+  ModalFooter,
+  CloseIcon,
+} from "./styles";
 
-const Modal = ({ ...props }) => <div />;
+class Modal extends Component {
+  constructor() {
+    super();
+    this.backdrop = React.createRef();
+    this.closeButton = React.createRef();
+  }
+
+  closeModal = e => {
+    const { onClose, backdropClosable } = this.props;
+    if (
+      backdropClosable &&
+      (e.target === this.backdrop.current ||
+        e.target === this.closeButton.current)
+    ) {
+      onClose();
+    }
+  };
+
+  render() {
+    const {
+      backdrop,
+      backdropStyle,
+      bodyStyle,
+      background,
+      closeButton,
+      children,
+      floatingStyle,
+      footer,
+      rounded,
+      title,
+      zIndex,
+      width,
+      visible
+    } = this.props;
+
+    return (
+      visible && [
+        ReactDOM.createPortal(
+          <ModalBackdrop
+            backdrop={backdrop}
+            backdropStyle={backdropStyle}
+            zIndex={zIndex}
+            floatingStyle={floatingStyle}
+            onClick={this.closeModal}
+            ref={this.backdrop}
+          >
+            <ModalContainer
+              rounded={rounded}
+              background={background}
+              width={width}
+              floatingStyle={floatingStyle}
+            >
+              <ModalHeader>
+                {title && <ModalTitle>{title}</ModalTitle>}
+                {closeButton && (
+                  <CloseIcon onClick={this.closeModal} ref={this.closeButton}>
+                    <Icon
+                      kind="bold"
+                      group="interface-essential"
+                      category="form-validation"
+                      file="close.svg"
+                      size="16"
+                      color="#5F5F5F"
+                    />
+                  </CloseIcon>
+                )}
+              </ModalHeader>
+              <ModalBody bodyStyle={bodyStyle}>{children}</ModalBody>
+              {footer && <ModalFooter>{footer}</ModalFooter>}
+            </ModalContainer>
+          </ModalBackdrop>,
+          document.body
+        )
+      ]
+    );
+  }
+}
 
 Modal.propTypes = {
   /** callback when modal is completely closed */
-  afterClose: PropTypes.func,
-  /** whether to show backdrop or not (area outside of the drawer) */
   backdrop: PropTypes.bool,
   /** whether to click on backdrop should close drawer */
   backdropClosable: PropTypes.bool,
@@ -20,18 +104,12 @@ Modal.propTypes = {
   /** whether a close button is visible on top right corner of modal */
   closeButton: PropTypes.bool,
   /** modal content */
-  content: PropTypes.node.isRequired,
-  /** whether to unmount child components on close */
-  destroyOnClose: PropTypes.bool,
+  children: PropTypes.node.isRequired,
   /** style of floating layer which is used for adjusting its position */
   floatingStyle: PropTypes.object,
   /** footer content */
   footer: PropTypes.node,
   /** return the mount node for modal */
-  getContainer: PropTypes.func,
-  /** callback when modal show or hide */
-  onVisibleChange: PropTypes.func,
-  /** whether modal is rounded */
   rounded: PropTypes.bool,
   /** modal title */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
@@ -44,18 +122,15 @@ Modal.propTypes = {
 };
 
 Modal.defaultProps = {
-  afterClose: noop,
+  // afterClose: noop,
   backdrop: true,
   backdropClosable: true,
   backdropStyle: {},
   background: "white",
   bodyStyle: {},
   closeButton: true,
-  destroyOnClose: false,
   floatingStyle: {},
   footer: null,
-  getContainer: () => document.body,
-  onVisibleChange: noop,
   rounded: true,
   title: null,
   visible: false,
