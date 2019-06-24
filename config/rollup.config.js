@@ -12,17 +12,18 @@ const globals = {
   "react-dom": "ReactDOM",
   "prop-types": "PropTypes",
   "styled-components": "styled",
+  formik: "formik"
 };
 
 const babelOptions = {
   exclude: /node_modules/,
   runtimeHelpers: true,
-  configFile: "./config/babel.config.js",
+  configFile: "./config/babel.config.js"
 };
 
 const commonjsOptions = {
   ignoreGlobal: true,
-  include: /node_modules/,
+  include: /node_modules/
 };
 
 function onwarn(warning) {
@@ -37,7 +38,7 @@ export default [
       file: "build/umd/boom-components.min.js",
       format: "umd",
       name: "BoomComponents",
-      globals,
+      globals
     },
     external: Object.keys(globals),
     plugins: [
@@ -47,7 +48,7 @@ export default [
       nodeGlobals(), // Wait for https://github.com/cssinjs/jss/pull/893
       replace({ "process.env.NODE_ENV": JSON.stringify("production") }),
       sizeSnapshot({ snapshotPath: "size-snapshot.json" }),
-      terser(),
-    ],
-  },
+      terser()
+    ]
+  }
 ];
