@@ -1,5 +1,5 @@
+/* eslint-disable global-require */
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import Icon from "../../general/icon";
 import {
@@ -9,8 +9,18 @@ import {
   ModalTitle,
   ModalBody,
   ModalFooter,
-  CloseIcon,
+  CloseIcon
 } from "./styles";
+
+const reactVersion = parseInt(React.version.split(".")[0]);
+let Portal;
+if (reactVersion >= 16) {
+  const ReactDOM = require("react-dom");
+  Portal = ({ children, node }) => ReactDOM.createPortal(children, node);
+} else {
+  // eslint-disable-next-line prefer-destructuring
+  Portal = require("react-portal").Portal;
+}
 
 class Modal extends Component {
   constructor() {
@@ -30,7 +40,7 @@ class Modal extends Component {
     }
   };
 
-  render() {
+  modalHandler = () => {
     const {
       backdrop,
       backdropStyle,
@@ -43,50 +53,50 @@ class Modal extends Component {
       rounded,
       title,
       zIndex,
-      width,
-      visible
+      width
     } = this.props;
 
     return (
-      visible && [
-        ReactDOM.createPortal(
-          <ModalBackdrop
-            backdrop={backdrop}
-            backdropStyle={backdropStyle}
-            zIndex={zIndex}
-            floatingStyle={floatingStyle}
-            onClick={this.closeModal}
-            ref={this.backdrop}
-          >
-            <ModalContainer
-              rounded={rounded}
-              background={background}
-              width={width}
-              floatingStyle={floatingStyle}
-            >
-              <ModalHeader>
-                {title && <ModalTitle>{title}</ModalTitle>}
-                {closeButton && (
-                  <CloseIcon onClick={this.closeModal} ref={this.closeButton}>
-                    <Icon
-                      kind="bold"
-                      group="interface-essential"
-                      category="form-validation"
-                      file="close.svg"
-                      size="16"
-                      color="#5F5F5F"
-                    />
-                  </CloseIcon>
-                )}
-              </ModalHeader>
-              <ModalBody bodyStyle={bodyStyle}>{children}</ModalBody>
-              {footer && <ModalFooter>{footer}</ModalFooter>}
-            </ModalContainer>
-          </ModalBackdrop>,
-          document.body
-        )
-      ]
+      <ModalBackdrop
+        backdrop={backdrop}
+        backdropStyle={backdropStyle}
+        zIndex={zIndex}
+        floatingStyle={floatingStyle}
+        onClick={this.closeModal}
+        ref={this.backdrop}
+      >
+        <ModalContainer
+          rounded={rounded}
+          background={background}
+          width={width}
+          floatingStyle={floatingStyle}
+        >
+          <ModalHeader>
+            {title && <ModalTitle>{title}</ModalTitle>}
+            {closeButton && (
+              <CloseIcon onClick={this.closeModal} ref={this.closeButton}>
+                <Icon
+                  kind="bold"
+                  group="interface-essential"
+                  category="form-validation"
+                  file="close.svg"
+                  size="16"
+                  color="#5F5F5F"
+                />
+              </CloseIcon>
+            )}
+          </ModalHeader>
+          <ModalBody bodyStyle={bodyStyle}>{children}</ModalBody>
+          {footer && <ModalFooter>{footer}</ModalFooter>}
+        </ModalContainer>
+      </ModalBackdrop>
     );
+  };
+
+  render() {
+    const { visible } = this.props;
+
+    return visible && <Portal node={document.body}>{this.modalHandler()}</Portal>;
   }
 }
 
