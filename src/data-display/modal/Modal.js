@@ -1,3 +1,4 @@
+/* eslint-disable react/no-string-refs */
 /* eslint-disable global-require */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
@@ -16,25 +17,22 @@ const reactVersion = parseInt(React.version.split(".")[0]);
 let Portal;
 if (reactVersion >= 16) {
   const ReactDOM = require("react-dom");
-  Portal = ({ children, node }) => ReactDOM.createPortal(children, node);
+  Portal = ({ children, node }) =>
+    ReactDOM.createPortal(children, document.body);
 } else {
   // eslint-disable-next-line prefer-destructuring
   Portal = require("react-portal").Portal;
 }
 
 class Modal extends Component {
-  constructor() {
-    super();
-    this.backdrop = React.createRef();
-    this.closeButton = React.createRef();
-  }
-
   closeModal = e => {
     const { onClose, backdropClosable } = this.props;
+    const { backdrop, closeButton } = this.refs;
     if (
       backdropClosable &&
-      (e.target === this.backdrop.current ||
-        e.target === this.closeButton.current)
+      (e.target === (backdrop.refs ? backdrop.refs.backdrop : backdrop) ||
+        e.target ===
+          (closeButton.refs ? closeButton.refs.closeButton : closeButton))
     ) {
       onClose();
     }
@@ -63,7 +61,8 @@ class Modal extends Component {
         zIndex={zIndex}
         floatingStyle={floatingStyle}
         onClick={this.closeModal}
-        ref={this.backdrop}
+        ref="backdrop"
+        innerRef="backdrop"
       >
         <ModalContainer
           rounded={rounded}
@@ -74,7 +73,11 @@ class Modal extends Component {
           <ModalHeader>
             {title && <ModalTitle>{title}</ModalTitle>}
             {closeButton && (
-              <CloseIcon onClick={this.closeModal} ref={this.closeButton}>
+              <CloseIcon
+                onClick={this.closeModal}
+                ref="closeButton"
+                innerRef="closeButton"
+              >
                 <Icon
                   kind="bold"
                   group="interface-essential"
@@ -96,7 +99,7 @@ class Modal extends Component {
   render() {
     const { visible } = this.props;
 
-    return visible && <Portal node={document.body}>{this.modalHandler()}</Portal>;
+    return visible && <Portal>{this.modalHandler()}</Portal>;
   }
 }
 
