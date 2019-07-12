@@ -15,8 +15,6 @@ export const DefaultBtn = styled.button`
   transition: opacity 150ms ease-in-out;
   background-color: ${props => colors[props.colorType] || colors.default};
   color: ${props => (props.colorType === "primary" ? "#fff" : "#000")};
-  margin-right: 8px;
-  margin-bottom: 12px;
 
   &:hover {
     opacity: 0.8;
