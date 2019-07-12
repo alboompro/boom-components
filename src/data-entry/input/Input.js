@@ -54,6 +54,7 @@ export class DefaultInput extends Component {
     } else if (typeof onChange === "function") {
       onChange(e, this);
     } else {
+      onChange(e, this);
       this.setState({ value: e.target.value });
     }
   };
@@ -70,6 +71,7 @@ export class DefaultInput extends Component {
       labelStyle,
       name,
       onBlur,
+      onKeyUp,
       placeholder,
       prefix,
       readOnly,
@@ -90,6 +92,7 @@ export class DefaultInput extends Component {
       readOnly,
       onKeyDown: this.onKeyDown,
       onChange: this.onChange,
+      onKeyUp,
       error
     };
 
@@ -110,7 +113,6 @@ export class DefaultInput extends Component {
               <Field
                 name={name}
                 render={({ field }) => {
-                  // debugger;
                   return <InputDefault {...inputProps} {...field} />;
                 }}
               />
@@ -170,6 +172,8 @@ DefaultInput.propTypes = {
   onPressEnter: PropTypes.func,
   /** callback when key is pressed */
   onKeyPress: PropTypes.func,
+  /** callback on key up */
+  onKeyUp: PropTypes.func,
   /** prefix icon inside input */
   prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** set readonly prop */
@@ -203,6 +207,7 @@ DefaultInput.defaultProps = {
   onChange: null,
   onPressEnter: null,
   onKeyPress: null,
+  onKeyUp: null,
   prefix: null,
   readOnly: false,
   suffix: null,
