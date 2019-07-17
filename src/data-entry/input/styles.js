@@ -60,7 +60,7 @@ export const InputDefault = styled.input`
   color: ${inputSettings.inputColor};
   font-size: ${inputSettings.inputFontSize};
   border: none;
-  background-color: transparent;
+  background-color: #fff;
   border: ${inputSettings.inputBorder};
   border-radius: ${inputSettings.inputBorderRadius};
   &:focus{
