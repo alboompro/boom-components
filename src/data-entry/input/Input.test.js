@@ -1,10 +1,7 @@
 import React from "react";
-import Enzyme, { shallow, mount, render } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { mount } from "enzyme";
 import { Formik, Form } from "formik";
 import Input, { DefaultInput } from "./Input";
-
-Enzyme.configure({ adapter: new Adapter() });
 
 describe("Input", () => {
   test("input props", () => {

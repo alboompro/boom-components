@@ -6,13 +6,179 @@ menu: Data Display
 import { Playground, Props } from 'docz'
 
 import Collapse from './Collapse'
-import Panel from './Panel'
+import Panel from "./Panel"
+import Icon from "../../general/Icon"
 
 # Collapse
 
-Collapse component.
+Uma área de conteúdo que pode ser expandida ou não.
 
-## API
+## Quando utilizar
+* Pode ser utilizado para agrupar ou esconder regiões complexas e manter a página limpa
+* Criar Accordions, um tipo especial de Collapse que apenas permite um painel ser expandido por vez.
+
+## Exemplos
+
+### Collapse Simples
+
+```jsx
+import Collapse from "@alboom/boom-components/data-display/collapse"
+const Panel = Collapse.Panel
+
+const MyComponent = () => {
+  return (
+    <Collapse defaultActiveKey="2">
+      <Panel header="Titulo 1" key="1">
+        <p>Conteúdo do painel 1.</p>
+      </Panel>
+      <Panel header="Esse titulo é ativo por padrão" key="2">
+        <p>Conteúdo exibido como expandido por padrão</p>
+      </Panel>
+    </Collapse>
+  )
+}
+```
+
+<Playground>
+  <Collapse defaultActiveKey="2">
+      <Panel header="Titulo 1" key="1">
+        <p>Conteúdo do painel 1.</p>
+      </Panel>
+      <Panel header="Esse painel é ativo por padrão" key="2">
+        <p>Conteúdo exibido como expandido por padrão</p>
+      </Panel>
+    </Collapse>
+</Playground>
+
+### Accordion
+
+```jsx
+import Collapse from "@alboom/boom-components/data-display/collapse"
+const Panel = Collapse.Panel
+
+const MyComponent = () => {
+  return (
+    <Collapse accordion expandIconPosition="left">
+      <Panel disabled header="Este painel é desabilitado" key="1">
+        <p>Você não pode me ver.</p>
+      </Panel>
+      <Panel header="Titulo 2" key="2">
+        <p>Conteúdo do painel 2</p>
+      </Panel>
+    </Collapse>
+  )
+}
+```
+
+<Playground>
+  <Collapse accordion expandIconPosition="left">
+      <Panel disabled header="Este painel é desabilitado" key="1">
+        <p>Você não pode me ver.</p>
+      </Panel>
+      <Panel header="Titulo 2" key="2">
+        <p>Conteúdo do painel 2</p>
+      </Panel>
+    </Collapse>
+</Playground>
+
+### Icone de expansão customizado
+
+Você pode customizar o icone de expansão do Collapse, provendo uma função que retorna o HTML Node
+que representa o icone, esta função recebe dois parametros; `isActive` e `disabled`:
+
+```jsx
+import Collapse from "@alboom/boom-components/data-display/collapse"
+const Panel = Collapse.Panel
+
+const expandIconFn = (isActive, disabled) => {
+  const IconPropsMap = {
+    disabled: {
+      group: "interface-essential",
+      category: "lock-unlock",
+      file: "lock-1.svg",
+      color: "#CC0000"
+    },
+    active: {
+      group: "arrows-diagrams",
+      category: "arrows",
+      file: "arrow-button-up-2.svg"
+    },
+    inactive: {
+      group: "arrows-diagrams",
+      category: "arrows",
+      file: "arrow-button-down-2.svg"
+    }
+  };
+
+  const key = disabled ? "disabled" : isActive ? "active" : "inactive";
+  const IconProps = Object.assign(
+    { kind: "bold", color: "#000000", size: 16 },
+    IconPropsMap[key]
+  );
+
+  return <Icon {...IconProps} />;
+};
+
+const MyComponent = () => {
+  return (
+    <Collapse accordion expandIconPosition="left" expandIcon={expandIconFn}>
+      <Panel disabled header="Este painel é desabilitado" key="1">
+        <p>Você não pode me ver.</p>
+      </Panel>
+      <Panel header="Titulo 2" key="2">
+        <p>Conteúdo do painel 2</p>
+      </Panel>
+    </Collapse>
+  )
+}
+```
+
+<Playground>
+  {
+    class CollapseWithExpandedIcon extends React.Component {
+      expandIconFn(isActive, disabled) {
+        const IconPropsMap = {
+          disabled: {
+            group: "interface-essential",
+            category: "lock-unlock",
+            file: "lock-1.svg",
+            color: "#CC0000"
+          },
+          active: {
+            group: "arrows-diagrams",
+            category: "arrows",
+            file: "arrow-button-up-2.svg"
+          },
+          inactive: {
+            group: "arrows-diagrams",
+            category: "arrows",
+            file: "arrow-button-down-2.svg"
+          }
+        }
+
+        const key = disabled ? 'disabled' : (isActive ? 'active' : 'inactive')
+        const IconProps = Object.assign({kind: "bold", color: "#000000", size: 16}, IconPropsMap[key])
+
+        return <Icon {...IconProps} />
+      }
+
+      render(){
+        return (
+          <Collapse accordion expandIconPosition="left" expandIcon={this.expandIconFn}>
+            <Panel disabled header="Este painel é desabilitado" key="1">
+              <p>Você não pode me ver.</p>
+            </Panel>
+            <Panel header="Titulo 2" key="2">
+              <p>Conteúdo do painel 2</p>
+            </Panel>
+          </Collapse>
+        );
+      }
+    }
+  }
+</Playground>
+
+## Api
 
 ### Collapse
 

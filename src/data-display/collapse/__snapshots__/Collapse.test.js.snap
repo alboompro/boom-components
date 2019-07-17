@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collapse Snapshot should render a collapse 1`] = `
+<styled.div
+  className=""
+  role={null}
+>
+  <Panel
+    accordion={false}
+    disabled={false}
+    expandIcon={null}
+    expandIconPosition="left"
+    header="Titulo 1"
+    isActive={false}
+    key=".$1"
+    onItemClick={[Function]}
+    panelKey="1"
+    showArrow={true}
+  >
+    <p>
+      Conteúdo do painel 1.
+    </p>
+  </Panel>
+  <Panel
+    accordion={false}
+    disabled={false}
+    expandIcon={null}
+    expandIconPosition="left"
+    header="Esse titulo é ativo por padrão"
+    isActive={true}
+    key=".$2"
+    onItemClick={[Function]}
+    panelKey="2"
+    showArrow={true}
+  >
+    <p>
+      Conteúdo exibido como expandido por padrão
+    </p>
+  </Panel>
+</styled.div>
+`;
