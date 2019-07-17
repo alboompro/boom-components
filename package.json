@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.2.0",
   "name": "@alboom/boom-components",
   "description": "React UI library containing a set of high quality components for building rich, interactive user interfaces in Alboom applications",
   "main": "index.js",
@@ -30,12 +30,10 @@
     "type": "git",
     "url": "git+ssh://git@gitlab.com/alboom/boom-components.git"
   },
-  "contributors": [
-    {
-      "name": "Elison de Campos",
-      "email": "elison.campos@alboom.com.br"
-    }
-  ],
+  "contributors": [{
+    "name": "Elison de Campos",
+    "email": "elison.campos@alboom.com.br"
+  }],
   "license": "MIT",
   "bugs": {
     "url": "https://gitlab.com/alboom/boom-components/issues"

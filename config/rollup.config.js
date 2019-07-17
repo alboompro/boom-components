@@ -12,6 +12,7 @@ const globals = {
   "react-dom": "ReactDOM",
   "prop-types": "PropTypes",
   "styled-components": "styled",
+  "react-is": "react-is",
   formik: "formik"
 };
 
