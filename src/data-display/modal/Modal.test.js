@@ -1,6 +1,5 @@
 import React from "react";
-import Enzyme, { shallow, mount, render } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { mount } from "enzyme";
 import Modal from "./Modal";
 import {
   ModalBackdrop,
@@ -9,8 +8,6 @@ import {
   ModalBody,
   ModalFooter
 } from "./styles";
-
-Enzyme.configure({ adapter: new Adapter() });
 
 describe("Modal", () => {
   test("modal props", () => {
@@ -34,7 +31,7 @@ describe("Modal", () => {
         <div>Modal Content</div>
       </Modal>
     );
-    
+
     const modalContainer = wrapper.find(ModalContainer).props();
     const modalBackdrop = wrapper.find(ModalBackdrop).props();
     const modalTitle = wrapper.find(ModalTitle).props();

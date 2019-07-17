@@ -42,11 +42,14 @@
   },
   "homepage": "https://gitlab.com/alboom/boom-components#README",
   "dependencies": {
+    "classname": "^0.0.0",
     "formik": "^1.5.7",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-is": "^16.8.6",
     "react-portal": "^4.2.0",
+    "shallowequal": "^1.1.0",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
