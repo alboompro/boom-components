@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import shallowEqual from "shallowequal";
-import cx from "classname";
+import cx from "classnames";
 
 class PanelContent extends Component {
   shouldComponentUpdate(nextProps) {

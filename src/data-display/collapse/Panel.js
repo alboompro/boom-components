@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import cx from "classname";
+import cx from "classnames";
 import shallowEqual from "shallowequal";
 import PanelContent from "./PanelContent";
 import Icon from "../../general/icon";

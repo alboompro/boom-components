@@ -13,6 +13,7 @@ const globals = {
   "prop-types": "PropTypes",
   "styled-components": "styled",
   "react-is": "react-is",
+  classnames: "classnames",
   formik: "formik"
 };
 
