@@ -18,7 +18,16 @@ class Panel extends Component {
   }
 
   handleItemClick = () => {
-    const { onItemClick, panelKey } = this.props;
+    const { onItemClick, panelKey, expandOnlyInIcon } = this.props;
+    if (expandOnlyInIcon) return;
+    if (typeof onItemClick === "function") {
+      onItemClick(panelKey);
+    }
+  };
+
+  handleIconClick = () => {
+    const { onItemClick, panelKey, expandOnlyInIcon } = this.props;
+    if (!expandOnlyInIcon) return;
     if (typeof onItemClick === "function") {
       onItemClick(panelKey);
     }
@@ -51,7 +60,11 @@ class Panel extends Component {
           />
         </IconWrapper>
       );
-    return <div className={IconContainerClasses}>{icon}</div>;
+    return (
+      <div className={IconContainerClasses} onClick={this.handleIconClick}>
+        {icon}
+      </div>
+    );
   };
 
   render() {

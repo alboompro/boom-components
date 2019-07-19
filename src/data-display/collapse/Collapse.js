@@ -82,7 +82,12 @@ class Collapse extends Component {
   getNewChild = (child, index) => {
     if (!child) return null;
     const { activeKey } = this.state;
-    const { accordion, expandIcon, expandIconPosition } = this.props;
+    const {
+      accordion,
+      expandIcon,
+      expandIconPosition,
+      expandOnlyInIcon
+    } = this.props;
     // if there is no key provided, use the panel order as default key
     const key = child.key || String(index);
     const { header, disabled } = child.props;
@@ -101,6 +106,7 @@ class Collapse extends Component {
       accordion,
       children: child.props.children,
       onItemClick: disabled ? null : this.onClickItem,
+      expandOnlyInIcon,
       expandIcon,
       expandIconPosition
     };
@@ -173,6 +179,8 @@ Collapse.propTypes = {
   expandIcon: PropTypes.func,
   /** Define a posição do icone de expansão */
   expandIconPosition: PropTypes.oneOf(["left", "right"]),
+  /** Define se o painel é expandido apenas ao clicar no icone */
+  expandOnlyInIcon: PropTypes.bool,
   /** Função de callback */
   onChange: PropTypes.func
 };
@@ -183,6 +191,7 @@ Collapse.defaultProps = {
   defaultActiveKey: null,
   expandIcon: null,
   expandIconPosition: "left",
+  expandOnlyInIcon: false,
   onChange: noop
 };
 
