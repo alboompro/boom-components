@@ -50,6 +50,7 @@ class Modal extends Component {
       footer,
       rounded,
       title,
+      headerStyle,
       zIndex,
       width
     } = this.props;
@@ -70,7 +71,7 @@ class Modal extends Component {
           width={width}
           floatingStyle={floatingStyle}
         >
-          <ModalHeader>
+          <ModalHeader style={headerStyle}>
             {title && <ModalTitle>{title}</ModalTitle>}
             {closeButton && (
               <CloseIcon
@@ -126,6 +127,8 @@ Modal.propTypes = {
   rounded: PropTypes.bool,
   /** modal title */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  /** custom header style */
+  headerStyle: PropTypes.object,
   /** whether modal is visible */
   visible: PropTypes.bool,
   /** width of modal */
@@ -146,6 +149,7 @@ Modal.defaultProps = {
   footer: null,
   rounded: true,
   title: null,
+  headerStyle: {},
   visible: false,
   width: 520,
   zIndex: 1000
