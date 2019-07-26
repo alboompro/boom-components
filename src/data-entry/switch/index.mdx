@@ -8,8 +8,21 @@ import { Playground, Props } from 'docz'
 import Switch from './Switch'
 
 # Switch
+<Playground state={{ switchValue: false }}>
+	{class ModalTest extends React.Component {
+		constructor() {
+      super()
+      this.state = { 
+				switchValue: false
+			}
+    }
 
-Switch component.
+		render() {
+			const { switchValue } = this.state	
+			return <Switch checked={switchValue} onChange={() => this.setState({ switchValue: !switchValue })} />
+		}
+	}}
+</Playground>
 
 ## API
 
