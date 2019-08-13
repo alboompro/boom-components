@@ -1,0 +1,143 @@
+---
+name: Select
+menu: Data Entry
+---
+
+import { Playground, Props } from 'docz'
+import Select from "./Select";
+import Icon from '../../general/icon/Icon';
+
+# Select
+
+Selects são campos usados para que se possa ser selecionado uma opção de uma lista de forma facil, e podem conter uma label, o campo de Seleção e um retorno de errro.
+
+## Quando utilizar
+* Construir Forms com campos de Select.
+
+## Dependências
+O Select não possui nenhuma dependência;
+
+## Exemplos
+
+### exemplo de Select simples
+```jsx
+  <Select
+    label="Select input"
+    value={value}
+    placeholder="placeholder"
+    options={{value: "example1", label: "example 1"},{value: "example 2", label: "example 2"}}
+    onChange={e => this.setState({
+      value: e.value
+    })}
+  />
+```
+
+<Playground>
+  {
+    class SelectTest extends React.Component {
+      constructor() {
+        super()
+        this.state = state = { value: "1", options: [{
+            value: "1", label: "item1"
+          },{
+            value: "2", label: "item2"
+          },{
+            value: "3", label: "item3"
+          },{
+            value: "4", label: "item4"
+          }]
+        }
+      }
+      
+      render (){
+        const { value, options } = this.state;
+
+        return <Select
+          label="Select input"
+          value={value}
+          placeholder="placeholder"
+          options={options}
+          onChange={e => this.setState({
+              value: e.value
+            })
+          }
+          disabled
+        />
+      }
+    }
+  }
+</Playground>
+
+<Playground>
+  {
+    class SelectTest extends React.Component {
+      constructor() {
+        super()
+        this.state = state = { value: "1", options: [{
+            value: "1", label: <div styles="background-color: red;">
+              node item 1 <span>test</span>
+            </div>
+          },{
+            value: "2", label: <div>node item 2</div>
+          },{
+            value: "3", label: <div>node item 3</div>
+          },{
+            value: "4", label: <div>node item 4</div>
+          },{
+            value: "5", label: <div>node item 5</div>
+          },{
+            value: "6", label: <div>node item 6</div>
+          },{
+            value: "7", label: <div>node item 7</div>
+          },{
+            value: "8", label: <div>node item 8</div>
+          },{
+            value: "9", label: <div>node item 9</div>
+          },{
+            value: "10", label: <div>node item 10</div>
+          },{
+            value: "11", label: <div>node item 11</div>
+          },{
+            value: "12", label: <div>node item 12</div>
+          },{
+            value: "13", label: <div>node item 13</div>
+          },{
+            value: "14", label: <div>node item 14</div>
+          },{
+            value: "15", label: <div>node item 15</div>
+          },{
+            value: "16", label: <div>node item 16</div>
+          },{
+            value: "17", label: <div>node item 17</div>
+          },{
+            value: "18", label: <div>node item 18</div>
+          },{
+            value: "19", label: <div>node item 19</div>
+          },{
+            value: "20", label: <div>node item 20</div>
+          },{
+            value: "21", label: <div>node item 21</div>
+          }]
+        }
+      }
+      
+      render (){
+        const { value, options } = this.state;
+        return <Select
+          label="Select input"
+          value={value}
+          placeholder="placeholder"
+          options={options}
+          dropdownStyle={{maxHeight: 200}}
+          onChange={e => this.setState({
+            value: e.value
+          })}
+        />
+      }
+    }
+  }
+</Playground>
+
+## API
+
+<Props of={Select} />
