@@ -19,6 +19,7 @@ export { default as Dropdown } from "./data-entry/dropdown";
 export { default as Input } from "./data-entry/input";
 export { default as Radio } from "./data-entry/radio";
 export { default as Slider } from "./data-entry/slider";
+export { default as Select } from "./data-entry/select";
 export { default as Switch } from "./data-entry/switch";
 
 export { default as Alert } from "./feedback/alert";
