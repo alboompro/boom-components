@@ -9,13 +9,13 @@ export { default as Breadcrumb } from "./data-display/breadcrumb";
 export { default as Card } from "./data-display/card";
 export { default as Collapse } from "./data-display/collapse";
 export { default as Drawer } from "./data-display/drawer";
+export { default as Dropdown } from "./data-display/dropdown";
 export { default as Modal } from "./data-display/modal";
 export { default as ProfilePicture } from "./data-display/profile-picture";
 export { default as Steps } from "./data-display/steps";
 
 export { default as AutoComplete } from "./data-entry/autocomplete";
 export { default as Checkbox } from "./data-entry/checkbox";
-export { default as Dropdown } from "./data-entry/dropdown";
 export { default as Input } from "./data-entry/input";
 export { default as Radio } from "./data-entry/radio";
 export { default as Slider } from "./data-entry/slider";

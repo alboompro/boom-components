@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collapse Snapshot should render a collapse 1`] = `
+<Fragment>
+  <GlobalStyleComponent
+    showArrow={false}
+  />
+  <Dropdown
+    defaultVisible={false}
+    disabled={false}
+    menu={
+      <ul>
+        <li>
+          1st Menu Item
+        </li>
+        <li>
+          2nd Menu Item
+        </li>
+        <li>
+          3rd Menu Item
+        </li>
+      </ul>
+    }
+    mouseEnterDelay={0.15}
+    mouseLeaveDelay={0.1}
+    onVisibleChange={[Function]}
+    overlay={[Function]}
+    overlayClassName=""
+    overlayStyle={Object {}}
+    placement="bottomCenter"
+    prefixCls="alb-dropdown"
+    showAction={Array []}
+    showArrow={false}
+    transitionName="slide-up"
+    trigger="hover"
+  >
+    <a
+      className=""
+    >
+      Hover me!
+    </a>
+  </Dropdown>
+</Fragment>
+`;

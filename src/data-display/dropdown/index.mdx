@@ -1,0 +1,64 @@
+---
+name: Dropdown
+menu: Data Display
+---
+
+import { Playground, Props } from 'docz'
+
+import Dropdown from './Dropdown'
+
+# Dropdown
+
+Uma lista em menu dropdown.
+
+## Quando utilizar
+
+Se existem muitas operações a serem exibidas, você pode agrupá-las em um dropdow. Ao clicar/passar o mouse sobre o gatilho, uma lista do dropdown deve aparecer, o que permite escolher uma das ações contidas nela.
+
+## Exemplos
+
+### Básico
+
+<Playground>
+  {class DropdownTest extends React.Component {
+    constructor(){
+      super()
+    }
+
+    render(){
+      const menu = (
+       <ul>
+         <li>
+            1st Menu Item
+        </li>
+        <li>
+            2nd Menu Item
+        </li>
+        <li>
+            3rd Menu Item
+        </li>
+       </ul>
+      )
+
+      return (
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+          <Dropdown overlay={menu}>
+          <a>Hover me!</a>
+        </Dropdown>
+
+        <Dropdown overlay={menu} trigger="click">
+          <a>Click me!</a>
+        </Dropdown>
+
+        <Dropdown overlay={menu} trigger="contextMenu">
+          <a>Right click me!</a>
+        </Dropdown>
+        </div>
+      )
+    }
+  }}
+</Playground>
+
+## API
+
+<Props of={Dropdown} />
