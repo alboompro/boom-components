@@ -10,8 +10,22 @@ import { noop } from "../../helpers";
  * @param {*} { children, textStyle, icon, iconStyle, htmlType, type, ...props }
  * @returns {Component}
  */
-const Button = ({ children, textStyle, icon, htmlType, type, ...props }) => (
-  <DefaultBtn type={htmlType} colorType={type} {...props}>
+const Button = ({
+  children,
+  textStyle,
+  icon,
+  htmlType,
+  type,
+  loading,
+  disabled,
+  ...props
+}) => (
+  <DefaultBtn
+    type={htmlType}
+    colorType={type}
+    disabled={loading || disabled}
+    {...props}
+  >
     {icon && <Icon>{icon}</Icon>}
     {children}
   </DefaultBtn>

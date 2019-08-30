@@ -26,6 +26,7 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   width: ${props => props.width}px;
   max-width: 90%;
+  max-height: 90%;
   background-color: ${props => props.background};
   border-radius: ${props => (props.rounded ? "3px" : 0)};
 
@@ -40,23 +41,16 @@ export const ModalContainer = styled.div`
 export const ModalHeader = styled.div`
   position: relative;
   display: flex;
-  align-items: flex-start;
-  justfy-content: center;
-  padding: 18px 17px 15px;
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.26);
-  }
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.26);
 `;
 
 export const CloseIcon = styled.div`
   cursor: pointer;
   margin-left: auto;
+  
   > img {
     width: 16px;
     pointer-events: none;
@@ -67,14 +61,18 @@ export const ModalTitle = styled.div`
   flex: 1;
   font-size: 15px;
   color: #4c4c4c;
-  font-weight: 400;
+  letter-spacing: 0.4px;
+  line-height: initial;
+  font-weight: 500;
 `;
 
 export const ModalBody = styled.div`
+  height: 100%;
+  overflow: auto;
   ${props => props.bodyStyle}
 `;
 
 export const ModalFooter = styled.div`
-  padding: 10px 15px;
+  padding: 15px;
   border-top: 1px solid #eaeaea;
 `;
