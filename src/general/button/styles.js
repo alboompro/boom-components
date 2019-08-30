@@ -22,10 +22,7 @@ export const DefaultBtn = styled.button`
 
   &:disabled {
     cursor: no-drop;
-
-    &:hover {
-      opacity: 1;
-    }
+    opacity: 0.5;
   }
 `;
 
