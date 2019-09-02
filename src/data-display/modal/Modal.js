@@ -42,17 +42,19 @@ class Modal extends Component {
     const {
       backdrop,
       backdropStyle,
-      bodyStyle,
       background,
-      closeButton,
+      bodyStyle,
       children,
+      closeButton,
       floatingStyle,
       footer,
+      headerStyle,
+      height,
+      modalStyle,
       rounded,
       title,
-      headerStyle,
-      zIndex,
-      width
+      width,
+      zIndex
     } = this.props;
 
     return (
@@ -69,7 +71,9 @@ class Modal extends Component {
           rounded={rounded}
           background={background}
           width={width}
+          height={height}
           floatingStyle={floatingStyle}
+          styles={modalStyle}
         >
           <ModalHeader style={headerStyle}>
             {title && <ModalTitle>{title}</ModalTitle>}
@@ -123,12 +127,16 @@ Modal.propTypes = {
   floatingStyle: PropTypes.object,
   /** footer content */
   footer: PropTypes.node,
+  /** custom header style */
+  headerStyle: PropTypes.object,
+  /** height of modal */
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  /** main containter modal style */
+  modalStyle: PropTypes.object,
   /** return the mount node for modal */
   rounded: PropTypes.bool,
   /** modal title */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  /** custom header style */
-  headerStyle: PropTypes.object,
   /** whether modal is visible */
   visible: PropTypes.bool,
   /** width of modal */
@@ -138,7 +146,6 @@ Modal.propTypes = {
 };
 
 Modal.defaultProps = {
-  // afterClose: noop,
   backdrop: true,
   backdropClosable: true,
   backdropStyle: {},
@@ -147,12 +154,14 @@ Modal.defaultProps = {
   closeButton: true,
   floatingStyle: {},
   footer: null,
+  headerStyle: {},
+  height: 520,
+  modalStyle: {},
   rounded: true,
   title: null,
-  headerStyle: {},
   visible: false,
-  width: 520,
-  zIndex: 1000
+  zIndex: 1000,
+  width: 520
 };
 
 export default Modal;
