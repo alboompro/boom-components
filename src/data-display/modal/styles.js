@@ -24,18 +24,23 @@ export const ModalBackdrop = styled.div`
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${props => props.width}px;
+  width: ${props =>
+    typeof props.width === "string" ? props.width : `${props.width}px`};
+  height: ${props =>
+    typeof props.height  === "string" ? props.height : `${props.height}px`};
   max-width: 90%;
   max-height: 90%;
   background-color: ${props => props.background};
   border-radius: ${props => (props.rounded ? "3px" : 0)};
-
+  
   ${props => props.floatingStyle.top 
     ?  `margin-top: ${props.floatingStyle.top };`
     : props.floatingStyle.bottom 
     ? `margin-bottom: ${props.floatingStyle.bottom };`
     : null
   }
+
+  ${props => props.styles}
 `;
 
 export const ModalHeader = styled.div`
