@@ -155,7 +155,7 @@ Modal.defaultProps = {
   floatingStyle: {},
   footer: null,
   headerStyle: {},
-  height: 520,
+  height: "auto",
   modalStyle: {},
   rounded: true,
   title: null,
