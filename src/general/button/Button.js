@@ -1,7 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Loader from "../../shared/loader";
 
-import { DefaultBtn, Icon } from "./styles";
+import {
+  DefaultBtn,
+  Icon,
+  LoadingFeedback,
+  ButtonContent,
+  ButtonChildren
+} from "./styles";
+
 import { noop } from "../../helpers";
 
 /**
@@ -17,17 +25,33 @@ const Button = ({
   htmlType,
   type,
   loading,
+  loadingColor,
+  loadingSize,
   disabled,
+  className,
   ...props
 }) => (
   <DefaultBtn
     type={htmlType}
     colorType={type}
     disabled={loading || disabled}
+    loadingSize={loadingSize}
+    className={`${className} ${loading ? "loading" : ""}`}
     {...props}
   >
-    {icon && <Icon>{icon}</Icon>}
-    {children}
+    <ButtonContent>
+      <LoadingFeedback>
+        {loading && (
+          <span>
+            <Loader loadingSize={loadingSize} loadingColor={loadingColor} />
+          </span>
+        )}
+      </LoadingFeedback>
+      <ButtonChildren style={textStyle}>
+        {children}
+        {icon && <Icon>{icon}</Icon>}
+      </ButtonChildren>
+    </ButtonContent>
   </DefaultBtn>
 );
 
@@ -45,6 +69,10 @@ Button.propTypes = {
   icon: PropTypes.string,
   /** set the loading status of button */
   loading: PropTypes.bool,
+  /** loading icon size */
+  loadingSize: PropTypes.number,
+  /** loading icon color */
+  loadingColor: PropTypes.string,
   /** set the handler of click event */
   onClick: PropTypes.func,
   /** make background transparent and invert text and border colors */
@@ -70,6 +98,8 @@ Button.defaultProps = {
   href: null,
   icon: null,
   loading: false,
+  loadingColor: "#fff",
+  loadingSize: 18,
   outlined: false,
   onClick: noop,
   rounded: false,

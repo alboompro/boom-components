@@ -3,6 +3,9 @@ name: Button
 menu: General
 ---
 import { Playground, Props } from 'docz'
+import styled from "styled-components";
+import Icon from "../Icon/";
+
 import Button from './button'
 
 # Button
@@ -18,8 +21,12 @@ Um botão significa uma operação (ou uma série delas). Clicar em um botão de
 ### Uso básico
 
 <Playground>
-  <Button>Default</Button>
-  <Button type="primary">Primary</Button>
+  <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <Button className={"classTest"} onClick={() => console.log("test")}>Default</Button>
+    <Button type="primary" loading>
+      Primary
+    </Button>
+  </div>
 </Playground>
 
 ## API
