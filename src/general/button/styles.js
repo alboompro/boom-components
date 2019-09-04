@@ -3,6 +3,7 @@ import styled from "styled-components";
 import colors from "../../constants/colors";
 
 export const Icon = styled.span`
+  display: flex;
   svg {
     min-height: 10px;
     height: 100%;
@@ -28,10 +29,12 @@ export const ButtonContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  height: 100%;
 `;
 
 export const ButtonChildren = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 14px;
   transition: 0.3s;
 
@@ -39,17 +42,17 @@ export const ButtonChildren = styled.div`
 `;
 
 export const DefaultBtn = styled.button`
-  display: flex;
+  display: block;
   position: relative;
   padding: 0 25px;
+  height: 35px;
   border: 0;
   border-radius: 2px;
   cursor: pointer;
   background-color: ${props => colors[props.colorType] || colors.default};
   transition: opacity 150ms ease-in-out;
 
-  ${ButtonContent} {
-    height: 35px;
+  ${ButtonChildren} {
     color: ${props => (props.colorType === "primary" ? "#fff" : "#000")};
   }
 

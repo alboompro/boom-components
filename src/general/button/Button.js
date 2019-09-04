@@ -22,6 +22,7 @@ const Button = ({
   children,
   textStyle,
   icon,
+  iconStyle,
   htmlType,
   type,
   loading,
@@ -40,16 +41,16 @@ const Button = ({
     {...props}
   >
     <ButtonContent>
-      <LoadingFeedback>
-        {loading && (
+      {loading && (
+        <LoadingFeedback>
           <span>
             <Loader loadingSize={loadingSize} loadingColor={loadingColor} />
           </span>
-        )}
-      </LoadingFeedback>
+        </LoadingFeedback>
+      )}
       <ButtonChildren style={textStyle}>
+        {icon && <Icon style={iconStyle}>{icon}</Icon>}
         {children}
-        {icon && <Icon>{icon}</Icon>}
       </ButtonChildren>
     </ButtonContent>
   </DefaultBtn>
@@ -67,6 +68,8 @@ Button.propTypes = {
   htmlType: PropTypes.oneOf(["button", "reset", "submit"]),
   /** set the icon of button */
   icon: PropTypes.string,
+  /** icon style */
+  iconStyle: PropTypes.object,
   /** set the loading status of button */
   loading: PropTypes.bool,
   /** loading icon size */
@@ -97,6 +100,7 @@ Button.defaultProps = {
   htmlType: "button",
   href: null,
   icon: null,
+  iconStyle: {},
   loading: false,
   loadingColor: "#fff",
   loadingSize: 18,
