@@ -4,12 +4,29 @@ menu: Data Entry
 ---
 
 import { Playground, Props } from 'docz'
+import Component from "react-component-component"
 
 import Checkbox from './Checkbox'
 
 # Checkbox
 
 Checkbox component.
+
+<Playground>
+  <Component
+    initialState={{checked: true}}
+  >
+    {
+      ({ setState, state }) => (
+        <Checkbox 
+          onChange={() => setState({ checked: !state.checked })}
+          label="Label de exemplo"
+          checked={state.checked}
+        />
+      )
+    }
+  </Component>
+</Playground>
 
 ## API
 
