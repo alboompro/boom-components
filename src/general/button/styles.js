@@ -53,7 +53,7 @@ export const DefaultBtn = styled.button`
   transition: opacity 150ms ease-in-out;
 
   ${ButtonChildren} {
-    color: ${props => (props.colorType === "primary" ? "#fff" : "#000")};
+    color: ${props => (props.colorType === "primary" ? "#fff" : "#383838")};
   }
 
   &:focus {
