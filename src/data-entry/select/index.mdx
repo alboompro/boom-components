@@ -48,7 +48,7 @@ O Select não possui nenhuma dependência;
           }]
         }
       }
-      
+
       render (){
         const { value, options } = this.state;
 
@@ -73,7 +73,7 @@ O Select não possui nenhuma dependência;
     class SelectTest extends React.Component {
       constructor() {
         super()
-        this.state = state = { value: "1", options: [{
+        this.state = state = { value: "", options: [{
             value: "1", label: <div styles="background-color: red;">
               node item 1 <span>test</span>
             </div>
@@ -120,7 +120,11 @@ O Select não possui nenhuma dependência;
           }]
         }
       }
-      
+
+      componentDidMount() {
+        this.setState({ value: '1' })
+      }
+
       render (){
         const { value, options } = this.state;
         return <Select
@@ -129,6 +133,7 @@ O Select não possui nenhuma dependência;
           placeholder="placeholder"
           options={options}
           dropdownStyle={{maxHeight: 200}}
+          optionsStyle={{ color: 'blue' }}
           onChange={e => this.setState({
             value: e.value
           })}

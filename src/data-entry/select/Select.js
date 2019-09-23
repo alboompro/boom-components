@@ -37,10 +37,21 @@ export class Select extends Component {
   }
 
   componentDidMount() {
+    this.setSelect();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { value } = this.props;
+    if (value !== prevProps.value) {
+      this.setSelect();
+    }
+  }
+
+  setSelect = () => {
     const { value, options } = this.props;
     const hoveredItem = options.findIndex(item => item.value === value);
     this.setState({ selected: hoveredItem, hovered: hoveredItem });
-  }
+  };
 
   openDropdown = () => {
     const { disabled } = this.props;
@@ -148,7 +159,12 @@ export class Select extends Component {
   };
 
   renderDropdown = () => {
-    const { dropdownStyle, dropdownClassName, options } = this.props;
+    const {
+      dropdownStyle,
+      dropdownClassName,
+      options,
+      optionsStyle
+    } = this.props;
     const { selectItem } = this.refs;
     const { selected, hovered } = this.state;
     const { width, top, left, height } = selectItem.getBoundingClientRect();
@@ -181,6 +197,7 @@ export class Select extends Component {
                 onMouseLeave={() => this.setState({ hovered: null })}
                 ref={`optionRef${index}`}
                 innerRef={`optionRef${index}`}
+                style={{ ...optionsStyle }}
               >
                 {item.label}
               </Option>
@@ -255,6 +272,8 @@ Select.propTypes = {
    * and label and can be a string/number or node
    */
   options: PropTypes.array.isRequired,
+  /** options style */
+  optionsStyle: PropTypes.object,
   /** set placeholder value */
   placeholder: PropTypes.string,
   /** select className */
@@ -274,6 +293,7 @@ Select.defaultProps = {
   dropdownStyle: null,
   label: "",
   onChange: null,
+  optionsStyle: null,
   placeholder: "",
   selectClassName: null,
   selectStyle: null,
