@@ -30,6 +30,7 @@ const Button = ({
   loadingSize,
   disabled,
   className,
+  style,
   ...props
 }) => (
   <DefaultBtn
@@ -38,6 +39,7 @@ const Button = ({
     disabled={loading || disabled}
     loadingSize={loadingSize}
     className={`${className} ${loading ? "loading" : ""}`}
+    style={style}
     {...props}
   >
     <ButtonContent>
@@ -90,6 +92,8 @@ Button.propTypes = {
   style: PropTypes.object,
   /** same as target attr of a but works only when href is specified */
   target: PropTypes.string,
+  /** set label style */
+  textStyle: PropTypes.object,
   /** set the pattern of button */
   type: PropTypes.oneOf(["main", "primary"])
 };
@@ -111,6 +115,7 @@ Button.defaultProps = {
   stretched: false,
   style: {},
   target: null,
+  textStyle: {},
   type: "main"
 };
 
