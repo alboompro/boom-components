@@ -6,22 +6,133 @@ menu: Feedback
 import { Playground, Props } from 'docz'
 
 import Notification from './Notification'
+import Notice from './Notice'
+import Modal from '../../data-display/modal'
+import Button from '../../general/button'
 
 # Notification
+## Quando utilizar
+* Notificar o usuário.
+* Mostrar que uma ação foi executada com sucesso/erro.
 
-Notification component.
+## Exemplos
+
+## Exemplo do Notification
+```jsx
+import notification from "@alboom/boom-components/feedback/notification";
+
+notification.open({
+  title: "My beatifull title",           // optional
+  message: "insert your message here..." // required
+});
+```
+
+<Playground>
+	{class NotificationTest extends React.Component {
+    showNotify(kind="open") {
+      Notification[kind]({
+        title: 'Title',
+        closable: true,
+        duration: 3,
+        message: <span>simple show</span>,
+        onClose() { console.log('simple close')}
+      })
+    }
+
+		render() {
+			return (
+        <div>
+          <p> Mostrar notificação: </p>
+          <div style={{ display: 'flex' }} >
+            <Button type="primary" style={{ marginRight: 5 }} onClick={() => this.showNotify()}> Default </Button>
+            <Button type="primary" style={{ marginRight: 5 }} onClick={() => this.showNotify('success')}> Sucesso </Button>
+            <Button type="primary" style={{ marginRight: 5 }} onClick={() => this.showNotify('info')}> Info </Button>
+            <Button type="primary" style={{ marginRight: 5 }} onClick={() => this.showNotify('warning')}> Alerta </Button>
+            <Button type="primary" style={{ marginRight: 5 }} onClick={() => this.showNotify('error')}> Erro </Button>
+          </div>
+        </div>
+      )
+		}
+	}}
+</Playground>
+
+## Exemplo do Notification informando um target
+```jsx
+import notification from "@alboom/boom-components/feedback/notification";
+
+notification.open({
+  title: "My beatifull title",            // optional
+  message: "insert your message here...", // required,
+  target: "#show"                         // optional
+});
+```
+
+<Playground state={{ modalStatus: false }}>
+	{class ModalTest extends React.Component {
+		constructor() {
+      super()
+      this.state = { modalStatus: false }
+    }
+
+    showNotify(kind="open") {
+      Notification[kind]({
+        title: 'Title',
+        message: <span>simple show</span>,
+        onClose() { console.log('simple close')},
+        duration: 3,
+        target: "#show",
+        wrapperStyle: "position: absolute; z-index: 10000; top: 15px; right: 15px;"
+      })
+    }
+
+    handleModal() {
+      const { modalStatus } = this.state
+      this.setState({ modalStatus: !modalStatus })
+    }
+
+		render() {
+			const { modalStatus } = this.state
+      const styleContent = {
+        padding: "20px",
+        position: "relative",
+        height: 500,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        overflow: "hidden"
+       }
+
+			return <div>
+				<Modal
+          title='Titulo do modal'
+          onClose={() => this.handleModal()}
+          visible={modalStatus}
+          width={1000}
+        >
+          <div id="show" style={styleContent}>
+            <Button type="primary" style={{ marginBottom: 5 }} onClick={() => this.showNotify()}> Default </Button>
+            <Button type="primary" style={{ marginBottom: 5 }} onClick={() => this.showNotify('success')}> Sucesso </Button>
+            <Button type="primary" style={{ marginBottom: 5 }} onClick={() => this.showNotify('info')}> Info </Button>
+            <Button type="primary" style={{ marginBottom: 5 }} onClick={() => this.showNotify('warning')}> Alerta </Button>
+            <Button type="primary" style={{ marginBottom: 5 }} onClick={() => this.showNotify('error')}> Erro </Button>
+          </div>
+        </Modal>
+				<Button type="primary" onClick={() => this.handleModal()} type="primary">
+          Abrir modal
+        </Button>
+			</div>
+		}
+	}}
+</Playground>
 
 ## API
-
+- `notification.open(config)`
 - `notification.success(config)`
-- `notification.error(config)`
 - `notification.info(config)`
 - `notification.warning(config)`
-- `notification.warn(config)`
-- `notification.open(config)`
-- `notification.close(key: String)`
-- `notification.destroy()`
+- `notification.error(config)`
 
 `config` properties are the following:
 
 <Props of={Notification} />
+<Props of={Notice} />
