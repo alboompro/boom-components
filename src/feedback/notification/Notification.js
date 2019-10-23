@@ -27,22 +27,10 @@ class Notification extends PureComponent {
     const noticeNodes = notices.map(notice => {
       const onClose = () => {
         this.remove(notice.key);
-
-        if (typeof notice.onClose !== "function") {
-          throw new Error("onClose is a not function");
-        }
-        notice.onClose();
+        if (typeof notice.onClose === "function") notice.onClose();
       };
 
-      return (
-        <Notice
-          {...notice}
-          key={notice.key}
-          onClose={onClose}
-          title={notice.title}
-          message={notice.message}
-        />
-      );
+      return <Notice {...notice} onClose={onClose} />;
     });
 
     return <div>{noticeNodes}</div>;

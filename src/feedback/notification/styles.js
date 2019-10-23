@@ -9,7 +9,7 @@ export const Container = styled.div`
   padding: 15px 25px;
   overflow: hidden;
   border-radius: 4px;
-  width: 270px;
+  max-width: 270px;
   position: relative;
   transition: all 0.3s ease-out;
   opacity: ${props => (props.visible ? 1 : 0)};
