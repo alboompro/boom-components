@@ -28,6 +28,7 @@ export { default as Message } from "./feedback/message";
 export { default as Notification } from "./feedback/notification";
 export { default as Placeholder } from "./feedback/placeholder";
 export { default as Spin } from "./feedback/spin";
+export { default as Skeleton } from "./feedback/skeleton";
 export { default as Tooltip } from "./feedback/tooltip";
 
 export { default as Button } from "./general/button";
