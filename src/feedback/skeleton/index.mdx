@@ -1,0 +1,111 @@
+---
+name: Skeleton
+menu: Feedback
+---
+
+import { Playground, Props } from "docz"
+
+import Skeleton from "./index"
+import {Circle, Line, Square, SkeletonContainer } from "./shapes"
+
+# Skeleton
+
+Provê um conteúdo fantasma enquanto você espera conteúdo ser carregado ou visualizar conteúdo que ainda não existe
+
+## Quando utilizar
+* Quando um recurso precisa de uma requisição que pode demorar
+* Quando um componente utiliza muita informação
+* Quando um componente precisa de informações para seu funcionamento inicial
+
+
+## Exemplos
+
+### Uso básico
+```jsx
+import Skeleton from "@alboom/boom-components/feedback/skeleton"
+
+class MyComponent extends React.Component {
+  state = {
+    loaded: false,
+    data: null
+  }
+
+  componentDidMount(){
+    fetch("http://someHeavyRequest.com").then(({data}) => {
+      this.setState({loaded: true, data})
+    })
+  }
+
+  render(){
+    const { loaded, data} = this.state
+    return (
+    <Skeleton ready={loaded}>
+      <div>Data carregado: {data}</div>
+    </Skeleton>
+    )
+  }
+}
+```
+
+<Playground>
+  <Skeleton />
+</Playground>
+
+### Avatar e Titulo
+```jsx
+import Skeleton from "@alboom/boom-components/feedback/skeleton"
+const MyComponent = ({loaded}) => {
+  return (
+    <Skeleton ready={loaded} avatar title paragraphs={5}>
+      { /* Content that will be displayed once loaded is true */}
+    </Skeleton>
+  )
+}
+```
+
+<Playground>
+  <Skeleton avatar title paragraphs={5} />
+</Playground>
+
+### Customizando template
+
+```jsx
+import Skeleton from "@alboom/boom-components/feedback/skeleton"
+const { Line, Circle } = Skeleton
+
+const MyComponent = ({loaded, content}) => {
+  const MyTemplate = (
+    <div>
+      <div>
+        <Circle animated={false} size={72} />
+      </div>
+      <div>
+        <Line width="80px" height={20} />
+      </div>
+    </div>
+  )
+
+  return (
+    <Skeleton ready={loaded} template={MyTemplate}>
+      { /* Content that will be displayed once loaded is true */}
+    </Skeleton>
+  )
+}
+```
+
+<Playground>
+ <Skeleton template={(<div>
+          <div>
+            <Circle animated={false} size={72} />
+          </div>
+          <div>
+            <Line width="80px" height={20} />
+          </div>
+          </div>
+        )} />
+</Playground>
+
+## API
+
+<Props of={Skeleton} />
+

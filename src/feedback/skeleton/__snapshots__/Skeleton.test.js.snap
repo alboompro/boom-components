@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Skeleton Snapshot should render a skeleton 1`] = `
+<styled.div>
+  <div
+    className="skeleton-content"
+  >
+    <Line
+      animated={true}
+      key="paragraph-0"
+    />
+    <Line
+      animated={true}
+      key="paragraph-1"
+    />
+  </div>
+</styled.div>
+`;
