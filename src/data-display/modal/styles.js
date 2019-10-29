@@ -48,7 +48,7 @@ export const ModalHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px;
+  padding: 12px 15px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.26);
   z-index: 1;
 `;
