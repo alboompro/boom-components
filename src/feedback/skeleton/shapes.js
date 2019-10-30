@@ -17,7 +17,7 @@ const Shape = styled.div`
   width: ${props =>
     typeof props.width === "number" ? `${props.width}px` : props.width};
   height: ${props =>
-    typeof props.width === "number" ? `${props.height}px` : props.height};
+    typeof props.height === "number" ? `${props.height}px` : props.height};
   background-color: ${props => props.color || "#e8e3e3"};
   margin-bottom: 8px;
   ${props =>
