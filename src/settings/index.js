@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-const scope = window || global;
+const scope = typeof window === "undefined" ? global : window;
 const settings = scope.__boomComponentsSettings || {};
-scope.__boomComponentsSettings = window.__boomComponentsSettings || settings;
+scope.__boomComponentsSettings = scope.__boomComponentsSettings || settings;
 
 export const update = (name, config = {}) => {
   settings[name] = {

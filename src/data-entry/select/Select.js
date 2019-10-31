@@ -168,7 +168,7 @@ export class Select extends Component {
     const { selectItem } = this.refs;
     const { selected, hovered } = this.state;
     const { width, top, left, height } = selectItem.getBoundingClientRect();
-    const scope = window || global;
+    const scope = typeof window === "undefined" ? global : window;
     const positionLeft = left + scope.scrollX;
     const positionTop = top + scope.scrollY + height;
 
