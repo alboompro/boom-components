@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-const settings = window.__boomComponentsSettings || {};
-window.__boomComponentsSettings = window.__boomComponentsSettings || settings;
+const scope = window || global;
+const settings = scope.__boomComponentsSettings || {};
+scope.__boomComponentsSettings = window.__boomComponentsSettings || settings;
 
 export const update = (name, config = {}) => {
   settings[name] = {
