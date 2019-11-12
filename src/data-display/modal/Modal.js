@@ -28,6 +28,8 @@ class Modal extends Component {
   closeModal = e => {
     const { onClose, backdropClosable } = this.props;
     const { backdrop, closeButton } = this.refs;
+    document.body.style.overflow = null;
+
     if (
       backdropClosable &&
       (e.target === (backdrop.refs ? backdrop.refs.backdrop : backdrop) ||
@@ -56,6 +58,8 @@ class Modal extends Component {
       width,
       zIndex
     } = this.props;
+
+    document.body.style.overflow = "hidden";
 
     return (
       <ModalBackdrop

@@ -3,5 +3,6 @@ export default {
   description:
     "Componentes React para criação de interfaces dos produtos Alboom",
   src: "./src",
-  host: "0.0.0.0"
+  host: "0.0.0.0",
+  base: "/boom-components"
 };
