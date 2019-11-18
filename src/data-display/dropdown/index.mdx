@@ -1,0 +1,143 @@
+---
+name: Dropdown
+menu: Data Display
+---
+
+import { Playground, Props } from "docz"
+
+import Dropdown from "./Dropdown"
+import Button from "../../general/button"
+
+# Dropdown
+
+Um menu dropdown.
+
+## Quando Utilizar
+
+Quando um conteúdo ou menu precisa ser exibido em uma janela dropdown.
+
+## Exemplos
+
+### Uso Básico
+
+```jsx
+import Dropdown from "@alboom/boom-components/data-display/dropdown"
+
+const MyComponent = () => {
+  const dropdownContent = (
+    <div>
+      Hi, I'm hidden until you interact with the dropdown.
+    </div>
+  )
+  return (
+    <Dropdown overlay={dropdownContent}>
+      <a>Hover me!</a>
+    </Dropdown>
+  )
+}
+```
+
+<Playground>
+  <Dropdown overlay={<div>Hi, I'm hidden until you interact with the dropdown.</div>}>
+    <a>Hover me!</a>
+  </Dropdown>
+</Playground>
+
+### Condições de disparo
+
+#### Click
+
+<Playground>
+  <Dropdown trigger={['click']} overlay={<div>Hi, I'm hidden until you interact with the dropdown.</div>}>
+    <a>Click me!</a>
+  </Dropdown>
+</Playground>
+
+#### Context menu
+
+<Playground>
+  <Dropdown trigger={['contextmenu']} overlay={<div>Hi, I'm hidden until you interact with the dropdown.</div>}>
+    <a>Right click me!</a>
+  </Dropdown>
+</Playground>
+
+<!-- ### Dropdowns controlaveis
+
+É possivel controlar a visibilidade de um Dropdown a partir de um componente pai, tornando-o controlado. Exemplo:
+
+```jsx
+import Dropdown from "@alboom/boom-components/data-display/dropdown"
+import Button from "@alboom/boom-components/general/button"
+
+class MyComponent extends React.Component {
+  state = {
+    visible: false
+  }
+
+  handleVisibleChange = visible => {
+    this.setState({visible})
+  }
+
+  render(){
+    const { visible } = this.state;
+    return (
+      <div>
+        <Button type="primary" onClick={() => {this.setState({visible: true})}}>Click to open dropdown</Button>
+        <Dropdown 
+            visible={visible} 
+            trigger={['click']} 
+            onVisibleChange={this.handleVisibleChange}
+            overlay={<div>I'm on a controlled component!<div>}>
+              <a>Click Me!</a>
+        </Dropdown>
+      </div>
+    )
+  }
+}
+```
+
+<Playground state={{visible: false}}>
+  {class DropdownTest extends React.Component {
+    constructor(){
+      super()
+      this.state = {
+        visible: false
+      }
+    }
+
+    render(){
+      const { visible } = this.state;
+      const overlay = <div>Hi, I'm a controlled dropdown.</div>
+      return (
+        <div style={{display: "flex"}}>
+          <Button style={{
+                textAlign: "center",
+                border: "1px solid transparent",
+                boxShadow: "0 2px 0 rgba(0,0,0,0.015)",
+                backgroundColor: "#fff",
+                borderColor: "#d9d9d9"
+              }} textStyle={{color: "black"}} onClick={() => this.setState({visible: true})}>Abrir Dropdown</Button>
+          <div>
+            <Dropdown onVisibleChange={(visible) => {
+              console.log(visible)
+                this.setState({visible: visible})
+              }} visible={visible} trigger={['click']} overlay={overlay}>
+              <Button style={{
+                textAlign: "center",
+                border: "1px solid transparent",
+                boxShadow: "0 2px 0 rgba(0,0,0,0.015)",
+                backgroundColor: "#fff",
+                borderColor: "#d9d9d9"
+              }} textStyle={{color: "black"}} type="primary">...</Button>
+            </Dropdown>
+          </div>
+        </div>
+      )
+    }
+  }
+}
+</Playground> -->
+
+## API
+
+<Props of={Dropdown} />
