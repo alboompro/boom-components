@@ -4,16 +4,6 @@ Uma biblioteca de componentes React para utilização em projetos da Alboom
 
 ## Instalação
 
-Certifique-se de possuir acesso ao repositório adicionando o arquivo `.npmrc` ao seu projeto:
-
-```
-always-auth=true
-@alboom:registry=https://npm.fury.io/alboom/
-//npm.fury.io/alboom/:_authToken=4T6WshJdADHBg-_rPs-r
-```
-
-Depois, execute, de acordo com seu gerenciador de pacotes:
-
 ```bash
 yarn add @alboom/boom-components
 ```

@@ -1,5 +1,5 @@
 {
-  "version": "0.2.25",
+  "version": "0.2.27",
   "name": "@alboom/boom-components",
   "description": "React UI library containing a set of high quality components for building rich, interactive user interfaces in Alboom applications",
   "main": "index.js",
@@ -28,7 +28,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/alboom/boom-components.git"
+    "url": "git+ssh://git@github.com:alboompro/boom-components.git"
   },
   "contributors": [
     {
@@ -38,9 +38,12 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/alboom/boom-components/issues"
+    "url": "https://github.com/alboompro/boom-components/issues"
   },
-  "homepage": "https://gitlab.com/alboom/boom-components#README",
+  "homepage": "https://github.com/alboompro/boom-components",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "classnames": "^2.2.6",
     "formik": "^1.5.7",

@@ -81,9 +81,7 @@ async function run() {
     const packageData = await createPackageFile();
 
     await Promise.all(
-      ["./README.md", "./LICENSE", ".npmrc"].map(file =>
-        includeFileInBuild(file)
-      )
+      ["./README.md", "./LICENSE"].map(file => includeFileInBuild(file))
     );
 
     await addLicense(packageData);
