@@ -6,154 +6,187 @@ import { DropdownWrapper, DropdownDispatcher, DropdownContent } from "./styles";
 class Dropdown extends Component {
   constructor(props) {
     super(props);
-    this.wrapperRef = createRef();
-    this.triggerRef = createRef();
     this.contentRef = createRef();
-    this.state = { visible: props.visible };
+    this.dispatcherRef = createRef();
+    this.wrapperRef = createRef();
+    this.state = {
+      visible: props.visible !== null ? props.visible : false,
+      controlled: props.visible !== null
+    };
   }
 
-  componentDidMount() {
-    const { trigger } = this.props;
-    const element = this.triggerRef.current;
-    if (element) {
-      trigger.forEach(event => {
-        if (event === "hover") {
-          element.addEventListener("mouseenter", this.handleVisibilityChange);
-          element.addEventListener("mouseleave", this.handleVisibilityChange);
-        } else {
-          element.addEventListener(event, this.handleVisibilityChange);
-        }
-      });
+  componentDidUpdate() {
+    const { controlled } = this.state;
+    const { visible } = this.props;
+    if (controlled && visible) {
+      document.addEventListener("click", this.handleClose);
+      document.addEventListener("contextmenu", this.handleClose);
     }
   }
 
-  componentWillUnmount() {
-    const { trigger } = this.props;
-    const element = this.triggerRef.current;
-    if (element) {
-      trigger.forEach(event => {
-        if (event === "hover") {
-          element.removeEventListener(
-            "mouseenter",
-            this.handleVisibilityChange
-          );
-          element.removeEventListener(
-            "mouseleave",
-            this.handleVisibilityChange
-          );
-        } else {
-          element.removeEventListener(event, this.handleVisibilityChange);
-        }
-      });
-    }
-  }
+  /**
+   * Check if event type is present in trigger properties
+   * in order to determine whether or not the activation
+   * should occur.
+   *
+   * @param {DOMEvent} e DOM Event for interacting with dispatcher
+   */
+  handleActivation = e => {
+    e && e.preventDefault();
+    const { visible, onVisibleChange } = this.props;
+    const { visible: stateVisible, controlled } = this.state;
 
-  handleVisibilityChange = e => {
-    e.preventDefault();
-    const { disabled } = this.props;
-    if (disabled) return;
-    const hoverEvents = ["mouseenter", "mouseleave"];
-    hoverEvents.includes(e.type) ? this.handleHover(e) : this.handleClick(e);
-  };
-
-  handleHover = e => {
-    const { visible, onVisibleChange } = this.state;
-    if (e.type === "mouseenter" && !visible) {
-      this.setState({ visible: true }, () => {
-        if (onVisibleChange && typeof onVisibleChange === "function") {
-          onVisibleChange(true);
-        }
-      });
-    } else if (e.type === "mouseleave") {
-      const content = this.contentRef.current;
-
-      // leaving to enter the dropdown content
-      if (e.toElement === content || e.toElement.closest(".dropdown-content")) {
-        content.addEventListener("mouseleave", this.handleMouseLeave);
+    if (this.isValidTrigger(e.type) || this.isClickOnContextMenu(e)) {
+      // if it's controlled, just pass the opposite visible to
+      // controller component via onVisibleChange. If not,
+      // update state.
+      if (controlled && typeof onVisibleChange === "function") {
+        onVisibleChange(!visible);
       } else {
-        this.setState({ visible: false }, () => {
-          if (onVisibleChange && typeof onVisibleChange === "function") {
-            onVisibleChange(false);
-          }
+        this.setState({
+          visible: !stateVisible
         });
       }
-    }
-  };
 
-  handleMouseLeave = e => {
-    const { onVisibleChange } = this.props;
-    const dispatcher = this.triggerRef.current;
-    const content = this.contentRef.current;
-    if (e.toElement !== dispatcher) {
-      this.setState({ visible: false }, () => {
-        if (onVisibleChange && typeof onVisibleChange === "function") {
-          onVisibleChange(false);
-        }
-      });
-      content.removeEventListener("mouseleave", this.handleMouseLeave);
-    }
-  };
-
-  handleClick = e => {
-    const { visible } = this.state;
-    const { onVisibleChange } = this.props;
-    const nextVisible = !visible;
-    if (nextVisible) {
-      document.addEventListener("click", this.handleCloseDropdown.bind(this));
-      document.addEventListener(
-        "contextmenu",
-        this.handleCloseDropdown.bind(this)
-      );
-    }
-    this.setState({ visible: nextVisible }, () => {
-      if (onVisibleChange && typeof onVisibleChange === "function") {
-        onVisibleChange(nextVisible);
+      // Then if we're showing the dropdown content, we need to add
+      // events to close the dropdown
+      const clickEvents = ["click", "contextmenu"];
+      if (
+        clickEvents.includes(e.type) &&
+        ((controlled && !visible === true) || !stateVisible === true)
+      ) {
+        document.addEventListener("click", this.handleClose);
+        document.addEventListener("contextmenu", this.handleClose);
       }
-    });
+    }
   };
 
-  handleCloseDropdown = e => {
-    const { onVisibleChange } = this.props;
-    const dispatcher = this.triggerRef.current;
+  /**
+   * Theres a corner case of user clicking with the left mouse button
+   * on a dispatcher that has the trigger for only contextmenu. In those
+   * cases, if the Dropdown overlay is visible it needs to dispatch
+   * the activation. This function validates this interaction
+   *
+   * @param {DOMEvent} e DOMEvent dispatched by interacting with the disptcher
+   * @return {Boolean} Whether the event is a left click on an open dropdown
+   * with contextmenu as trigger
+   */
+  isClickOnContextMenu = e => {
+    const { trigger, visible } = this.props;
+    const { visible: stateVisible, controlled } = this.state;
+    const validTrigger =
+      (typeof trigger === "string" && trigger === "contextmenu") ||
+      trigger.includes("contextmenu");
+    if (validTrigger && e.type === "click") {
+      return controlled ? visible : stateVisible;
+    }
+    return false;
+  };
+
+  /**
+   *
+   *
+   * @param {DOMEvent} e DOMEvent
+   */
+  handleClose = e => {
+    e && e.preventDefault();
+    const { visible, onVisibleChange } = this.props;
+    const { visible: stateVisible, controlled } = this.state;
+    const dispatcher = this.dispatcherRef.current;
+    const wrapper = this.wrapperRef.current;
+
     const currentContainer = e.target.closest(".dropdown-main-container");
     if (
-      currentContainer === this.wrapperRef.current &&
+      currentContainer === wrapper &&
       (e.target === dispatcher || e.target.closest(".dropdown-dispatcher"))
     ) {
       return;
     }
     if (!e.target.closest(".dropdown-content")) {
-      this.setState({ visible: false }, () => {
-        if (onVisibleChange && typeof onVisibleChange === "function") {
-          onVisibleChange(false);
-        }
-      });
-      document.removeEventListener("click", this.handleCloseDropdown);
-      document.removeEventListener("contextmenu", this.handleCloseDropdown);
+      document.removeEventListener("click", this.handleClose);
+      document.removeEventListener("contextmenu", this.handleClose);
+
+      if (controlled && typeof onVisibleChange === "function") {
+        onVisibleChange(!visible);
+      } else {
+        this.setState({ visible: !stateVisible });
+      }
     }
   };
 
+  /**
+   * When trigger is hover, check if mouse is leaving to the dropdown
+   * content or not. It it's moving to the dropdown content, don't do
+   * anything. Else, close modal.
+   *
+   * @param {DOMEvent} e DOMEvent
+   */
+  handleMouseLeave = e => {
+    const { visible, onVisibleChange } = this.props;
+    const { visible: stateVisible, controlled } = this.state;
+    if (this.isValidTrigger(e.type)) {
+      const contentElement = this.contentRef.current;
+      const dispatcher = this.dispatcherRef.current;
+      const toElement = e.toElement || e.nativeEvent.toElement;
+      if (toElement !== dispatcher && toElement !== contentElement) {
+        if (controlled && visible && typeof onVisibleChange === "function") {
+          onVisibleChange(!visible);
+        } else if (stateVisible) {
+          this.setState({ visible: !stateVisible });
+        }
+      }
+    }
+  };
+
+  /**
+   * Check if the event type that dispatched an action within the
+   * component is a valid trigger.
+   *
+   * @param {String} evType DOMEvent event type string
+   * @return {Boolean} Whether or not the event type is a valid trigger
+   */
+  isValidTrigger = evType => {
+    const { trigger } = this.props;
+    const triggerArray =
+      typeof trigger === "string" ? trigger.split(" ") : trigger;
+    const eventType =
+      evType === "mouseenter" || evType === "mouseleave" ? "hover" : evType;
+    return triggerArray.includes(eventType);
+  };
+
   render() {
-    const { visible } = this.state;
-    const { children, overlay, overlayClassName, overlayStyle } = this.props;
+    const {
+      children,
+      overlay,
+      visible,
+      overlayClassName,
+      overlayStyle
+    } = this.props;
+    const { visible: stateVisible, controlled } = this.state;
+    const dropdownVisible = controlled ? visible : stateVisible;
     const ContentClasses = cx("dropdown-content", overlayClassName);
 
     return (
       <DropdownWrapper
-        className="dropdown-main-container"
         ref={this.wrapperRef}
+        className="dropdown-main-container"
       >
         <DropdownDispatcher
+          ref={this.dispatcherRef}
+          onClick={this.handleActivation}
+          onMouseEnter={this.handleActivation}
+          onMouseLeave={this.handleMouseLeave}
+          onContextMenu={this.handleActivation}
           className="dropdown-dispatcher"
-          ref={this.triggerRef}
         >
           {children}
         </DropdownDispatcher>
         <DropdownContent
-          visible={visible}
+          ref={this.contentRef}
+          visible={dropdownVisible}
           className={ContentClasses}
           style={overlayStyle}
-          ref={this.contentRef}
+          onMouseLeave={this.handleMouseLeave}
         >
           {overlay}
         </DropdownContent>
@@ -174,16 +207,19 @@ Dropdown.propTypes = {
   /** Called when the visible state is changed. */
   onVisibleChange: PropTypes.func,
   /** The trigger mode which executes the dropdown action. Note that hover can't be used on touchscreens. */
-  trigger: PropTypes.arrayOf(
-    (propValue, key, componentName, _location, propFullName) => {
-      const validTriggers = ["hover", "click", "contextmenu"];
-      if (!validTriggers.includes(propValue[key])) {
-        return new Error(
-          `Invalid prop '${propFullName}' supplied to '${componentName}'. Validation Failed.`
-        );
+  trigger: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(
+      (propValue, key, componentName, _location, propFullName) => {
+        const validTriggers = ["hover", "click", "contextmenu"];
+        if (!validTriggers.includes(propValue[key])) {
+          return new Error(
+            `Invalid prop '${propFullName}' supplied to '${componentName}'. Validation Failed.`
+          );
+        }
       }
-    }
-  ),
+    )
+  ]),
   /** Whether the dropdown menu is currently visible */
   visible: PropTypes.bool
 };
@@ -195,7 +231,7 @@ Dropdown.defaultProps = {
   overlayClassName: "",
   overlayStyle: {},
   trigger: ["hover"],
-  visible: false
+  visible: null
 };
 
 export default Dropdown;
