@@ -1,18 +1,18 @@
 # Boom Components
 
-Uma biblioteca de componentes React para utilização em projetos da Alboom
+A UI library used by Alboom products, built with React.
 
-## Instalação
+## Install
 
 ```bash
-yarn add @alboom/boom-components
+yarn add @alboompro/boom-components
 ```
 
 ```bash
-npm install @alboom/boom-components --save
+npm install @alboompro/boom-components --save
 ```
 
-## Utilização
+## How to use
 
 ```javascript
 import Button from "@alboom/boom-components/general/button";
