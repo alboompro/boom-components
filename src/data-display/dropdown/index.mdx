@@ -39,7 +39,7 @@ const MyComponent = () => {
 ```
 
 <Playground>
-  <Dropdown overlay={<div>Hi, I'm hidden until you interact with the dropdown.</div>}>
+  <Dropdown trigger="hover" overlay={<div>Hi, I'm hidden until you interact with the dropdown.</div>}>
     <a>Hover me!</a>
   </Dropdown>
 </Playground>
@@ -49,7 +49,7 @@ const MyComponent = () => {
 #### Click
 
 <Playground>
-  <Dropdown trigger={['click']} overlay={<div>Hi, I'm hidden until you interact with the dropdown.</div>}>
+  <Dropdown overlay={<div>Hi, I'm hidden until you interact with the dropdown.</div>}>
     <a>Click me!</a>
   </Dropdown>
 </Playground>
@@ -57,9 +57,67 @@ const MyComponent = () => {
 #### Context menu
 
 <Playground>
-  <Dropdown trigger={['contextmenu']} overlay={<div>Hi, I'm hidden until you interact with the dropdown.</div>}>
+  <Dropdown trigger='contextmenu' overlay={<div>Hi, I'm hidden until you interact with the dropdown.</div>}>
     <a>Right click me!</a>
   </Dropdown>
+</Playground>
+
+### Alinhamento
+
+O Dropdown possui um alinhamento inteligente, alterado o alinhamento caso não haja espaço disponivel na tela para exibição do mesmo (ex: um dropdown abre para a parte superior caso o elemento
+de disparo esteja posicionado no final da tela). Você pode, entretanto, controlar o alinhamento horizontal em relação ao componente de disparo com a propriedade align:
+
+```jsx
+import Dropdown from "@alboom/boom-components/data-display/dropdown"
+
+class MyComponent extends React.Component {
+  render(){
+    return (
+      <div>
+        <Dropdown align="left" overlay={<div>Oi, estou alinhado a esquerda</div>}><a>Alinhado a esquerda</a></Dropdown>
+        <Dropdown align="right" overlay={<div>Oi, estou alinhado a direita</div>}><a>Alinhado a direita</a></Dropdown>
+        <Dropdown align="center" overlay={<div>Oi, estou alinhado ao centro</div>}><a>Alinhado ao centro</a></Dropdown>
+      </div>
+    )
+  }
+}
+```
+
+<Playground>
+{
+  class MyComponent extends React.Component {
+    render(){
+      return (
+        <div style={{ display: "flex", flexDirection: "column", height: 300, justifyContent: "space-evenly" }}>
+        <div style={{height: "33%"}}>
+          <Dropdown
+            align="left"
+            overlay={<div>Oi, estou alinhado a esquerda</div>}
+          >
+            <Button>Alinhado a esquerda</Button>
+          </Dropdown>
+        </div>
+        <div  style={{height: "33%"}}>
+          <Dropdown
+            align="right"
+            overlay={<div>Oi, estou alinhado a direita</div>}
+          >
+            <Button>Alinhado a direita</Button>
+          </Dropdown>
+        </div>
+        <div  style={{height: "33%"}}>
+          <Dropdown
+            align="center"
+            overlay={<div>Oi, estou alinhado ao centro</div>}
+          >
+            <Button>Alinhado ao centro</Button>
+          </Dropdown>
+        </div>
+      </div>
+      );
+    }
+  }
+}
 </Playground>
 
 ### Dropdowns controláveis

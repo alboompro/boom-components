@@ -10,6 +10,7 @@ class Dropdown extends Component {
     this.dispatcherRef = createRef();
     this.wrapperRef = createRef();
     this.state = {
+      verticalAlign: "bottom",
       visible: props.visible !== null ? props.visible : false,
       controlled: props.visible !== null
     };
@@ -33,10 +34,22 @@ class Dropdown extends Component {
    */
   handleActivation = e => {
     e && e.preventDefault();
-    const { visible, onVisibleChange } = this.props;
+    const { visible, onVisibleChange, disabled } = this.props;
     const { visible: stateVisible, controlled } = this.state;
+    if (disabled) return;
 
     if (this.isValidTrigger(e.type) || this.isClickOnContextMenu(e)) {
+      // check if we're going to display the dropdown in order
+      // to calculate placement
+      if ((controlled && !visible == true) || !stateVisible == true) {
+        const { bottom } = this.contentRef.current.getBoundingClientRect();
+        if (bottom > window.innerHeight) {
+          this.setState({ verticalAlign: "top" });
+        } else {
+          this.setState({ verticalAlign: "bottom" });
+        }
+      }
+
       // if it's controlled, just pass the opposite visible to
       // controller component via onVisibleChange. If not,
       // update state.
@@ -156,13 +169,14 @@ class Dropdown extends Component {
 
   render() {
     const {
+      align,
       children,
       overlay,
       visible,
       overlayClassName,
       overlayStyle
     } = this.props;
-    const { visible: stateVisible, controlled } = this.state;
+    const { visible: stateVisible, controlled, verticalAlign } = this.state;
     const dropdownVisible = controlled ? visible : stateVisible;
     const ContentClasses = cx("dropdown-content", overlayClassName);
 
@@ -187,6 +201,8 @@ class Dropdown extends Component {
           className={ContentClasses}
           style={overlayStyle}
           onMouseLeave={this.handleMouseLeave}
+          verticalAlign={verticalAlign}
+          align={align}
         >
           {overlay}
         </DropdownContent>
@@ -196,6 +212,8 @@ class Dropdown extends Component {
 }
 
 Dropdown.propTypes = {
+  /** Alignment of dropdown: left, center or right */
+  align: PropTypes.oneOf(["left", "center", "right"]),
   /** Whether the dropdown menu is disabled  */
   disabled: PropTypes.bool,
   /** The dropdown menu */
@@ -225,12 +243,13 @@ Dropdown.propTypes = {
 };
 
 Dropdown.defaultProps = {
+  align: "left",
   disabled: false,
   onVisibleChange: null,
   overlay: null,
   overlayClassName: "",
   overlayStyle: {},
-  trigger: ["hover"],
+  trigger: "click",
   visible: null
 };
 
