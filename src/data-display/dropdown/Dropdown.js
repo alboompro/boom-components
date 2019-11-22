@@ -70,6 +70,9 @@ class Dropdown extends Component {
       ) {
         document.addEventListener("click", this.handleClose);
         document.addEventListener("contextmenu", this.handleClose);
+      } else {
+        document.removeEventListener("click", this.handleClose);
+        document.removeEventListener("contextmenu", this.handleClose);
       }
     }
   };
@@ -115,6 +118,7 @@ class Dropdown extends Component {
     ) {
       return;
     }
+
     if (!e.target.closest(".dropdown-content")) {
       document.removeEventListener("click", this.handleClose);
       document.removeEventListener("contextmenu", this.handleClose);
