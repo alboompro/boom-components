@@ -3,9 +3,12 @@ import styled, { css } from "styled-components";
 
 export const DropdownWrapper = styled.div`
   position: absolute;
+  height: 100%;
 `;
 
-export const DropdownDispatcher = styled.div``;
+export const DropdownDispatcher = styled.div`
+  height: 100%;
+`;
 
 export const DropdownContent = styled.div`
   border-radius: 3px;
