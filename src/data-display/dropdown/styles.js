@@ -1,15 +1,19 @@
 /* eslint-disable indent */
 import styled, { css } from "styled-components";
 
-export const DropdownWrapper = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
+export const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  height: 100vh;
+  z-index: 100;
 `;
 
-export const DropdownDispatcher = styled.div`
-  height: 100%;
-  width: 100%;
+export const PositionWrapper = styled.div`
+  position: absolute;
+  z-index: 101;
 `;
 
 export const DropdownContent = styled.div`
@@ -22,49 +26,14 @@ export const DropdownContent = styled.div`
   color: #212121;
   text-align: left;
   width: 230px;
-
-  position: absolute;
-  top: calc(100% + 6px);
-  ${props =>
-    props.verticalAlign &&
-    props.verticalAlign === "top" &&
-    css`
-      top: auto;
-      bottom: calc(100% + 6px);
-    `}
-
-  ${props => {
-    switch (props.align) {
-      case "right":
-        return css`
-          right: 0;
-        `;
-      case "center":
-        return css`
-          left: 50%;
-          transform: translateX(-50%);
-        `;
-      default:
-        return css`
-          left: 0;
-        `;
-    }
-  }}
-
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.1s opacity 0.1s cubic-bezier(0.55, 0.3, 0.5, 0.9);
-  z-index: 2;
-
-  ${props =>
-    props.visible &&
-    css`
-      visibility: visible;
-      opacity: 1;
-    `}
+  z-index: 102;
 
   &:before {
     position: absolute;
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
 
     ${props => {
       switch (props.align) {
@@ -88,7 +57,7 @@ export const DropdownContent = styled.div`
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     ${props => {
-      if (props.verticalAlign === "top") {
+      if (props.arrowPos === "top") {
         return css`
           top: 100%
           border-top: 6px solid white;
@@ -99,9 +68,5 @@ export const DropdownContent = styled.div`
         border-bottom: 6px solid white;
       `;
     }}
-    content: "";
-    display: block;
-    width: 0;
-    height: 0;
   }
 `;
