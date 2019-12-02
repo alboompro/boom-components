@@ -28,7 +28,6 @@ class Modal extends Component {
   closeModal = e => {
     const { onClose, backdropClosable } = this.props;
     const { backdrop, closeButton } = this.refs;
-    document.body.style.overflow = null;
 
     if (
       backdropClosable &&
@@ -36,6 +35,7 @@ class Modal extends Component {
         e.target ===
           (closeButton.refs ? closeButton.refs.closeButton : closeButton))
     ) {
+      document.body.style.overflow = null;
       onClose();
     }
   };
