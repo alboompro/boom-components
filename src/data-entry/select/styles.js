@@ -44,9 +44,9 @@ export const SelectItem = styled.div`
     border-right: 5px solid transparent;
 
     ${props =>
-    props.open
-      ? "border-bottom: 5px solid #595959;"
-      : "border-top: 5px solid #595959;"}
+      props.open
+        ? "border-bottom: 5px solid #595959;"
+        : "border-top: 5px solid #595959;"}
   }
 
   ${props => props.selectStyle}
@@ -59,7 +59,7 @@ export const OptionContainer = styled.ul`
   padding: 0;
   background-color: #fff;
   border: 1px solid #c9c9c9;
-  border-top: none;
+  ${props => props.border && `border-${props.border}: none;`}
   cursor: pointer;
   overflow: auto;
 
@@ -85,6 +85,7 @@ export const DropdownBackdrop = styled.div`
   z-index: 9999;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 100%;
   ${props => props.style}
 `;

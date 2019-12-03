@@ -197,7 +197,6 @@ export class Select extends Component {
         positionTop = top - optionsHeight - 1;
         border = "bottom";
       } else {
-        border = "top";
         positionTop = top + height;
       }
     }
