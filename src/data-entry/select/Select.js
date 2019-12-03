@@ -187,13 +187,15 @@ export class Select extends Component {
 
     if (targetDOM) {
       const positionTarget = targetDOM.getBoundingClientRect();
-      const heightItem = optionsStyle && optionsStyle.height.match(/^\d+/)[0];
-      const optionsHeight = options.length * heightItem || 30;
+      const heightItem =
+        (optionsStyle && optionsStyle.height.match(/^\d+/)[0]) || 30;
+      const optionsHeight = options.length * heightItem;
 
       const topDistance = top - positionTarget.top;
       const bottomDistance = positionTarget.bottom - bottom;
 
-      if (topDistance > bottomDistance) {
+      // condition is true render select options in top select
+      if (topDistance > bottomDistance && optionsHeight > bottomDistance) {
         positionTop = top - optionsHeight - 1;
         border = "bottom";
       } else {
