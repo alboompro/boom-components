@@ -1,6 +1,6 @@
 /* eslint-disable react/no-string-refs */
 /* eslint-disable global-require */
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Icon from "../../general/icon";
 import {
@@ -13,22 +13,17 @@ import {
   CloseIcon
 } from "./styles";
 
-const reactVersion = parseInt(React.version.split(".")[0]);
-let Portal;
-if (reactVersion >= 16) {
-  const ReactDOM = require("react-dom");
-  Portal = ({ children, node }) =>
-    ReactDOM.createPortal(children, document.body);
-} else {
-  // eslint-disable-next-line prefer-destructuring
-  Portal = require("react-portal").Portal;
-}
+import Portal from "../../shared/portal";
 
-class Modal extends Component {
+class Modal extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.originalOverflow = document.body.style.overflow;
+  }
+
   closeModal = e => {
     const { onClose, backdropClosable } = this.props;
     const { backdrop, closeButton } = this.refs;
-    document.body.style.overflow = null;
 
     if (
       backdropClosable &&
@@ -36,6 +31,7 @@ class Modal extends Component {
         e.target ===
           (closeButton.refs ? closeButton.refs.closeButton : closeButton))
     ) {
+      document.body.style.overflow = this.originalOverflow;
       onClose();
     }
   };
