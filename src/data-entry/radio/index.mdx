@@ -4,12 +4,61 @@ menu: Data Entry
 ---
 
 import { Playground, Props } from 'docz'
+import Component from "react-component-component"
 
 import Radio from './Radio'
 
 # Radio
 
 Radio component.
+
+<Playground>
+  <Component
+    initialState={{select: 'birl'}}
+  >
+    {
+      ({ setState, state }) => (
+       <div>
+          <div>
+          <Radio
+            onChange={() => setState({ select: 'birl' })}
+            label="Label de exemplo"
+            value="birl"
+            select={state.select}
+            name="asd"
+          />
+
+          <Radio
+            onChange={() => setState({ select: 'birl2' })}
+            label="Label de exemplo"
+            select={state.select}
+            value="birl2"
+            name="asd"
+          />
+        </div>
+
+         <div>
+          <Radio
+            onChange={() => setState({ select: 'birl3' })}
+            label="Label de exemplo"
+            value="birl3"
+            select={state.select}
+            name="top"
+          />
+
+          <Radio
+            onChange={() => setState({ select: 'birl4' })}
+            label="Label de exemplo"
+            select={state.select}
+            value="birl4"
+            name="top"
+          />
+        </div>
+      </div>
+      )
+    }
+  </Component>
+</Playground>
 
 ## API
 

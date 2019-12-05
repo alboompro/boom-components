@@ -1,24 +1,63 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Radio = ({ ...props }) => <div />;
+import {
+  RadioContainer,
+  RadioContent,
+  RadioButtonLabel,
+  RadioInput,
+  Label
+} from "./styles";
+
+const Radio = ({
+  className,
+  RadioStyle,
+  labelStyle,
+  onChange,
+  label,
+  name,
+  disabled,
+  select,
+  style,
+  value
+}) => (
+  <RadioContainer disabled={disabled} className={className} style={style}>
+    <RadioContent onClick={!disabled && onChange}>
+      <RadioInput
+        type="radio"
+        name={name}
+        value={value}
+        checked={value === select}
+        style={RadioStyle}
+      />
+      <RadioButtonLabel />
+      <Label style={labelStyle}>{label}</Label>
+    </RadioContent>
+  </RadioContainer>
+);
 
 Radio.propTypes = {
-  /** whether radio is selected */
-  checked: PropTypes.bool,
-  /** specifies the initial state of radio */
-  defaultChecked: PropTypes.bool,
-  /** disabled status of radio */
+  /** add custom className */
+  className: PropTypes.string,
+  /** component main style */
+  style: PropTypes.object,
+  /** whether Radio is checked */
   disabled: PropTypes.bool,
-  /** for comparison, to determine whether is the selected  */
-  value: PropTypes.any
+  /** callback when state changes */
+  onChange: PropTypes.func,
+  /** add custom style to input */
+  RadioStyle: PropTypes.object,
+  /** add custom style to label */
+  labelStyle: PropTypes.object
 };
 
 Radio.defaultProps = {
-  checked: false,
-  defaultChecked: false,
+  className: "",
   disabled: false,
-  value: null
+  onChange: null,
+  RadioStyle: null,
+  labelStyle: null,
+  style: null
 };
 
 export default Radio;
