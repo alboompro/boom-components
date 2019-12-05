@@ -18,8 +18,7 @@ const reactVersion = parseInt(React.version.split(".")[0]);
 let Portal;
 if (reactVersion >= 16) {
   const ReactDOM = require("react-dom");
-  Portal = ({ children, node }) =>
-    ReactDOM.createPortal(children, document.body);
+  Portal = ({ children, node }) => ReactDOM.createPortal(children, node);
 } else {
   // eslint-disable-next-line prefer-destructuring
   Portal = require("react-portal").Portal;
@@ -130,6 +129,7 @@ export class Select extends Component {
     this.closeDropdown();
   };
 
+  // eslint-disable-next-line consistent-return
   keyDownEvents = e => {
     const { hovered } = this.state;
     e.preventDefault();
@@ -163,25 +163,59 @@ export class Select extends Component {
       dropdownStyle,
       dropdownClassName,
       options,
-      optionsStyle
+      optionsStyle,
+      target
     } = this.props;
+
     const { selectItem } = this.refs;
     const { selected, hovered } = this.state;
-    const { width, top, left, height } = selectItem.getBoundingClientRect();
+    const {
+      width,
+      top,
+      bottom,
+      left,
+      height
+    } = selectItem.getBoundingClientRect();
+
     const scope = typeof window === "undefined" ? global : window;
+
+    let positionTop = top + scope.scrollY + height;
     const positionLeft = left + scope.scrollX;
-    const positionTop = top + scope.scrollY + height;
+
+    const targetDOM = document.querySelector(target);
+    let border = "top";
+
+    if (targetDOM) {
+      const positionTarget = targetDOM.getBoundingClientRect();
+      const heightItem =
+        (optionsStyle && optionsStyle.height.match(/^\d+/)[0]) || 30;
+      const optionsHeight = options.length * heightItem;
+
+      const topDistance = top - positionTarget.top;
+      const bottomDistance = positionTarget.bottom - bottom;
+
+      // condition is true render select options in top select
+      if (topDistance > bottomDistance && optionsHeight > bottomDistance) {
+        positionTop = top - optionsHeight - 1;
+        border = "bottom";
+      } else {
+        positionTop = top + height;
+      }
+    }
 
     return (
-      <Portal>
+      <Portal node={targetDOM || document.body}>
         <DropdownBackdrop
           onClick={this.closeBackdrop}
           ref="backdrop"
           innerRef="backdrop"
-          style={{ height: document.documentElement.scrollHeight }}
+          style={
+            !targetDOM ? { height: document.documentElement.scrollHeight } : {}
+          }
         >
           <OptionContainer
             className={dropdownClassName}
+            border={border}
             style={{
               width,
               left: positionLeft,
@@ -193,6 +227,7 @@ export class Select extends Component {
               <Option
                 selected={selected === index}
                 hovered={hovered === index}
+                key={`option-${item.value}`}
                 onClick={() => this.selectOption()}
                 onMouseEnter={() => this.setState({ hovered: index })}
                 onMouseLeave={() => this.setState({ hovered: null })}
@@ -283,6 +318,8 @@ Select.propTypes = {
   selectStyle: PropTypes.object,
   /** set dropdown arrow show */
   showArrow: PropTypes.bool,
+  /** target when select is render  */
+  target: PropTypes.string,
   /** set input value */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
@@ -299,6 +336,7 @@ Select.defaultProps = {
   selectClassName: null,
   selectStyle: null,
   showArrow: true,
+  target: null,
   value: ""
 };
 
