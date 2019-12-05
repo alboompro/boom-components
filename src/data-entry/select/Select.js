@@ -227,8 +227,7 @@ export class Select extends Component {
               <Option
                 selected={selected === index}
                 hovered={hovered === index}
-                // eslint-disable-next-line react/no-array-index-key
-                key={index}
+                key={`option-${item.value}`}
                 onClick={() => this.selectOption()}
                 onMouseEnter={() => this.setState({ hovered: index })}
                 onMouseLeave={() => this.setState({ hovered: null })}
