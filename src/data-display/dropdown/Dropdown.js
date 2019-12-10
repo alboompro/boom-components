@@ -28,10 +28,6 @@ class Dropdown extends Component {
     };
   }
 
-  componentDidMount(){
-    const { bottom } = this.
-  }
-
   /**
    * Check if the event type that dispatched an action within the
    * component is a valid trigger.
