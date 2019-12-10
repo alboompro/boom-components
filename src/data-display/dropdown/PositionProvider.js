@@ -17,8 +17,9 @@ class PositionProvider extends Component {
     const dispatcherRect = origin.current.getBoundingClientRect();
     const contentRect = this.element.current.getBoundingClientRect();
 
+    const scope = typeof window === "undefined" ? global : window;
     const arrowPos =
-      dispatcherRect.bottom + contentRect.height > window.innerHeight
+      dispatcherRect.bottom + contentRect.height > scope.innerHeight
         ? "top"
         : "bottom";
 
