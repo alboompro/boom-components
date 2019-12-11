@@ -4,12 +4,99 @@ menu: Data Entry
 ---
 
 import { Playground, Props } from 'docz'
+import Component from "react-component-component"
 
 import Radio from './Radio'
 
 # Radio
+ Radios são elementos que representam opções.
+ Geralmente, há um grupo deles que se refere ao mesmo contexto e apenas uma opção pode ser selecionada por grupo.
+## Quando utilizar
+* Varias opções mas apenas uma pode ser selecionada.
 
-Radio component.
+## Exemplos
+
+### Radio simples
+
+```jsx
+import Radio from "@alboom/boom-components/data-entry/radio";
+
+// Render...
+<div>
+  <Radio id="1" name="radio-simples" value="1" label="Sim" defaultChecked />
+  <Radio id="2" name="radio-simples" value="0" label="Não" />
+</div>
+```
+
+<Playground>
+  <Radio id="1" name="radio-simples" value="1" label="Sim" defaultChecked />
+  <Radio id="2" name="radio-simples" value="0" label="Não" />
+</Playground>
+
+### Utilizando onChange
+
+```jsx
+import Radio from "@alboom/boom-components/data-entry/radio";
+
+// Initial state
+this.state = {
+  value: '1'
+}
+
+// Render
+const { value } = this.state
+
+<div>
+  <Radio
+    id="3"
+    name="radio-onChange"
+    value="1"
+    label="Sim"
+    defaultChecked
+    onChange={e => this.setState({ value: e.target.value }) }
+  />
+  <Radio
+    id="4"
+    name="radio-onChange"
+    value="0"
+    label="Não"
+    onChange={e => this.setState({ value: e.target.value }) }
+  />
+
+  <span> Value selecionado: {value} </span>
+</div>
+```
+
+<Playground>
+  <Component
+    initialState={{ value: "1", options: [
+      { id: "3", name: "radio-onChange", value: "1", label: "Sim" },
+      { id: "4", name: "radio-onChange", value: "0", label: "Não" }
+    ]}}
+  >
+    {
+      ({ setState, state }) => (
+        <div>
+          <div style={ { display: 'flex' } }>
+            {state.options.map(option => (
+              <Radio
+                id={option.id}
+                name={option.name}
+                value={option.value}
+                label={option.label}
+                defaultChecked={state.value === option.value}
+                onChange={(e) => setState({ value: e.target.value })}
+                style={{ width: '80px', fontSize: '16px' }}
+              />
+            ))}
+          </div>
+
+          <span>Value selecionado: {state.value}</span>
+        </div>
+      )
+    }
+  </Component>
+</Playground>
 
 ## API
 
