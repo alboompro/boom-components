@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import PositionProvider from "./PositionProvider";
@@ -20,9 +20,11 @@ if (reactVersion >= 16) {
 class Dropdown extends Component {
   constructor(props) {
     super(props);
-    this.dispatcher = createRef();
+    this.dispatcher =
+      typeof React.createRef === "function"
+        ? React.createRef()
+        : el => (this.dispatcherRef = { current: el });
     this.state = {
-      backdropTop: null,
       visible: props.visible !== null ? props.visible : false,
       controlled: props.visible !== null
     };

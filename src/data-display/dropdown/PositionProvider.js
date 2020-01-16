@@ -1,11 +1,14 @@
 /* eslint-disable indent */
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import { PositionWrapper, DropdownContent } from "./styles";
 
 class PositionProvider extends Component {
   constructor(props) {
     super(props);
-    this.element = createRef();
+    this.element =
+      typeof React.createRef === "function"
+        ? React.createRef()
+        : el => (this.element = { current: el });
     this.state = {
       style: {},
       arrowPosition: "bottom"
