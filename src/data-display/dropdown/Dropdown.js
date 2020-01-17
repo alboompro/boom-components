@@ -144,7 +144,6 @@ class Dropdown extends Component {
     return (
       <div>
         <div
-          style={{ position: "absolute", width: "100%", height: "100%" }}
           onClick={this.handleClick}
           onContextMenu={this.handleClick}
           onMouseEnter={this.handleMouseEnter}
