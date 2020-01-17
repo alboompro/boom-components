@@ -70,8 +70,13 @@ class PositionProvider extends Component {
   render() {
     const { children, align, style: overlayStyle, className } = this.props;
     const { style, arrowPosition } = this.state;
+
+    const positionProps = {};
+    typeof React.createRef === "function"
+      ? (positionProps.ref = this.element)
+      : (positionProps.innerRef = this.element);
     return (
-      <PositionWrapper style={style} ref={this.element}>
+      <PositionWrapper style={style} {...positionProps}>
         <DropdownContent
           className={className}
           style={overlayStyle}

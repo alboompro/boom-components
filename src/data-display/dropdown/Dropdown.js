@@ -21,9 +21,7 @@ class Dropdown extends Component {
   constructor(props) {
     super(props);
     this.dispatcher =
-      typeof React.createRef === "function"
-        ? React.createRef()
-        : el => (this.dispatcherRef = { current: el });
+      typeof React.createRef === "function" ? React.createRef() : null;
     this.state = {
       visible: props.visible !== null ? props.visible : false,
       controlled: props.visible !== null
@@ -35,7 +33,7 @@ class Dropdown extends Component {
    * component is a valid trigger.
    *
    * @param {String} evType DOMEvent event type string
-   * @return {Boolean} Whether or not the event type is a valid trigger
+   * @return {Boolean} Whether or not the event type is a valid <trigger></trigger>
    */
   isValidTrigger = evType => {
     const { trigger } = this.props;
@@ -121,6 +119,10 @@ class Dropdown extends Component {
     }
   };
 
+  setDispatcherRef = element => {
+    this.dispatcher = { current: element };
+  };
+
   render() {
     const {
       children,
@@ -134,6 +136,10 @@ class Dropdown extends Component {
     const dropdownVisible = controlled ? visible : stateVisible;
 
     const OverlayClasses = cx("dropdown-overlay", overlayClassName);
+    const refCondition =
+      typeof React.createRef === "function"
+        ? { ref: this.dispatcher }
+        : { ref: this.setDispatcherRef };
 
     return (
       <div>
@@ -142,7 +148,7 @@ class Dropdown extends Component {
           onClick={this.handleClick}
           onContextMenu={this.handleClick}
           onMouseEnter={this.handleMouseEnter}
-          ref={this.dispatcher}
+          {...refCondition}
         >
           {children}
         </div>
