@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Portal from "../../shared/portal";
 
-import {
-  DropdownContainer,
-  DropdownPlacement,
-  DropdownContent,
-  DropdownWrapper
-} from "./styles";
+import { DropdownContainer, DropdownContent, DropdownWrapper } from "./styles";
 
 class Dropdown extends Component {
   constructor(props) {
@@ -18,6 +13,12 @@ class Dropdown extends Component {
       visible: popupVisible,
       placement: {}
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.visible !== null) {
+      this.setState({ visible: nextProps.visible });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -186,7 +187,8 @@ class Dropdown extends Component {
         {visible && (
           <Portal>
             <DropdownContainer>
-              <DropdownPlacement
+              <div
+                className="dropdown-placement"
                 onMouseLeave={this.handleDropdownMouseLeave}
                 ref={this.setContainerRef}
                 style={placement}
@@ -194,7 +196,7 @@ class Dropdown extends Component {
                 <DropdownContent align={align} style={overlayStyle}>
                   {overlay}
                 </DropdownContent>
-              </DropdownPlacement>
+              </div>
             </DropdownContainer>
           </Portal>
         )}

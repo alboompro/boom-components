@@ -12,6 +12,10 @@ export const DropdownContainer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  .dropdown-placement {
+    position: absolute;
+    z-index: 1080;
+  }
 `;
 
 export const DropdownPlacement = styled.div`

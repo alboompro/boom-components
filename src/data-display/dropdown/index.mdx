@@ -5,7 +5,7 @@ menu: Data Display
 
 import { Playground, Props } from "docz"
 
-import Dropdown from "./Dropdown2"
+import Dropdown from "./Dropdown"
 import Button from "../../general/button"
 import Icon from "../../general/icon"
 
@@ -66,7 +66,26 @@ Você pode controlar o alinhamento do dropdown através da propriedade align:
   </Dropdown>
 </Playground>
 
+### Componente controlado
 
+<Playground state={{visible: false}}>
+  {class Example extends React.Component {
+    constructor(){
+      super()
+      this.state = {
+        visible: false
+      }
+    }
+
+    render(){
+      return (
+        <Dropdown visible={this.state.visible} onVisibleChange={(visible) => this.setState({visible: visible})} trigger="click" overlay={<div>Fico oculto até interagirem com o botão.</div>}>
+          <Button type="primary">Clique aqui!</Button>
+        </Dropdown>
+      )
+    }
+  }}
+</Playground>
 
 ## API
 
