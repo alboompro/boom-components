@@ -1,22 +1,26 @@
 /* eslint-disable indent */
 import styled, { css } from "styled-components";
 
-export const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  max-width: 100%;
-  height: 100vh;
-  z-index: 100;
+export const DropdownWrapper = styled.div`
+  .dispatcher {
+    display: inline-block;
+  }
 `;
 
-export const PositionWrapper = styled.div`
+export const DropdownContainer = styled.div`
   position: absolute;
-  z-index: 101;
+  top: 0;
+  left: 0;
+  width: 100%;
+`;
+
+export const DropdownPlacement = styled.div`
+  position: absolute;
+  z-index: 1080;
 `;
 
 export const DropdownContent = styled.div`
+  border-radius: 3px;
   border-radius: 3px;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 6px;
@@ -26,7 +30,7 @@ export const DropdownContent = styled.div`
   color: #212121;
   text-align: left;
   width: 230px;
-  z-index: 102;
+  margin-top: 6px;
 
   &:before {
     position: absolute;
@@ -64,7 +68,7 @@ export const DropdownContent = styled.div`
         `;
       }
       return css`
-        top: -6px;
+        top: 0;
         border-bottom: 6px solid white;
       `;
     }}
