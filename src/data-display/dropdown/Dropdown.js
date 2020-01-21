@@ -1,41 +1,164 @@
-/* eslint-disable global-require */
-
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import cx from "classnames";
-import PositionProvider from "./PositionProvider";
-import { Backdrop } from "./styles";
+import Portal from "../../shared/portal";
 
-const reactVersion = parseInt(React.version.split(".")[0]);
-
-let Portal;
-if (reactVersion >= 16) {
-  const ReactDOM = require("react-dom");
-  Portal = ({ children }) => ReactDOM.createPortal(children, document.body);
-} else {
-  // eslint-disable-next-line prefer-destructuring
-  Portal = require("react-portal").Portal;
-}
+import {
+  DropdownContainer,
+  DropdownPlacement,
+  DropdownContent,
+  DropdownWrapper
+} from "./styles";
 
 class Dropdown extends Component {
   constructor(props) {
     super(props);
-    this.dispatcher =
-      typeof React.createRef === "function" ? React.createRef() : null;
+    this.dispatcherRef = null;
+    const popupVisible = props.visible !== null ? props.visible : false;
     this.state = {
-      visible: props.visible !== null ? props.visible : false,
-      controlled: props.visible !== null
+      visible: popupVisible,
+      placement: {}
     };
   }
 
+  componentDidUpdate(prevProps) {
+    const { visible } = this.state;
+    if (!prevProps.visible && visible) {
+      this.addHideEvents();
+    } else if (prevProps.visible && !visible) {
+      this.removeHideEvents();
+    }
+  }
+
+  addHideEvents = () => {
+    document.addEventListener("click", this.clickOnDocumentHandler);
+  };
+
+  clickToHide = e => {
+    const { visible } = this.state;
+    const dispatcher = this.dispatcherRef.current;
+    const content = this.containerRef ? this.containerRef.current : null;
+    return (
+      visible &&
+      (e.target !== dispatcher && !dispatcher.contains(e.target)) &&
+      (e.target !== content && !content.contains(e.target))
+    );
+  };
+
+  clickOnDocumentHandler = e => {
+    const v = this.clickToHide(e);
+    if (this.clickToHide(e)) {
+      e && e.preventDefault();
+      this.update(false);
+    }
+  };
+
+  handleClick = e => {
+    const { disabled } = this.props;
+    if (!disabled && this.validTrigger(e.type)) {
+      e && e.preventDefault();
+      const { visible } = this.state;
+      const nextVisible = !visible;
+      if (nextVisible) this.placeInPosition(e);
+      this.update(nextVisible);
+    }
+  };
+
+  handleMouseEnter = e => {
+    const { disabled } = this.props;
+    if (!disabled && this.validTrigger(e.type)) {
+      e && e.preventDefault();
+      const { visible } = this.state;
+      const nextVisible = !visible;
+      if (nextVisible) {
+        this.placeInPosition(e);
+        this.update(nextVisible);
+      }
+    }
+  };
+
+  handleMouseLeave = e => {
+    const { visible } = this.state;
+    if (visible && this.validTrigger(e.type)) {
+      e && e.preventDefault();
+      const container = this.containerRef.current;
+      const { toElement } = e.nativeEvent;
+      if (toElement && !container.contains(toElement)) {
+        this.update(false);
+      }
+    }
+  };
+
+  handleDropdownMouseLeave = e => {
+    const { visible } = this.state;
+    if (visible && this.validTrigger(e.type)) {
+      e && e.preventDefault();
+      const dispatcher = this.dispatcherRef.current;
+      const { toElement } = e.nativeEvent;
+      if (
+        toElement &&
+        toElement !== dispatcher &&
+        !dispatcher.contains(toElement)
+      ) {
+        this.update(false);
+      }
+    }
+  };
+
   /**
-   * Check if the event type that dispatched an action within the
-   * component is a valid trigger.
+   * calculate the position in order to correctly
+   * place the dropdown content in relation to the
+   * dispatcher
    *
-   * @param {String} evType DOMEvent event type string
-   * @return {Boolean} Whether or not the event type is a valid <trigger></trigger>
+   * @memberof Dropdown
    */
-  isValidTrigger = evType => {
+  placeInPosition = e => {
+    const { align } = this.props;
+    const {
+      right,
+      left,
+      width,
+      bottom
+    } = e.currentTarget.getBoundingClientRect();
+    const placement = {
+      top: window.scrollY + bottom
+    };
+    switch (align) {
+      case "right":
+        placement.left = right;
+        placement.transform = "translateX(-100%)";
+        break;
+      case "center":
+        placement.left = left + width / 2;
+        placement.transform = "translateX(-50%)";
+        break;
+      default:
+        placement.left = left;
+    }
+    this.setState({ placement });
+  };
+
+  removeHideEvents = () => {
+    document.removeEventListener("click", this.clickOnDocumentHandler);
+  };
+
+  setContainerRef = el => {
+    this.containerRef = { current: el };
+  };
+
+  setDispatcherRef = el => {
+    this.dispatcherRef = { current: el };
+  };
+
+  update = nextVisible => {
+    const { onVisibleChange } = this.props;
+    if (typeof onVisibleChange === "function") {
+      onVisibleChange(nextVisible);
+    } else {
+      this.setState({ visible: nextVisible });
+    }
+  };
+
+  validTrigger = evType => {
     const { trigger } = this.props;
     const triggerArray =
       typeof trigger === "string" ? trigger.split(" ") : trigger;
@@ -44,132 +167,38 @@ class Dropdown extends Component {
     return triggerArray.includes(eventType);
   };
 
-  /**
-   * Checks if the mouse is hovering the dispatcher or the dropdown
-   * content.
-   *
-   * @param {DOMEvent} ev MouseOver Event
-   * @return {Boolean} wether or not the event position is hovering the dropdown
-   */
-  isHoveringDropdown = ev => {
-    const dispatcherRect = this.dispatcher.current.getBoundingClientRect();
-    const overlayRect = document
-      .querySelector(".dropdown-overlay")
-      .getBoundingClientRect();
-    return (
-      (ev.x >= dispatcherRect.x &&
-        ev.x <= dispatcherRect.right &&
-        (ev.y >= dispatcherRect.y && ev.y <= dispatcherRect.bottom)) ||
-      (ev.x >= overlayRect.x &&
-        ev.x <= overlayRect.right &&
-        (ev.y >= overlayRect.y - 8 && ev.y <= overlayRect.bottom))
-    );
-  };
-
-  handleClick = e => {
-    e && e.preventDefault();
-    const { disabled, onVisibleChange } = this.props;
-    const { controlled, visible: stateVisible } = this.state;
-    if (!disabled && this.isValidTrigger(e.type)) {
-      if (controlled && typeof onVisibleChange === "function") {
-        onVisibleChange(!stateVisible);
-      } else {
-        this.setState({ visible: true });
-      }
-    }
-  };
-
-  handleMouseEnter = e => {
-    e && e.preventDefault();
-    const { disabled } = this.props;
-    if (!disabled && this.isValidTrigger(e.type)) {
-      const { controlled } = this.state;
-      const { visible, onVisibleChange } = this.props;
-      if (controlled && typeof onVisibleChange === "function") {
-        onVisibleChange(!visible);
-      } else {
-        this.setState({ visible: true });
-      }
-    }
-  };
-
-  handleMouseMove = e => {
-    if (
-      this.isValidTrigger("mouseleave") &&
-      !this.isHoveringDropdown(e.nativeEvent)
-    ) {
-      const { controlled } = this.state;
-      const { onVisibleChange, visible } = this.props;
-      if (controlled && typeof onVisibleChange === "function") {
-        onVisibleChange(!visible);
-      } else {
-        this.setState({ visible: false });
-      }
-    }
-  };
-
-  handleClose = e => {
-    if (e.target.closest(".dropdown-overlay")) return;
-    const { controlled } = this.state;
-    const { onVisibleChange, visible } = this.props;
-    if (controlled && typeof onVisibleChange === "function") {
-      onVisibleChange(!visible);
-    } else {
-      this.setState({ visible: false });
-    }
-  };
-
-  setDispatcherRef = element => {
-    this.dispatcher = { current: element };
-  };
-
   render() {
-    const {
-      children,
-      overlay,
-      align,
-      overlayClassName,
-      overlayStyle,
-      visible
-    } = this.props;
-    const { visible: stateVisible, controlled } = this.state;
-    const dropdownVisible = controlled ? visible : stateVisible;
-
-    const OverlayClasses = cx("dropdown-overlay", overlayClassName);
-    const refCondition =
-      typeof React.createRef === "function"
-        ? { ref: this.dispatcher }
-        : { ref: this.setDispatcherRef };
+    const { overlay, children, align, overlayStyle } = this.props;
+    const { visible, placement } = this.state;
 
     return (
-      <div>
+      <DropdownWrapper>
         <div
+          className="dispatcher"
           onClick={this.handleClick}
           onContextMenu={this.handleClick}
           onMouseEnter={this.handleMouseEnter}
-          {...refCondition}
+          onMouseLeave={this.handleMouseLeave}
+          ref={this.setDispatcherRef}
         >
           {children}
         </div>
-        {dropdownVisible && (
+        {visible && (
           <Portal>
-            <Backdrop
-              onClick={this.handleClose}
-              onMouseMove={this.handleMouseMove}
-              onContextMenu={this.handleClose}
-            >
-              <PositionProvider
-                className={OverlayClasses}
-                style={overlayStyle}
-                align={align}
-                origin={this.dispatcher}
+            <DropdownContainer>
+              <DropdownPlacement
+                onMouseLeave={this.handleDropdownMouseLeave}
+                ref={this.setContainerRef}
+                style={placement}
               >
-                {overlay}
-              </PositionProvider>
-            </Backdrop>
+                <DropdownContent align={align} style={overlayStyle}>
+                  {overlay}
+                </DropdownContent>
+              </DropdownPlacement>
+            </DropdownContainer>
           </Portal>
         )}
-      </div>
+      </DropdownWrapper>
     );
   }
 }
@@ -181,8 +210,6 @@ Dropdown.propTypes = {
   disabled: PropTypes.bool,
   /** The dropdown menu */
   overlay: PropTypes.node,
-  /** Class name of the dropdown root element */
-  overlayClassName: PropTypes.string,
   /** Style of the dropdown root element */
   overlayStyle: PropTypes.object,
   /** Called when the visible state is changed. */
@@ -210,7 +237,6 @@ Dropdown.defaultProps = {
   disabled: false,
   onVisibleChange: null,
   overlay: null,
-  overlayClassName: "",
   overlayStyle: {},
   trigger: "click",
   visible: null
