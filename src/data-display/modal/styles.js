@@ -6,6 +6,7 @@ export const ModalBackdrop = styled.div`
   left: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100vw;
   max-width: 100%;
   height: 100vh;
@@ -14,12 +15,9 @@ export const ModalBackdrop = styled.div`
   ${props => props.backdrop && "background-color: rgba(129, 129, 129, 0.8);"}
   ${props => props.backdrop && props.backdropStyle}
   ${props =>
-    props.floatingStyle.top
-      ? "align-items: flex-start;"
-      : props.floatingStyle.bottom
-      ? "align-items: flex-end;"
-      : "align-items: center;"}
-`;
+    props.floatingStyle &&
+    ((props.floatingStyle.top && "align-items: flex-start;") ||
+      (props.floatingStyle.bottom && "align-items: flex-end;"))}`;
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -34,11 +32,10 @@ export const ModalContainer = styled.div`
   border-radius: ${props => (props.rounded ? "3px" : 0)};
 
   ${props =>
-    props.floatingStyle.top
-      ? `margin-top: ${props.floatingStyle.top};`
-      : props.floatingStyle.bottom
-      ? `margin-bottom: ${props.floatingStyle.bottom};`
-      : null}
+    props.floatingStyle &&
+    ((props.floatingStyle.top && `margin-top: ${props.floatingStyle.top};`) ||
+      (props.floatingStyle.bottom &&
+        `margin-bottom: ${props.floatingStyle.bottom};`))}
 
   ${props => props.styles}
 `;
