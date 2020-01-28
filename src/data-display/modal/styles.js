@@ -14,10 +14,22 @@ export const ModalBackdrop = styled.div`
 
   ${props => props.backdrop && "background-color: rgba(129, 129, 129, 0.8);"}
   ${props => props.backdrop && props.backdropStyle}
-  ${props =>
-    props.floatingStyle &&
-    ((props.floatingStyle.top && "align-items: flex-start;") ||
-      (props.floatingStyle.bottom && "align-items: flex-end;"))}`;
+
+  ${props => {
+    const { floatingStyle } = props;
+
+    if (floatingStyle) {
+      const rules = [];
+      const { top, bottom } = floatingStyle;
+
+      top && rules.push("align-items: flex-start");
+      bottom && rules.push("align-items: flex-end");
+
+      return rules.join("\n");
+    }
+
+    return null;
+  }}`;
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -36,6 +48,22 @@ export const ModalContainer = styled.div`
     ((props.floatingStyle.top && `margin-top: ${props.floatingStyle.top};`) ||
       (props.floatingStyle.bottom &&
         `margin-bottom: ${props.floatingStyle.bottom};`))}
+
+  ${props => {
+    const { floatingStyle } = props;
+
+    if (floatingStyle) {
+      const rules = [];
+      const { top, bottom } = floatingStyle;
+
+      top && rules.push(`margin-top: ${top};`);
+      bottom && rules.push(`margin-bottom: ${bottom};`);
+
+      return rules.join("\n");
+    }
+
+    return null;
+  }};
 
   ${props => props.styles}
 `;
