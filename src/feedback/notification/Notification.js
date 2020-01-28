@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
+import Icon from "../../general/icon";
+
 import Notice from "./Notice";
 
 let count = 0;
@@ -82,45 +84,65 @@ Notification.open = props => {
 
 Notification.success = props => {
   Notification.open({
-    ...props,
     style: {
       backgroundColor: "#45ae70",
       color: "#fff"
     },
-    iconColor: "#fff"
+    iconColor: "#fff",
+    icon: (
+      <Icon
+        kind="bold"
+        group="interface-essential"
+        category="form-validation"
+        file="check-circle-1.svg"
+        size="16"
+        color="#fff"
+      />
+    ),
+    ...props
   });
 };
 
 Notification.error = props => {
   Notification.open({
-    ...props,
     style: {
       backgroundColor: "#e85035",
       color: "#fff"
     },
-    iconColor: "#fff"
+    iconColor: "#fff",
+    icon: (
+      <Icon
+        kind="bold"
+        group="interface-essential"
+        category="form-validation"
+        file="remove-circle.svg"
+        size="16"
+        color="#fff"
+      />
+    ),
+    ...props
   });
 };
 
 Notification.info = props => {
   Notification.open({
-    ...props,
     style: {
       backgroundColor: "#48bdd6",
       color: "#fff"
     },
-    iconColor: "#fff"
+    iconColor: "#fff",
+    ...props
   });
 };
 
 Notification.warning = props => {
   Notification.open({
-    ...props,
     style: {
       backgroundColor: "#f1b503",
       color: "#fff"
     },
-    iconColor: "#fff"
+    iconColor: "#fff",
+    ...props
   });
 };
 
