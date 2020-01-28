@@ -43,12 +43,6 @@ export const ModalContainer = styled.div`
   background-color: ${props => props.background};
   border-radius: ${props => (props.rounded ? "3px" : 0)};
 
-  ${props =>
-    props.floatingStyle &&
-    ((props.floatingStyle.top && `margin-top: ${props.floatingStyle.top};`) ||
-      (props.floatingStyle.bottom &&
-        `margin-bottom: ${props.floatingStyle.bottom};`))}
-
   ${props => {
     const { floatingStyle } = props;
 
