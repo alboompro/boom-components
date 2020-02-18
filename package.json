@@ -1,5 +1,5 @@
 {
-  "version": "0.2.42",
+  "version": "0.2.43",
   "name": "@alboompro/boom-components",
   "description": "React UI library containing a set of high quality components for building rich, interactive user interfaces in Alboom applications",
   "main": "index.js",

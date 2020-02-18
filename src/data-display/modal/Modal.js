@@ -47,6 +47,7 @@ class Modal extends PureComponent {
       floatingStyle,
       footer,
       headerStyle,
+      header,
       height,
       modalStyle,
       rounded,
@@ -75,25 +76,29 @@ class Modal extends PureComponent {
           floatingStyle={floatingStyle}
           styles={modalStyle}
         >
-          <ModalHeader style={headerStyle}>
-            {title && <ModalTitle>{title}</ModalTitle>}
-            {closeButton && (
-              <CloseIcon
-                onClick={this.closeModal}
-                ref="closeButton"
-                innerRef="closeButton"
-              >
-                <Icon
-                  kind="bold"
-                  group="interface-essential"
-                  category="form-validation"
-                  file="close.svg"
-                  size="16"
-                  color="#5F5F5F"
-                />
-              </CloseIcon>
-            )}
-          </ModalHeader>
+          {header ? (
+            <ModalHeader style={headerStyle}>{header}</ModalHeader>
+          ) : (
+            <ModalHeader style={headerStyle}>
+              {title && <ModalTitle>{title}</ModalTitle>}
+              {closeButton && (
+                <CloseIcon
+                  onClick={this.closeModal}
+                  ref="closeButton"
+                  innerRef="closeButton"
+                >
+                  <Icon
+                    kind="bold"
+                    group="interface-essential"
+                    category="form-validation"
+                    file="close.svg"
+                    size="16"
+                    color="#5F5F5F"
+                  />
+                </CloseIcon>
+              )}
+            </ModalHeader>
+          )}
           <ModalBody bodyStyle={bodyStyle}>{children}</ModalBody>
           {footer && <ModalFooter>{footer}</ModalFooter>}
         </ModalContainer>
@@ -127,6 +132,8 @@ Modal.propTypes = {
   floatingStyle: PropTypes.object,
   /** footer content */
   footer: PropTypes.node,
+  /** header node content */
+  header: PropTypes.node,
   /** custom header style */
   headerStyle: PropTypes.object,
   /** height of modal */
@@ -154,6 +161,7 @@ Modal.defaultProps = {
   closeButton: true,
   floatingStyle: {},
   footer: null,
+  header: null,
   headerStyle: {},
   height: "auto",
   modalStyle: {},
