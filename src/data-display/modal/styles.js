@@ -67,8 +67,8 @@ export const ModalHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 15px;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.26);
+  padding: 10px 20px;
+  border: 1px solid #eaeaea;
   z-index: 1;
 `;
 
@@ -94,12 +94,11 @@ export const CloseIcon = styled.div`
 
 export const ModalTitle = styled.div`
   flex: 1;
-  font-size: 15px;
-  color: #4c4c4c;
+  font-size: 17px;
+  color: #212121;
   letter-spacing: 0.4px;
   line-height: initial;
   font-weight: 500;
-  text-transform: uppercase;
 `;
 
 export const ModalBody = styled.div`
@@ -109,6 +108,6 @@ export const ModalBody = styled.div`
 `;
 
 export const ModalFooter = styled.div`
-  padding: 15px;
+  padding: 12px 20px;
   border-top: 1px solid #eaeaea;
 `;
