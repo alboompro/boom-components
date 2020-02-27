@@ -21,6 +21,11 @@ class Modal extends PureComponent {
     this.originalOverflow = document.body.style.overflow;
   }
 
+  componentWillUnmount() {
+    // remember to return control of overflow to body.
+    document.body.style.overflow = this.originalOverflow;
+  }
+
   closeModal = e => {
     const { onClose, backdropClosable } = this.props;
     const { backdrop, closeButton } = this.refs;
