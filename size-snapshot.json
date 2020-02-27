@@ -1,13 +1,7 @@
 {
   "build/umd/boom-components.min.js": {
-<<<<<<< HEAD
-    "bundled": 158017,
-    "minified": 54372,
-    "gzipped": 14533
-=======
-    "bundled": 157651,
-    "minified": 54207,
-    "gzipped": 14481
->>>>>>> 6dd8d2785984d28c44eedb87e79b426747adaa96
+    "bundled": 157931,
+    "minified": 54305,
+    "gzipped": 14496
   }
 }
