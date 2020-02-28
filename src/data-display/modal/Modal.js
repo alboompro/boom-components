@@ -21,10 +21,22 @@ class Modal extends PureComponent {
     this.originalOverflow = document.body.style.overflow;
   }
 
+  componentDidUpdate(prevProps) {
+    const { visible } = this.props;
+
+    if (prevProps.visible && !visible) {
+      this.restoreOriginalOverFlow();
+    }
+  }
+
   componentWillUnmount() {
     // remember to return control of overflow to body.
-    document.body.style.overflow = this.originalOverflow;
+    this.restoreOriginalOverFlow();
   }
+
+  restoreOriginalOverFlow = () => {
+    document.body.style.overflow = this.originalOverflow;
+  };
 
   closeModal = e => {
     const { onClose, backdropClosable } = this.props;
@@ -36,7 +48,6 @@ class Modal extends PureComponent {
         e.target ===
           (closeButton.refs ? closeButton.refs.closeButton : closeButton))
     ) {
-      document.body.style.overflow = this.originalOverflow;
       onClose();
     }
   };
