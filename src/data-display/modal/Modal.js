@@ -41,12 +41,14 @@ class Modal extends PureComponent {
   closeModal = e => {
     const { onClose, backdropClosable } = this.props;
     const { backdrop, closeButton } = this.refs;
-
     if (
-      backdropClosable &&
-      (e.target === (backdrop.refs ? backdrop.refs.backdrop : backdrop) ||
+      (backdropClosable &&
         e.target ===
-          (closeButton.refs ? closeButton.refs.closeButton : closeButton))
+          (backdropClosable && backdrop.refs
+            ? backdrop.refs.backdrop
+            : backdrop)) ||
+      e.target ===
+        (closeButton.refs ? closeButton.refs.closeButton : closeButton)
     ) {
       onClose();
     }
