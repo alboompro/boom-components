@@ -169,7 +169,7 @@ class Dropdown extends Component {
   };
 
   render() {
-    const { overlay, children, align, overlayStyle } = this.props;
+    const { overlay, children, align, overlayStyle, showArrow } = this.props;
     const { visible, placement } = this.state;
 
     return (
@@ -193,7 +193,11 @@ class Dropdown extends Component {
                 ref={this.setContainerRef}
                 style={placement}
               >
-                <DropdownContent align={align} style={overlayStyle}>
+                <DropdownContent
+                  align={align}
+                  style={overlayStyle}
+                  showArrow={showArrow}
+                >
                   {overlay}
                 </DropdownContent>
               </div>
@@ -216,6 +220,8 @@ Dropdown.propTypes = {
   overlayStyle: PropTypes.object,
   /** Called when the visible state is changed. */
   onVisibleChange: PropTypes.func,
+  /** Show arrow */
+  showArrow: PropTypes.bool,
   /** The trigger mode which executes the dropdown action. Note that hover can't be used on touchscreens. */
   trigger: PropTypes.oneOfType([
     PropTypes.string,
@@ -241,7 +247,8 @@ Dropdown.defaultProps = {
   overlay: null,
   overlayStyle: {},
   trigger: "click",
-  visible: null
+  visible: null,
+  showArrow: true
 };
 
 export default Dropdown;
