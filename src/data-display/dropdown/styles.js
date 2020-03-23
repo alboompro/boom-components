@@ -39,7 +39,7 @@ export const DropdownContent = styled.div`
   &:before {
     position: absolute;
     content: "";
-    display: block;
+    display: ${props => (props.showArrow ? "block" : "none")};
     width: 0;
     height: 0;
 
