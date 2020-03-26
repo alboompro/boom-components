@@ -2,6 +2,7 @@
 /* eslint-disable global-require */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Portal from "../../shared/portal";
 
 import {
   SelectContainer,
@@ -13,16 +14,6 @@ import {
   DropdownBackdrop,
   Placeholder
 } from "./styles";
-
-const reactVersion = parseInt(React.version.split(".")[0]);
-let Portal;
-if (reactVersion >= 16) {
-  const ReactDOM = require("react-dom");
-  Portal = ({ children, node }) => ReactDOM.createPortal(children, node);
-} else {
-  // eslint-disable-next-line prefer-destructuring
-  Portal = require("react-portal").Portal;
-}
 
 export class Select extends Component {
   constructor() {
@@ -168,6 +159,7 @@ export class Select extends Component {
     } = this.props;
 
     const { selectItem } = this.refs;
+    const selectRef = selectItem.refs ? selectItem.refs.selectItem : selectItem;
     const { selected, hovered } = this.state;
     const {
       width,
@@ -175,7 +167,7 @@ export class Select extends Component {
       bottom,
       left,
       height
-    } = selectItem.getBoundingClientRect();
+    } = selectRef.getBoundingClientRect();
 
     const scope = typeof window === "undefined" ? global : window;
 
@@ -267,6 +259,7 @@ export class Select extends Component {
             open={open}
             onClick={this.openDropdown}
             ref="selectItem"
+            innerRef="selectItem"
             disabled={disabled}
             style={selectStyle}
           >
