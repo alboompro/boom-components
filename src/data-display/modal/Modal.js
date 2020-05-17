@@ -21,17 +21,35 @@ class Modal extends PureComponent {
     this.originalOverflow = document.body.style.overflow;
   }
 
+  componentDidUpdate(prevProps) {
+    const { visible } = this.props;
+
+    if (prevProps.visible && !visible) {
+      this.restoreOriginalOverFlow();
+    }
+  }
+
+  componentWillUnmount() {
+    // remember to return control of overflow to body.
+    this.restoreOriginalOverFlow();
+  }
+
+  restoreOriginalOverFlow = () => {
+    document.body.style.overflow = this.originalOverflow;
+  };
+
   closeModal = e => {
     const { onClose, backdropClosable } = this.props;
     const { backdrop, closeButton } = this.refs;
-
     if (
-      backdropClosable &&
-      (e.target === (backdrop.refs ? backdrop.refs.backdrop : backdrop) ||
+      (backdropClosable &&
         e.target ===
-          (closeButton.refs ? closeButton.refs.closeButton : closeButton))
+          (backdropClosable && backdrop.refs
+            ? backdrop.refs.backdrop
+            : backdrop)) ||
+      e.target ===
+        (closeButton.refs ? closeButton.refs.closeButton : closeButton)
     ) {
-      document.body.style.overflow = this.originalOverflow;
       onClose();
     }
   };
@@ -47,6 +65,7 @@ class Modal extends PureComponent {
       floatingStyle,
       footer,
       headerStyle,
+      header,
       height,
       modalStyle,
       rounded,
@@ -75,25 +94,29 @@ class Modal extends PureComponent {
           floatingStyle={floatingStyle}
           styles={modalStyle}
         >
-          <ModalHeader style={headerStyle}>
-            {title && <ModalTitle>{title}</ModalTitle>}
-            {closeButton && (
-              <CloseIcon
-                onClick={this.closeModal}
-                ref="closeButton"
-                innerRef="closeButton"
-              >
-                <Icon
-                  kind="bold"
-                  group="interface-essential"
-                  category="form-validation"
-                  file="close.svg"
-                  size="16"
-                  color="#5F5F5F"
-                />
-              </CloseIcon>
-            )}
-          </ModalHeader>
+          {header ? (
+            <ModalHeader style={headerStyle}>{header}</ModalHeader>
+          ) : (
+            <ModalHeader style={headerStyle}>
+              {title && <ModalTitle>{title}</ModalTitle>}
+              {closeButton && (
+                <CloseIcon
+                  onClick={this.closeModal}
+                  ref="closeButton"
+                  innerRef="closeButton"
+                >
+                  <Icon
+                    kind="bold"
+                    group="interface-essential"
+                    category="form-validation"
+                    file="close.svg"
+                    size="16"
+                    color="#5F5F5F"
+                  />
+                </CloseIcon>
+              )}
+            </ModalHeader>
+          )}
           <ModalBody bodyStyle={bodyStyle}>{children}</ModalBody>
           {footer && <ModalFooter>{footer}</ModalFooter>}
         </ModalContainer>
@@ -127,6 +150,8 @@ Modal.propTypes = {
   floatingStyle: PropTypes.object,
   /** footer content */
   footer: PropTypes.node,
+  /** header node content */
+  header: PropTypes.node,
   /** custom header style */
   headerStyle: PropTypes.object,
   /** height of modal */
@@ -154,6 +179,7 @@ Modal.defaultProps = {
   closeButton: true,
   floatingStyle: {},
   footer: null,
+  header: null,
   headerStyle: {},
   height: "auto",
   modalStyle: {},

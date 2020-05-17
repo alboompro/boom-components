@@ -1,7 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Icon from "../../general/icon";
-import { Container, Message, IconContainer } from "./styles";
+import {
+  Container,
+  Content,
+  Title,
+  Message,
+  IconContainer,
+  IconCloseContainer
+} from "./styles";
 import { noop } from "../../helpers";
 
 class Notice extends PureComponent {
@@ -13,7 +20,8 @@ class Notice extends PureComponent {
     iconColor: "#000",
     onClose: noop,
     style: {},
-    title: ""
+    title: "",
+    icon: null
   };
 
   componentDidMount() {
@@ -47,13 +55,13 @@ class Notice extends PureComponent {
   };
 
   render() {
-    const { closable, iconColor, style, title, message } = this.props;
+    const { closable, iconColor, style, title, message, icon } = this.props;
     const { visible } = this.state;
 
     return (
-      <Container visible={visible} style={style}>
+      <Container visible={visible} title={title} style={style}>
         {closable && (
-          <IconContainer onClick={this.close}>
+          <IconCloseContainer onClick={this.close}>
             <Icon
               kind="regular"
               group="interface-essential"
@@ -62,10 +70,13 @@ class Notice extends PureComponent {
               size="14"
               color={`${iconColor || "#212121"}`}
             />
-          </IconContainer>
+          </IconCloseContainer>
         )}
-        {title}
-        <Message>{message}</Message>
+        {icon && <IconContainer>{icon}</IconContainer>}
+        <Content>
+          <Title>{title}</Title>
+          <Message>{message}</Message>
+        </Content>
       </Container>
     );
   }
@@ -76,11 +87,13 @@ Notice.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** content of notification box */
   message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  /** icon of notification */
+  icon: PropTypes.node,
   /** time in seconds before notificaiton is closed. If it's set to NULL notification will never be closed automatically. */
   duration: PropTypes.number,
   /** callback when notification is close */
   onClose: PropTypes.func,
-  /** Style notification */
+  /** style notification */
   style: PropTypes.object,
   /** show close button */
   closable: PropTypes.bool,

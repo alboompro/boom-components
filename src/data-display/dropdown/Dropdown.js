@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Portal from "../../shared/portal";
 
-import {
-  DropdownContainer,
-  DropdownPlacement,
-  DropdownContent,
-  DropdownWrapper
-} from "./styles";
+import { DropdownContainer, DropdownContent, DropdownWrapper } from "./styles";
 
 class Dropdown extends Component {
   constructor(props) {
@@ -18,6 +13,12 @@ class Dropdown extends Component {
       visible: popupVisible,
       placement: {}
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.visible !== null) {
+      this.setState({ visible: nextProps.visible });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -173,7 +174,7 @@ class Dropdown extends Component {
   };
 
   render() {
-    const { overlay, children, align, overlayStyle } = this.props;
+    const { overlay, children, align, overlayStyle, showArrow } = this.props;
     const { visible, placement } = this.state;
 
     return (
@@ -191,7 +192,8 @@ class Dropdown extends Component {
         {visible && (
           <Portal>
             <DropdownContainer>
-              <DropdownPlacement
+              <div
+                className="dropdown-placement"
                 onMouseLeave={this.handleDropdownMouseLeave}
                 ref={this.setContainerRef}
                 style={placement}
@@ -199,11 +201,12 @@ class Dropdown extends Component {
                 <DropdownContent
                   align={align}
                   style={overlayStyle}
+                  showArrow={showArrow}
                   arrowPos={placement.toTop ? "top" : "bottom"}
                 >
                   {overlay}
                 </DropdownContent>
-              </DropdownPlacement>
+              </div>
             </DropdownContainer>
           </Portal>
         )}
@@ -223,6 +226,8 @@ Dropdown.propTypes = {
   overlayStyle: PropTypes.object,
   /** Called when the visible state is changed. */
   onVisibleChange: PropTypes.func,
+  /** Show arrow */
+  showArrow: PropTypes.bool,
   /** The trigger mode which executes the dropdown action. Note that hover can't be used on touchscreens. */
   trigger: PropTypes.oneOfType([
     PropTypes.string,
@@ -248,7 +253,8 @@ Dropdown.defaultProps = {
   overlay: null,
   overlayStyle: {},
   trigger: "click",
-  visible: null
+  visible: null,
+  showArrow: true
 };
 
 export default Dropdown;

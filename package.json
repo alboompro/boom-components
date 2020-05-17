@@ -1,5 +1,5 @@
 {
-  "version": "0.2.38",
+  "version": "0.2.51",
   "name": "@alboompro/boom-components",
   "description": "React UI library containing a set of high quality components for building rich, interactive user interfaces in Alboom applications",
   "main": "index.js",
@@ -50,7 +50,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "formik": "^1.5.7",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-component-component": "^1.2.1",
@@ -58,7 +57,8 @@
     "react-is": "^16.8.6",
     "react-portal": "^4.2.0",
     "shallowequal": "^1.1.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "formik": ">= 1.5.7"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

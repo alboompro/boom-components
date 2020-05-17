@@ -35,7 +35,7 @@ export const ButtonContent = styled.div`
 export const ButtonChildren = styled.div`
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 15px;
   transition: 0.3s;
 
   ${props => props.textStyle}
@@ -44,8 +44,8 @@ export const ButtonChildren = styled.div`
 export const DefaultBtn = styled.button`
   display: block;
   position: relative;
-  padding: 0 25px;
-  height: 35px;
+  padding: 0 30px;
+  height: 40px;
   border: 0;
   border-radius: 2px;
   cursor: pointer;
