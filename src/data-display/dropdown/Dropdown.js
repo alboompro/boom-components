@@ -46,7 +46,6 @@ class Dropdown extends Component {
   };
 
   clickOnDocumentHandler = e => {
-    const v = this.clickToHide(e);
     if (this.clickToHide(e)) {
       e && e.preventDefault();
       this.update(false);
@@ -118,19 +117,25 @@ class Dropdown extends Component {
       right,
       left,
       width,
+      height,
       bottom
     } = e.currentTarget.getBoundingClientRect();
+
+    const toTop = bottom / window.innerHeight > 0.9;
+
     const placement = {
-      top: window.scrollY + bottom
+      toTop,
+      top: window.scrollY - (toTop ? height : 0) + bottom,
+      transform: toTop ? "translateY(calc(-100% - 8px))" : ""
     };
     switch (align) {
       case "right":
         placement.left = right;
-        placement.transform = "translateX(-100%)";
+        placement.transform += "translateX(-100%)";
         break;
       case "center":
         placement.left = left + width / 2;
-        placement.transform = "translateX(-50%)";
+        placement.transform += "translateX(-50%)";
         break;
       default:
         placement.left = left;
@@ -197,6 +202,7 @@ class Dropdown extends Component {
                   align={align}
                   style={overlayStyle}
                   showArrow={showArrow}
+                  arrowPos={placement.toTop ? "top" : "bottom"}
                 >
                   {overlay}
                 </DropdownContent>

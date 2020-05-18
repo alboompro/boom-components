@@ -67,7 +67,7 @@ export const DropdownContent = styled.div`
     ${props => {
       if (props.arrowPos === "top") {
         return css`
-          top: 100%
+          top: 100%;
           border-top: 6px solid white;
         `;
       }
