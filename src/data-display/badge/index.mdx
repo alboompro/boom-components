@@ -3,13 +3,49 @@ name: Badge
 menu: Data Display
 ---
 
-import { Playground, Props } from 'docz'
+import { Playground, Props } from "docz";
 
-import Badge from './Badge'
+import Badge from "./Badge";
 
 # Badge
 
 Badge component.
+
+## Exemplos
+
+### Uso Básico
+
+```jsx
+import Badge from "@alboom/boom-components/data-display/badge";
+
+const MyComponent = () => {
+  return (
+    <Badge
+      color="#FFF"
+      padding="10px"
+      background="#565FFF"
+      borderRadius="15px"
+      textAlign="center"
+      fontSize="1.2rem"
+    >
+      Ativo
+    </Badge>
+  );
+};
+```
+
+<Playground>
+  <Badge
+    color="#FFF"
+    padding="10px"
+    background="#565FFF"
+    borderRadius="15px"
+    textAlign="center"
+    fontSize="1.2rem"
+  >
+    Ativo
+  </Badge>
+</Playground>
 
 ## API
 
