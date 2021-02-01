@@ -33,6 +33,8 @@ export const SelectItem = styled.div`
   padding: 0 5px 0 10px;
   font-size: 14px;
   opacity: ${props => (props.disabled ? ".5" : "1")};
+  border-radius: ${props =>
+    props.roundedBorder ? `${props.roundedBorder}px` : "unset"};
 
   &:after {
     content: "";
@@ -43,10 +45,7 @@ export const SelectItem = styled.div`
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 
-    ${props =>
-      props.open
-        ? "border-bottom: 5px solid #595959;"
-        : "border-top: 5px solid #595959;"}
+    ${props => `border-${props.open ? "bottom" : "top"}: 5px solid #595959;`}
   }
 
   ${props => props.selectStyle}
@@ -62,8 +61,14 @@ export const OptionContainer = styled.ul`
   ${props => props.border && `border-${props.border}: none;`}
   cursor: pointer;
   overflow: auto;
+  border-radius: ${({ roundedBorder }) => roundedBorder || "unset"};
 
   ${props => props.style}
+`;
+
+export const OptionScroll = styled.ul`
+  overflow-y: auto;
+  max-height: ${props => `${props.maxHeight}px`};
 `;
 
 export const Option = styled.li`
@@ -74,6 +79,7 @@ export const Option = styled.li`
   font-size: 14px;
   font-weight: ${props => (props.selected ? "600" : "500")};
   background-color: ${props => (props.hovered ? "#f4f4f4" : "#fff")};
+  ${props => props.multiSelected && "color: #b3b3b3"}
 `;
 
 export const DropdownBackdrop = styled.div`
@@ -82,11 +88,12 @@ export const DropdownBackdrop = styled.div`
   }
 
   position: absolute;
-  z-index: 9999;
+  z-index: ${props => props.zIndex};
   top: 0;
   left: 0;
   bottom: 0;
   width: 100%;
+
   ${props => props.style}
 `;
 
@@ -94,3 +101,5 @@ export const Placeholder = styled.span`
   font-size: 12px;
   color: #9c9c9c;
 `;
+
+export const ActionsContainer = styled.div``;
