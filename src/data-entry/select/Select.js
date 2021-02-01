@@ -10,9 +10,11 @@ import {
   SelectContent,
   SelectItem,
   OptionContainer,
+  OptionScroll,
   Option,
   DropdownBackdrop,
-  Placeholder
+  Placeholder,
+  ActionsContainer
 } from "./styles";
 
 export class Select extends Component {
@@ -27,7 +29,11 @@ export class Select extends Component {
   }
 
   componentDidMount() {
+    const { manualClose } = this.props;
+
     this.setSelect();
+
+    manualClose && manualClose(this.closeDropdown);
   }
 
   componentDidUpdate(prevProps) {
@@ -52,7 +58,13 @@ export class Select extends Component {
   };
 
   closeDropdown = () => {
+    const { roundedBorder } = this.props;
     document.removeEventListener("keydown", this.keyDownEvents);
+
+    if (roundedBorder) {
+      this.getSelectRef().style.borderRadius = `${roundedBorder}px`;
+    }
+
     this.setState({ open: false });
   };
 
@@ -108,15 +120,22 @@ export class Select extends Component {
     }
   };
 
-  selectOption = () => {
-    const { options, onChange } = this.props;
-    const { hovered } = this.state;
+  selectOption = onClick => {
+    if (onClick) {
+      onClick();
+    } else {
+      const { options, onChange, autoUpdate } = this.props;
+      const { hovered } = this.state;
 
-    this.setState({
-      selected: hovered
-    });
+      if (autoUpdate) {
+        this.setState({
+          selected: hovered
+        });
+      }
 
-    onChange && onChange(options[hovered]);
+      onChange && onChange(options[hovered]);
+    }
+
     this.closeDropdown();
   };
 
@@ -149,17 +168,26 @@ export class Select extends Component {
     }
   };
 
+  getSelectRef = () => {
+    const { selectItem } = this.refs;
+    return selectItem.refs ? selectItem.refs.selectItem : selectItem;
+  };
+
   renderDropdown = () => {
     const {
       dropdownStyle,
       dropdownClassName,
       options,
       optionsStyle,
-      target
+      target,
+      actions,
+      roundedBorder,
+      dropdownDirection,
+      selectMaxHeight,
+      zIndex
     } = this.props;
 
-    const { selectItem } = this.refs;
-    const selectRef = selectItem.refs ? selectItem.refs.selectItem : selectItem;
+    const selectRef = this.getSelectRef();
     const { selected, hovered } = this.state;
     const {
       width,
@@ -168,7 +196,6 @@ export class Select extends Component {
       left,
       height
     } = selectRef.getBoundingClientRect();
-
     const scope = typeof window === "undefined" ? global : window;
 
     let positionTop = top + scope.scrollY + height;
@@ -176,28 +203,45 @@ export class Select extends Component {
 
     const targetDOM = document.querySelector(target);
     let border = "top";
+    const borderRadius = {
+      bottom: `0 0 ${roundedBorder}px ${roundedBorder}px`,
+      top: `${roundedBorder}px ${roundedBorder}px 0 0`
+    };
 
     if (targetDOM) {
       const positionTarget = targetDOM.getBoundingClientRect();
       const heightItem =
         (optionsStyle && optionsStyle.height.match(/^\d+/)[0]) || 30;
-      const optionsHeight = options.length * heightItem;
+      const optionsHeight = (actions.length + options.length) * heightItem;
 
       const topDistance = top - positionTarget.top;
       const bottomDistance = positionTarget.bottom - bottom;
 
-      // condition is true render select options in top select
-      if (topDistance > bottomDistance && optionsHeight > bottomDistance) {
-        positionTop = top - optionsHeight - 1;
-        border = "bottom";
+      if (dropdownDirection) {
+        if (dropdownDirection === "top") {
+          positionTop = top - optionsHeight - 1;
+          border = "bottom";
+        } else {
+          positionTop = top + height;
+        }
       } else {
-        positionTop = top + height;
+        // condition is true render select options in top select
+        // eslint-disable-next-line no-lonely-if
+        if (topDistance > bottomDistance && optionsHeight > bottomDistance) {
+          positionTop = top - optionsHeight - 1;
+          border = "bottom";
+        } else {
+          positionTop = top + height;
+        }
       }
+
+      selectRef.style.borderRadius = borderRadius[border];
     }
 
     return (
       <Portal node={targetDOM || document.body}>
         <DropdownBackdrop
+          zIndex={zIndex}
           onClick={this.closeBackdrop}
           ref="backdrop"
           innerRef="backdrop"
@@ -207,6 +251,9 @@ export class Select extends Component {
         >
           <OptionContainer
             className={dropdownClassName}
+            roundedBorder={
+              roundedBorder && borderRadius[border === "top" ? "bottom" : "top"]
+            }
             border={border}
             style={{
               width,
@@ -215,21 +262,36 @@ export class Select extends Component {
               ...dropdownStyle
             }}
           >
-            {options.map((item, index) => (
-              <Option
-                selected={selected === index}
-                hovered={hovered === index}
-                key={`option-${item.value}`}
-                onClick={() => this.selectOption()}
-                onMouseEnter={() => this.setState({ hovered: index })}
-                onMouseLeave={() => this.setState({ hovered: null })}
-                ref={`optionRef${index}`}
-                innerRef={`optionRef${index}`}
-                style={{ ...optionsStyle }}
-              >
-                {item.label}
-              </Option>
-            ))}
+            <OptionScroll maxHeight={selectMaxHeight}>
+              {options.map((item, index) => (
+                <Option
+                  selected={selected === index}
+                  hovered={hovered === index}
+                  key={`option-${item.value}`}
+                  onClick={() =>
+                    !item.selected &&
+                    this.selectOption(item.props && item.props.onClick)
+                  }
+                  onMouseEnter={() =>
+                    !item.selected && this.setState({ hovered: index })
+                  }
+                  onMouseLeave={() =>
+                    !item.selected && this.setState({ hovered: null })
+                  }
+                  multiSelected={item.selected}
+                  ref={`optionRef${index}`}
+                  innerRef={`optionRef${index}`}
+                  style={{ ...optionsStyle }}
+                >
+                  {React.isValidElement(item) ? item : item.label}
+                </Option>
+              ))}
+            </OptionScroll>
+            {actions && (
+              <ActionsContainer onClick={this.closeDropdown}>
+                {actions.map(action => action)}
+              </ActionsContainer>
+            )}
           </OptionContainer>
         </DropdownBackdrop>
       </Portal>
@@ -245,7 +307,8 @@ export class Select extends Component {
       placeholder,
       selectClassName,
       selectStyle,
-      showArrow
+      showArrow,
+      roundedBorder
     } = this.props;
     const { open, selected } = this.state;
 
@@ -255,6 +318,7 @@ export class Select extends Component {
         <SelectContent>
           <SelectItem
             className={selectClassName}
+            roundedBorder={roundedBorder}
             showArrow={showArrow}
             open={open}
             onClick={this.openDropdown}
@@ -300,7 +364,29 @@ Select.propTypes = {
    * set array with options value, receive a array width value and label
    * and label and can be a string/number or node
    */
-  options: PropTypes.array.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      }),
+      PropTypes.node
+    ])
+  ).isRequired,
+  /** update type */
+  autoUpdate: PropTypes.bool,
+  /** actions; you must specify a key to nodes */
+  actions: PropTypes.arrayOf(PropTypes.node),
+  /** rounded border */
+  roundedBorder: PropTypes.number,
+  /** choose dropdown direction */
+  dropdownDirection: PropTypes.oneOf(["top", "bottom"]),
+  /** scroll max height */
+  selectMaxHeight: PropTypes.number,
+  /** zindex */
+  zIndex: PropTypes.number,
+  /** close by parent function */
+  manualClose: PropTypes.func,
   /** options style */
   optionsStyle: PropTypes.object,
   /** set placeholder value */
@@ -330,7 +416,14 @@ Select.defaultProps = {
   selectStyle: null,
   showArrow: true,
   target: null,
-  value: ""
+  value: "",
+  autoUpdate: true,
+  actions: null,
+  roundedBorder: 0,
+  dropdownDirection: null,
+  selectMaxHeight: 210,
+  zIndex: 9999,
+  manualClose: null
 };
 
 export default Select;
