@@ -212,7 +212,8 @@ export class Select extends Component {
       const positionTarget = targetDOM.getBoundingClientRect();
       const heightItem =
         (optionsStyle && optionsStyle.height.match(/^\d+/)[0]) || 30;
-      const optionsHeight = (actions.length + options.length) * heightItem;
+      const optionsHeight =
+        (((actions && actions.length) || 0) + options.length) * heightItem;
 
       const topDistance = top - positionTarget.top;
       const bottomDistance = positionTarget.bottom - bottom;
@@ -418,7 +419,7 @@ Select.defaultProps = {
   target: null,
   value: "",
   autoUpdate: true,
-  actions: null,
+  actions: [],
   roundedBorder: 0,
   dropdownDirection: null,
   selectMaxHeight: 210,
