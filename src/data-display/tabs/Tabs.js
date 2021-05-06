@@ -26,12 +26,14 @@ const Tabs = ({ tabs, initialTab }) => {
 };
 
 Tabs.propTypes = {
+  /** receives an array of objects that have "label", and "component", label must be string, and component must be an element */
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       component: PropTypes.element.isRequired
     })
   ).isRequired,
+  /** if you want a specific tab/component to be displayed first, enter a number */
   initialTab: PropTypes.number
 };
 
