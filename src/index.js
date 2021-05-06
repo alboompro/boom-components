@@ -13,6 +13,7 @@ export { default as Dropdown } from "./data-display/dropdown";
 export { default as Modal } from "./data-display/modal";
 export { default as ProfilePicture } from "./data-display/profile-picture";
 export { default as Steps } from "./data-display/steps";
+export { default as Tabs } from "./data-display/tabs";
 
 export { default as AutoComplete } from "./data-entry/autocomplete";
 export { default as Checkbox } from "./data-entry/checkbox";
