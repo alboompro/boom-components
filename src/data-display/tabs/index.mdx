@@ -1,0 +1,73 @@
+---
+name: Tabs
+menu: Data Display
+---
+
+import { Playground, Props } from "docz";
+
+import Tabs from "./Tabs";
+
+# Tabs
+
+Tabs component.
+
+## Exemplos
+
+### Uso Básico
+
+```jsx
+import Tabs from "@alboom/boom-components/data-display/Tabs";
+import Componente2 from '../components/exemplo2;
+import Componente4 from '../components/exemplo2;
+
+const Tabs = () => {
+  const tabs = [
+    {
+      label: 'Tab 1',
+      component: <p style={{ marginTop: '20px' }}>Componente 1</p>
+    },
+    {
+      label: 'Tab 2',
+      component: <Componente2 props={props} />,
+    },
+    {
+      label: 'Tab 3',
+      component: <p style={{ marginTop: '20px' }}>Componente 3</p>,
+    },
+    {
+      label: 'Tab 4',
+      component: <Componente4 props={props} />,
+    },
+  ];
+
+  return (
+    <Tabs tabs={tabs} />
+  );
+};
+```
+
+<Playground>
+  <Tabs tabs={[
+    {
+      label: 'Tab 1',
+      component: <p style={{ marginTop: '20px' }}>Componente 1</p>
+    },
+    {
+      label: 'Tab 2',
+      component: <p style={{ marginTop: '20px' }}>Componente 2</p>
+    },
+    {
+      label: 'Tab 3',
+      component: <p style={{ marginTop: '20px' }}>Componente 3</p>
+    },
+    {
+      label: 'Tab 4',
+      component: <p style={{ marginTop: '20px' }}>Componente 4</p>
+    },
+  ]}
+  />
+</Playground>
+
+## API
+
+<Props of={Tabs} />
