@@ -1,7 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { CardStyle, CardHead, CardBody } from "./styles";
 
-const Card = ({ ...props }) => <div />;
+const Card = ({ children, title, ...props }) => {
+  return (
+    <CardStyle {...props}>
+      <CardHead>
+        <h2>{title}</h2>
+      </CardHead>
+      <CardBody>{children}</CardBody>
+    </CardStyle>
+  );
+};
 
 Card.propTypes = {
   /** actions list which shows at the bottom of the card */
