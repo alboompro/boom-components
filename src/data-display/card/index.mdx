@@ -3,14 +3,72 @@ name: Card
 menu: Data Display
 ---
 
-import { Playground, Props } from 'docz'
+import { Playground, Props } from "docz";
 
-import Card from './Card'
+import Card from "./card";
 
 # Card
 
-Card component.
+Componente retangular simples.
+
+## Quando utilizar
+
+## Exemplo
+
+### Uso Básico
+
+```jsx
+import Card from "@alboom/boom-components/data-display/card";
+
+<Card title="Default size card" style={{ width: 300 }}>
+  <p>Card content</p>
+  <p>Card content</p>
+</Card>
+
+<Card title="Small size card" size="small">
+  <p>Card content</p>
+  <p>Card content</p>
+  <p>Card content</p>
+</Card>
+```
+
+<Playground>
+  <div>
+    <Card title="Default size card" style={{ width: 300 }}>
+      <p>Card content</p>
+      <p>Card content</p>
+    </Card>
+
+    <Card title="Small size card" size="small">
+      <p>Card content</p>
+      <p>Card content</p>
+      <p>Card content</p>
+    </Card>
+
+  </div>
+
+</Playground>
+
+### Sem borda
+
+<Playground>
+  <Card title="Card title" bordered={false}>
+    <p>Card content</p>
+    <p>Card content</p>
+  </Card>
+</Playground>
+
+### Hover
+
+<Playground>
+  <Card title="Card title" hoverable>
+    <p>Card content</p>
+    <p>Card content</p>
+  </Card>
+</Playground>
 
 ## API
+
+### Card
 
 <Props of={Card} />
