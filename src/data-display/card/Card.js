@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CardStyle, CardHead, CardBody } from "./styles";
+import { CardStyle, HeadStyle, BodyStyle } from "./styles";
 
-const Card = ({ children, title, style, ...props }) => {
+const Card = ({ children, title, style, cover, extra, ...props }) => {
   const StyleProps = {
     bordered: props.bordered,
     hoverable: props.hoverable,
@@ -14,15 +14,35 @@ const Card = ({ children, title, style, ...props }) => {
   };
 
   const BodyProps = {
-    size: props.size
+    size: props.size,
+    cover: cover
   };
+
+  let head = React.ReactNode; // Se TS seria head: React.ReactNode (anotação de tipo)
+  if (title || extra) {
+    head = (
+      <HeadStyle {...HeadProps}>
+        {title && <h2>{title}</h2>}
+        {extra ? extra : null}
+      </HeadStyle>
+    );
+  }
+
+  const coverDOM = cover ? { cover } : null;
+
+  const body = (
+    <BodyStyle {...BodyProps}>
+      {cover ? <h2>{title}</h2> : ''}
+      {children}
+    </BodyStyle>
+  );
+
+  // const actiomDOM =
 
   return (
     <CardStyle {...StyleProps} style={{ ...style }}>
-      <CardHead {...HeadProps}>
-        <h2>{title}</h2>
-      </CardHead>
-      <CardBody {...BodyProps}>{children}</CardBody>
+      {cover ? cover : head}
+      {body}
     </CardStyle>
   );
 };
@@ -41,7 +61,9 @@ Card.propTypes = {
   /** card cover */
   cover: PropTypes.node,
   /** card title */
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  /** content to render in the top-right corner of the card */
+  extra: PropTypes.node
 };
 
 Card.defaultProps = {
@@ -50,6 +72,8 @@ Card.defaultProps = {
   hoverable: false,
   loading: false,
   size: "default",
+  cover: null,
+  extra: null,
   title: null
 };
 

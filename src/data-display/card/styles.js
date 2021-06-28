@@ -26,9 +26,12 @@ export const CardStyle = styled.div`
         transition: box-shadow 0.3s, border-color 0.3s;
         `
       : ""}
+  img {
+    width: inherit;
+  }
 `;
 
-export const CardHead = styled.div`
+export const HeadStyle = styled.div`
   min-height: ${HeadProps => (HeadProps.size == "small" ? "36px" : "48px")};
   margin-bottom: -1px;
   padding: ${HeadProps => (HeadProps.size == "small" ? "0 12px" : "0 24px")};
@@ -43,10 +46,14 @@ export const CardHead = styled.div`
   }
 `;
 
-export const CardBody = styled.div`
+export const BodyStyle = styled.div`
   padding: ${BodyProps => (BodyProps.size == "small" ? "12px" : "24px")};
 
   p {
     margin: 0px;
+  }
+
+  h2 {
+    font-size: ${HeadProps => (HeadProps.size == "small" ? "14px" : "16px")};
   }
 `;
