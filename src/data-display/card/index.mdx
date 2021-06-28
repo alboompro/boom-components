@@ -5,32 +5,21 @@ menu: Data Display
 
 import { Playground, Props } from "docz";
 
-import Card from "./card";
+import Card from "./Card";
 
 # Card
 
-Componente retangular simples.
+Uma área de conteúdo retangular simples.
 
 ## Quando utilizar
 
-## Exemplo
+- Conteúdo que possa consistir em vários elementos de diversos tipos e tamanhos.
+
+## Exemplos
 
 ### Uso Básico
 
-```jsx
-import Card from "@alboom/boom-components/data-display/card";
-
-<Card title="Default size card" style={{ width: 300 }}>
-  <p>Card content</p>
-  <p>Card content</p>
-</Card>
-
-<Card title="Small size card" size="small">
-  <p>Card content</p>
-  <p>Card content</p>
-  <p>Card content</p>
-</Card>
-```
+Um cartão básico contendo um título e conteúdo. Suportando dois tamanhos diferentes `default` e `small`.
 
 <Playground>
   <div>
@@ -51,6 +40,8 @@ import Card from "@alboom/boom-components/data-display/card";
 
 ### Sem borda
 
+Cartão sem a borda lateral, pode ser usado em fundos em que a borda não faz contraste.
+
 <Playground>
   <Card title="Card title" bordered={false}>
     <p>Card content</p>
@@ -58,12 +49,35 @@ import Card from "@alboom/boom-components/data-display/card";
   </Card>
 </Playground>
 
-### Hover
+### Hoverable
+
+Cartão com sentença de sopreposição, usado para quando o cartão possa ser usado.
 
 <Playground>
   <Card title="Card title" hoverable>
     <p>Card content</p>
     <p>Card content</p>
+  </Card>
+</Playground>
+
+### Cover
+
+É possível adicionar `node` usando a prop "cover", atribuindo mais flexibilidade ao conteúdo.
+
+<Playground>
+  <Card
+    style={{ width: 240 }}
+    cover={
+      <img
+        alt="image example"
+        src="https://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?cs=srgb&dl=pexels-lisa-1252983.jpg&fm=jpg"
+      />
+    }
+    title="Card with cover title"
+    size="small"
+    hoverable
+  >
+    <p> Card Content </p>
   </Card>
 </Playground>
 
