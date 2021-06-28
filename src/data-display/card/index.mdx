@@ -13,7 +13,7 @@ Uma área de conteúdo retangular simples.
 
 ## Quando utilizar
 
-- Conteúdo que possa consistir em vários elementos de diversos tipos e tamanhos.
+- Quando o conteúdo possa consistir em vários elementos de diversos tipos e tamanhos.
 
 ## Exemplos
 
@@ -38,20 +38,37 @@ Um cartão básico contendo um título e conteúdo. Suportando dois tamanhos dif
 
 </Playground>
 
-### Sem borda
+### Bordered
 
-Cartão sem a borda lateral, pode ser usado em fundos em que a borda não faz contraste.
+É possível criar um cartão sem o cortorno, pode ser usado em fundos em que a borda não faz contraste.
 
-<Playground>
+<Playground
+  style={{
+    backgroundColor: "#eee",
+    margin: "-2em",
+    padding: "2em",
+    width: "auto"
+  }}
+>
   <Card title="Card title" bordered={false}>
     <p>Card content</p>
     <p>Card content</p>
   </Card>
 </Playground>
 
+### Simple card
+
+Eventualmente é desejável criar um cartão somente com o conteúdo, sendo possível na seguinte maneira:
+
+<Playground>
+  <Card>
+    <p>Card content</p>
+  </Card>
+</Playground>
+
 ### Hoverable
 
-Cartão com sentença de sopreposição, usado para quando o cartão possa ser usado.
+Cartão com sentença de sopreposição. Usado para quando o cartão possa ser utilizado.
 
 <Playground>
   <Card title="Card title" hoverable>
