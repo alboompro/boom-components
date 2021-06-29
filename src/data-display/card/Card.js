@@ -1,8 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CardStyle, HeadStyle, BodyStyle } from "./styles";
 
-const Card = ({ children, title, style, cover, extra, ...props }) => {
+import {
+  CardStyle,
+  HeadStyle,
+  BodyStyle,
+  TitleStyle,
+  ExtraStyle,
+  ActionStyle
+} from "./styles";
+
+const Card = ({ children, title, style, cover, extra, actions, ...props }) => {
   const StyleProps = {
     bordered: props.bordered,
     hoverable: props.hoverable,
@@ -22,27 +30,38 @@ const Card = ({ children, title, style, cover, extra, ...props }) => {
   if (title || extra) {
     head = (
       <HeadStyle {...HeadProps}>
-        {title && <h2>{title}</h2>}
-        {extra ? extra : null}
+        {title && <TitleStyle {...HeadProps}>{title}</TitleStyle>}
+        {extra && <ExtraStyle {...HeadProps}>{extra}</ExtraStyle>}
       </HeadStyle>
     );
   }
 
   const coverDOM = cover ? { cover } : null;
 
-  const body = (
-    <BodyStyle {...BodyProps}>
-      {cover ? <h2>{title}</h2> : ''}
-      {children}
-    </BodyStyle>
-  );
+  const body = <BodyStyle {...BodyProps}>{children}</BodyStyle>;
 
-  // const actiomDOM =
+  let getAction = actions => {
+    const actionList = actions.map((action, index) => (
+      <li style={{ width: `${100 / actions.length}%` }} key={index}>
+        <span>{action}</span>
+      </li>
+    ));
+    return actionList;
+  };
+
+  const actionDOM =
+    actions && actions.length ? (
+      <ActionStyle>{getAction(actions)}</ActionStyle>
+    ) : null;
+
+  // const actionDOM =
 
   return (
     <CardStyle {...StyleProps} style={{ ...style }}>
-      {cover ? cover : head}
+      {head}
+      {cover ? cover : ""}
       {body}
+      {actionDOM}
     </CardStyle>
   );
 };
