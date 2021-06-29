@@ -6,6 +6,9 @@ menu: Data Display
 import { Playground, Props } from "docz";
 
 import Card from "./Card";
+import Meta from "./Meta.js";
+import Tabs from "../tabs/Tabs.js";
+import Button from "../../general/button/Button.js";
 
 # Card
 
@@ -38,13 +41,13 @@ Um cartão básico contendo um título e conteúdo. Suportando dois tamanhos dif
 
 </Playground>
 
-### Bordered
+### Cartão sem `Bordered`
 
 É possível criar um cartão sem o cortorno, pode ser usado em fundos em que a borda não faz contraste.
 
 <Playground
   style={{
-    backgroundColor: "#eee",
+    backgroundColor: "#ddd",
     margin: "-2em",
     padding: "2em",
     width: "auto"
@@ -56,17 +59,24 @@ Um cartão básico contendo um título e conteúdo. Suportando dois tamanhos dif
   </Card>
 </Playground>
 
-### Simple card
+### Cartão simples
 
 Eventualmente é desejável criar um cartão somente com o conteúdo, sendo possível na seguinte maneira:
 
-<Playground>
+<Playground
+  style={{
+    backgroundColor: "#ddd",
+    margin: "-2em",
+    padding: "2em",
+    width: "auto"
+  }}
+>
   <Card>
     <p>Card content</p>
   </Card>
 </Playground>
 
-### Hoverable
+### Cartão `Hoverable`
 
 Cartão com sentença de sopreposição. Usado para quando o cartão possa ser utilizado.
 
@@ -77,9 +87,9 @@ Cartão com sentença de sopreposição. Usado para quando o cartão possa ser u
   </Card>
 </Playground>
 
-### Cover
+### Cartão com `Cover`
 
-É possível adicionar `node` usando a prop "cover", atribuindo mais flexibilidade ao conteúdo.
+É possível adicionar um ou mais `node` usando a prop "cover".
 
 <Playground>
   <Card
@@ -90,11 +100,58 @@ Cartão com sentença de sopreposição. Usado para quando o cartão possa ser u
         src="https://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?cs=srgb&dl=pexels-lisa-1252983.jpg&fm=jpg"
       />
     }
-    title="Card with cover title"
+    title="Card title with cover"
     size="small"
     hoverable
   >
     <p> Card Content </p>
+  </Card>
+</Playground>
+
+### Cartão usando tabs
+
+Mais conteúdo pode ser alocado usando `tabs`
+
+### Mais configurações ao conteúdo
+
+Você pode usar `Card.Meta` suportando um conteúdo ainda mais fléxivel. Como o abaixo, utilizando `title`, `description` e `avatar`:
+
+<Playground>
+  <Card
+    title="This is small card title"
+    style={{ width: 300 }}
+    cover={
+      <img
+        alt="example"
+        src="https://images.unsplash.com/photo-1599147983579-b645239a5bf5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"
+      />
+    }
+    size="small"
+    actions={[
+      <Button type="primary">OK</Button>,
+      <span>Cancelar</span>
+    ]}
+  >
+    <Meta description="This is the meta description" />
+  </Card>
+
+  <Card
+    style={{ width: 300 }}
+    cover={
+      <img
+        alt="example"
+        src="https://images.unsplash.com/photo-1505238680356-667803448bb6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80"
+      />
+    }
+    actions={[
+      <Button type="main" loading loadingColor={'#333'}/>
+    ]}
+  >
+    <Meta
+      avatar={<img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZmlsZSUyMHBpY3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" />}
+      title="This is Meta.title"
+      description="This is the description"
+    />
   </Card>
 </Playground>
 
@@ -103,3 +160,7 @@ Cartão com sentença de sopreposição. Usado para quando o cartão possa ser u
 ### Card
 
 <Props of={Card} />
+
+#### Card.Meta
+
+<Props of={Meta} />
