@@ -43,7 +43,7 @@ Um cartão básico contendo um título e conteúdo. Suportando dois tamanhos dif
 
 ### Cartão sem `Bordered`
 
-É possível criar um cartão sem o cortorno, pode ser usado em fundos em que a borda não faz contraste.
+É possível definir e criar um cartão sem ou com cortorno, característica a ser avaliada em fundos em que a borda não faz contraste.
 
 <Playground
   style={{
@@ -61,7 +61,7 @@ Um cartão básico contendo um título e conteúdo. Suportando dois tamanhos dif
 
 ### Cartão simples
 
-Eventualmente é desejável criar um cartão somente com o conteúdo, sendo possível na seguinte maneira:
+Eventualmente é desejável criar um cartão somente com o conteúdo sendo possível na seguinte maneira:
 
 <Playground
   style={{
@@ -78,7 +78,8 @@ Eventualmente é desejável criar um cartão somente com o conteúdo, sendo poss
 
 ### Cartão `Hoverable`
 
-Cartão com sentença de sopreposição. Usado para quando o cartão possa ser utilizado.
+Cartão com sentença de sopreposição.  
+Usado para quando o cartão possa ser utilizado(por exemplo, acessar um link).
 
 <Playground>
   <Card title="Card title" hoverable>
@@ -89,7 +90,7 @@ Cartão com sentença de sopreposição. Usado para quando o cartão possa ser u
 
 ### Cartão com `Cover`
 
-É possível adicionar um ou mais `node` usando a prop "cover".
+É possível adicionar um ou mais `node` usando `cover`.
 
 <Playground>
   <Card
@@ -112,9 +113,40 @@ Cartão com sentença de sopreposição. Usado para quando o cartão possa ser u
 
 Mais conteúdo pode ser alocado usando `tabs`
 
+<Playground>
+  <Card
+    tabs={[
+      {
+        label: "tab 1",
+        component: (
+          <div>
+            <h2>Title in Tab</h2>
+            <p>
+              Irure adipisicing laboris deserunt do non in nisi quis culpa
+              excepteur eiusmod nisi reprehenderit.
+            </p>
+          </div>
+        )
+      },
+      {
+        label: "tab 2",
+        component: (
+          <img
+            alt="example"
+            src="https://images.unsplash.com/photo-1599147983579-b645239a5bf5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"
+            style={{ width: "100%" }}
+          />
+        )
+      }
+    ]}
+    actions={[<Button type="primary">OK</Button>, <span>Cancelar</span>]}
+  />
+</Playground>
+
 ### Mais configurações ao conteúdo
 
-Você pode usar `Card.Meta` suportando um conteúdo ainda mais fléxivel. Como o abaixo, utilizando `title`, `description` e `avatar`:
+Ademais você ainda pode usar `Card.Meta` suportando um conteúdo ainda mais flexível.  
+Como os exemplos abaixo, utilizando `title`, `description`, `avatar` e `actions` com botões:
 
 <Playground>
   <Card
@@ -144,7 +176,7 @@ Você pode usar `Card.Meta` suportando um conteúdo ainda mais fléxivel. Como o
       />
     }
     actions={[
-      <Button type="main" loading loadingColor={'#333'}/>
+      <Button type="main" loading loadingColor={'#333'}>Waiting</Button>
     ]}
   >
     <Meta
