@@ -6,10 +6,77 @@ menu: Feedback
 import { Playground, Props } from 'docz'
 
 import Spin from './Spin'
+import Input, { DefaultInput } from '../../data-entry/input/Input'
+import Icon from '../../general/icon/Icon'
 
 # Spin
 
-Spin component.
+## Exemplos
+
+### Uso básico
+
+<Playground>
+  <Spin />
+</Playground>
+
+### Texto Personalizado
+
+<Playground>
+  <Spin text="Carregando..." />
+</Playground>
+
+### Tamanhos
+
+<Playground>
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+    <Spin size="small" />
+    <Spin />
+    <Spin size="large" />
+  </div>
+</Playground>
+
+### Spinner Personalizado
+
+<Playground>
+  <Spin 
+    spinner={(
+      <Icon 
+        kind="bold" 
+        group="interface-essential" 
+        category="loading" 
+        file="loading.svg" 
+        size="64" 
+        color="#000000" 
+      />
+    )}
+  />
+</Playground>
+
+### Pai de outros componentes
+
+<Playground>
+  <Spin>
+    <div>
+      <DefaultInput
+        name="fieldName"
+        label="Basic input"
+        error={false}
+        value={"teste"}
+        onChange={(e,instance) => {
+          instance.setState({ value: e.target.value });
+        }}
+      />
+      <DefaultInput
+        name="fieldName"
+        label="Basic input"
+        error={false}
+        onChange={(e,instance) => {
+          instance.setState({ value: e.target.value });
+        }}
+      />
+    </div>
+  </Spin>
+</Playground>
 
 ## API
 
