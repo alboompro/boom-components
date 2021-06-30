@@ -10,7 +10,7 @@ const Meta = ({ title, description, avatar, ...props }) => {
         margin: "-4px 0"
       }}
     >
-      <div style={{ float: "left", "padding-right": "16px" }}>
+      <div style={{ float: "left", paddingRight: "16px" }}>
         {avatar ? <AvatarStyle>{avatar}</AvatarStyle> : null}
       </div>
       <DetailStyle style={{ overflow: "hidden" }}>

@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-const textColor = "#666";
 const borderStyle = "1px solid #d9d9d9";
 
 export const CardStyle = styled.div`
@@ -27,7 +26,7 @@ export const CardStyle = styled.div`
         `
       : ""}
   img {
-    width: inherit;
+    width: 100%;
   }
 `;
 

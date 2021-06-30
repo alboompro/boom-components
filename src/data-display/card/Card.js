@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Tabs from "../tabs/Tabs";
 
 import {
   CardStyle,
@@ -9,8 +10,18 @@ import {
   ExtraStyle,
   ActionStyle
 } from "./styles";
+import { Props } from "docz";
 
-const Card = ({ children, title, style, cover, extra, actions, ...props }) => {
+const Card = ({
+  children,
+  title,
+  style,
+  cover,
+  extra,
+  actions,
+  tabs,
+  ...props
+}) => {
   const StyleProps = {
     bordered: props.bordered,
     hoverable: props.hoverable,
@@ -26,20 +37,6 @@ const Card = ({ children, title, style, cover, extra, actions, ...props }) => {
     cover: cover
   };
 
-  let head = React.ReactNode; // Se TS seria head: React.ReactNode (anotação de tipo)
-  if (title || extra) {
-    head = (
-      <HeadStyle {...HeadProps}>
-        {title && <TitleStyle {...HeadProps}>{title}</TitleStyle>}
-        {extra && <ExtraStyle {...HeadProps}>{extra}</ExtraStyle>}
-      </HeadStyle>
-    );
-  }
-
-  const coverDOM = cover ? { cover } : null;
-
-  const body = <BodyStyle {...BodyProps}>{children}</BodyStyle>;
-
   let getAction = actions => {
     const actionList = actions.map((action, index) => (
       <li style={{ width: `${100 / actions.length}%` }} key={index}>
@@ -49,19 +46,24 @@ const Card = ({ children, title, style, cover, extra, actions, ...props }) => {
     return actionList;
   };
 
-  const actionDOM =
-    actions && actions.length ? (
-      <ActionStyle>{getAction(actions)}</ActionStyle>
-    ) : null;
-
-  // const actionDOM =
-
   return (
     <CardStyle {...StyleProps} style={{ ...style }}>
-      {head}
-      {cover ? cover : ""}
-      {body}
-      {actionDOM}
+      {title || extra || tabs ? (
+        <div>
+          <div>{tabs && tabs.length ? <Tabs tabs={tabs} /> : null}</div>
+          {title || extra ? (
+            <HeadStyle {...HeadProps}>
+              {title && <TitleStyle {...HeadProps}>{title}</TitleStyle>}
+              {extra && <ExtraStyle {...HeadProps}>{extra}</ExtraStyle>}
+            </HeadStyle>
+          ) : null}
+        </div>
+      ) : null}
+      {cover}
+      {children && <BodyStyle {...BodyProps}>{children}</BodyStyle>}
+      {actions && actions.length ? (
+        <ActionStyle>{getAction(actions)}</ActionStyle>
+      ) : null}
     </CardStyle>
   );
 };
@@ -82,7 +84,14 @@ Card.propTypes = {
   /** card title */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** content to render in the top-right corner of the card */
-  extra: PropTypes.node
+  extra: PropTypes.node,
+  /** props tab */
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      component: PropTypes.element.isRequired
+    })
+  )
 };
 
 Card.defaultProps = {
@@ -93,6 +102,7 @@ Card.defaultProps = {
   size: "default",
   cover: null,
   extra: null,
+  tabs: null,
   title: null
 };
 
