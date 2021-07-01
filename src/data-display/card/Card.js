@@ -50,7 +50,11 @@ const Card = ({
     <CardStyle {...StyleProps} style={{ ...style }}>
       {title || extra || tabs ? (
         <div>
-          <div>{tabs && tabs.length ? <Tabs tabs={tabs} /> : null}</div>
+          {tabs && tabs.length ? (
+            <div>
+              <Tabs tabs={tabs} />
+            </div>
+          ) : null}
           {title || extra ? (
             <HeadStyle {...HeadProps}>
               {title && <TitleStyle {...HeadProps}>{title}</TitleStyle>}
