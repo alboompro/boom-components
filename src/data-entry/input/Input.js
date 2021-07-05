@@ -134,7 +134,7 @@ export class DefaultInput extends Component {
               <Field
                 name={name}
                 render={({ field }) => {
-                  return <InputDefault {...inputProps} {...field} />;
+                  return this.getDefaultInput({ ...inputProps, ...field });
                 }}
               />
             ) : (
@@ -234,7 +234,7 @@ DefaultInput.propTypes = {
   maxLength: PropTypes.number,
   /** show counter if maxLength is setted */
   showCounter: PropTypes.bool,
-  /** set input as textarea, does not work with formik  */
+  /** set input as textarea  */
   textAreaMode: PropTypes.bool
 };
 

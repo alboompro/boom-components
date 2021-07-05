@@ -317,7 +317,7 @@ Em caso de erro, o sufixo ficará abaixo da mensagem de erro:
 
 ### Input como textarea
 
-Se for necessário, podemos trocar nosso input por um textarea, passando a flag `textAreaMode={true}`. Este modo não funciona com o formik
+Se for necessário, podemos trocar nosso input por um textarea, passando a flag `textAreaMode={true}`
 
 ```jsx
 <DefaultInput
@@ -338,6 +338,35 @@ Se for necessário, podemos trocar nosso input por um textarea, passando a flag 
   />
 </Playground>
 
+Também pode ser implementado com o Formik
+
+<Playground>
+  <Formik
+    initialValues={{ "field1": "", "field2": "" }}
+    onSubmit={(values) => {
+      console.log(values)
+    }}
+  >
+    {({handleChange, setFieldValue, values}) => (
+      <Form>
+        <Input
+          name="field1"
+          onChange={handleChange}
+          label="Esse é um input comum"
+          clearable
+        />
+        <Input
+          name="field2"
+          onChange={handleChange}
+          label="Esse é um textarea"
+          textAreaMode={true}
+          clearable
+        />
+        <Button htmlType="submit" type={"primary"} style={{ marginTop: 10, fontSize: 12 }}>Submit</Button>
+      </Form>
+    )} 
+  </Formik>
+</Playground>
 
 ## API
 
