@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Props - Snapshot could create a card with Meta 1`] = `
+<styled.div
+  bordered={true}
+  hoverable={false}
+  loading={false}
+  size="small"
+  style={
+    Object {
+      "width": 300,
+    }
+  }
+>
+  <div>
+    <styled.div
+      size="small"
+    >
+      <styled.div
+        size="small"
+      >
+        Card Test with Meta
+      </styled.div>
+    </styled.div>
+  </div>
+  <img
+    alt="image example"
+    src="htps://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?cs=srgb&dl=pexels-lisa-1252983.jpg&fm=jpg"
+  />
+  <styled.div
+    cover={
+      <img
+        alt="image example"
+        src="htps://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?cs=srgb&dl=pexels-lisa-1252983.jpg&fm=jpg"
+      />
+    }
+    size="small"
+  >
+    <Meta
+      avatar={
+        <img
+          alt="image example"
+          src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZmlsZSUyMHBpY3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        />
+      }
+      description="Test meta-description"
+      title="Test meta-title"
+    />
+  </styled.div>
+  <styled.ul>
+    <li
+      key="0"
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <span>
+        <Button
+          className={null}
+          disabled={false}
+          href={null}
+          htmlType="button"
+          icon={null}
+          iconStyle={Object {}}
+          loading={true}
+          loadingColor="#333"
+          loadingSize={18}
+          onClick={[Function]}
+          outlined={false}
+          rounded={false}
+          size="default"
+          stretched={false}
+          style={Object {}}
+          target={null}
+          textStyle={Object {}}
+          type="main"
+        >
+          Waiting
+        </Button>
+      </span>
+    </li>
+  </styled.ul>
+</styled.div>
+`;
+
+exports[`Props - Snapshot could create a card with cover 1`] = `
+<styled.div
+  bordered={true}
+  hoverable={true}
+  loading={false}
+  size="small"
+  style={
+    Object {
+      "width": 240,
+    }
+  }
+>
+  <div>
+    <styled.div
+      size="small"
+    >
+      <styled.div
+        size="small"
+      >
+        Card Test with Cover
+      </styled.div>
+    </styled.div>
+  </div>
+  <img
+    alt="image example"
+    src="htps://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?cs=srgb&dl=pexels-lisa-1252983.jpg&fm=jpg"
+  />
+  <styled.div
+    cover={
+      <img
+        alt="image example"
+        src="htps://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?cs=srgb&dl=pexels-lisa-1252983.jpg&fm=jpg"
+      />
+    }
+    size="small"
+  >
+    <p>
+      child component text
+    </p>
+  </styled.div>
+</styled.div>
+`;
