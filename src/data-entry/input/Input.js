@@ -11,7 +11,13 @@ import {
   ErrorLabel,
   InputIcon,
   ClearebleIcon,
-  InputDefault
+  InputDefault,
+  Description,
+  InputSuffix,
+  InputSuffixLabel,
+  InfoSuffixLabel,
+  InputSuffixCounter,
+  InputTextArea
 } from "./styles";
 
 export class DefaultInput extends Component {
@@ -59,6 +65,14 @@ export class DefaultInput extends Component {
     }
   };
 
+  getDefaultInput = inputProps => {
+    const { textAreaMode } = this.props;
+
+    if (textAreaMode) return <InputTextArea {...inputProps} />;
+
+    return <InputDefault {...inputProps} />;
+  };
+
   render() {
     const {
       className,
@@ -78,7 +92,11 @@ export class DefaultInput extends Component {
       suffix,
       type,
       value,
-      formik
+      formik,
+      description,
+      infoSuffix,
+      maxLength,
+      showCounter
     } = this.props;
 
     const { value: stateValue } = this.state;
@@ -96,11 +114,14 @@ export class DefaultInput extends Component {
       error
     };
 
+    if (maxLength) inputProps.value = inputProps.value.substring(0, maxLength);
+
     if (onBlur) inputProps.onBlur = onBlur;
 
     return (
       <DefaultInputContainer error={error} className={className}>
         {label && <Label labelStyle={labelStyle}>{label}</Label>}
+        {description && <Description>{description}</Description>}
         <InputContent error={error}>
           {prefix && <InputIcon prefix={prefix}>{prefix}</InputIcon>}
           {suffix && (
@@ -117,7 +138,7 @@ export class DefaultInput extends Component {
                 }}
               />
             ) : (
-              <InputDefault {...inputProps} />
+              this.getDefaultInput(inputProps)
             )}
             {inputProps.value && clearable && (
               <ClearebleIcon
@@ -136,7 +157,19 @@ export class DefaultInput extends Component {
             )}
           </InputField>
         </InputContent>
-        {error && error.message && <ErrorLabel>{error.message}</ErrorLabel>}
+        <InputSuffix>
+          <InputSuffixLabel>
+            {error && error.message && <ErrorLabel>{error.message}</ErrorLabel>}
+            {infoSuffix && infoSuffix && (
+              <InfoSuffixLabel>{infoSuffix}</InfoSuffixLabel>
+            )}
+          </InputSuffixLabel>
+          {maxLength && showCounter && (
+            <InputSuffixCounter>
+              {inputProps.value.length}/{maxLength}
+            </InputSuffixCounter>
+          )}
+        </InputSuffix>
       </DefaultInputContainer>
     );
   }
@@ -192,7 +225,17 @@ DefaultInput.propTypes = {
     "week"
   ]),
   /** input content value */
-  value: PropTypes.string
+  value: PropTypes.string,
+  /** input description */
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  /** info suffix, after input */
+  infoSuffix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  /** limit input length */
+  maxLength: PropTypes.number,
+  /** show counter if maxLength is setted */
+  showCounter: PropTypes.bool,
+  /** set input as textarea, does not work with formik  */
+  textAreaMode: PropTypes.bool
 };
 
 DefaultInput.defaultProps = {
@@ -212,7 +255,12 @@ DefaultInput.defaultProps = {
   readOnly: false,
   suffix: null,
   type: "text",
-  value: null
+  value: "",
+  description: null,
+  infoSuffix: null,
+  maxLength: null,
+  showCounter: false,
+  textAreaMode: false
 };
 
 export default connect(DefaultInput);

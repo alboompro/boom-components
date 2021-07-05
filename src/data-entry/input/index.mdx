@@ -202,7 +202,7 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
   </Formik>
 </Playground>
 
-### Imput style customizado
+### Input style customizado
 
 <Playground>
   <Formik
@@ -227,6 +227,117 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
   )} 
   </Formik>
 </Playground>
+
+### Input com descrição
+
+Podemos passar tanto uma string quanto um elemento Node para nossa descrição. Basta utilizarmos a propriedade `description`
+
+```jsx
+<DefaultInput
+  label="Input com descrição"
+  placeholder="Esse input tem uma descrição node"
+  description={
+    <div>Essa é uma descrição com um Node. <a href="#input-com-descrição">Saiba mais.</a></div>
+  }
+  infoSuffix="Podemos colocar alguma informação aqui, como um preview do input, ou um contador personalizado"
+/>
+```
+
+<Playground>
+  <DefaultInput
+    label="Input com descrição"
+    placeholder="Esse input tem uma descrição"
+    description={<div>Essa é uma descrição com um Node. <a href="#input-com-descrição">Saiba mais.</a></div>}
+    onChange={(e,instance) => {
+      instance.setState({ value: e.target.value });
+    }}
+  />
+</Playground>
+
+### Input com limite de caracteres
+
+Podemos definir um limite máximo de caracteres para o nosso input, passando as props `maxLength` e `showCounter={true}`
+
+```jsx
+<DefaultInput
+  label="Input com limite de caracteres"
+  placeholder="Esse input tem limite máximo de caracteres"
+  showCounter={true}
+  maxLength={25}
+/>
+```
+
+<Playground>
+  <DefaultInput
+    label="Input com limite de caracteres"
+    placeholder="Esse input tem limite máximo de caracteres"
+    showCounter={true}
+    maxLength={25}
+    onChange={(e,instance) => {
+      instance.setState({ value: e.target.value });
+    }}
+  />
+</Playground>
+
+### Input com informação em seu sufixo
+
+Caso precisemos definir um sufixo para nosso input, podemos passá-lo utilizando a propriedade `infoSuffix`
+
+```jsx
+<DefaultInput
+  label="Input com sufixo"
+  placeholder="Esse input tem um sufixo"
+  infoSuffix="Podemos definir um sufixo dessa forma."
+/>
+```
+
+<Playground>
+  <DefaultInput
+    label="Input com sufixo"
+    placeholder="Esse input tem um sufixo"
+    infoSuffix="Podemos definir um sufixo dessa forma."
+    onChange={(e,instance) => {
+      instance.setState({ value: e.target.value });
+    }}
+  />
+</Playground>
+
+Em caso de erro, o sufixo ficará abaixo da mensagem de erro:
+<Playground>
+  <DefaultInput
+    label="Input com sufixo"
+    placeholder="Esse input tem um sufixo"
+    infoSuffix="Podemos definir um sufixo dessa forma."
+    error={{message: "Nesse caso, temos um erro"}}
+    onChange={(e,instance) => {
+      instance.setState({ value: e.target.value });
+    }}
+  />
+</Playground>
+
+### Input como textarea
+
+Se for necessário, podemos trocar nosso input por um textarea, passando a flag `textAreaMode={true}`. Este modo não funciona com o formik
+
+```jsx
+<DefaultInput
+  label="Input como text area"
+  placeholder="Esse input é um textarea"
+  textAreaMode={true}
+/>
+```
+
+<Playground>
+  <DefaultInput
+    label="Input como text area"
+    placeholder="Esse input é um textarea"
+    textAreaMode={true}
+    onChange={(e,instance) => {
+      instance.setState({ value: e.target.value });
+    }}
+  />
+</Playground>
+
 
 ## API
 

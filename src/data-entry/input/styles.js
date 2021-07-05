@@ -14,7 +14,16 @@ const inputSettings = update("input", {
   inputFontSize: "14px",
   inputErrorSize: "11px",
   inputPaddingError: "17px",
-  errorColor: "#FF5252"
+  errorColor: "#FF5252",
+  errorMinHeight: "17px",
+  errorPadding: "5px 0 0",
+  descriptionSize: "12px",
+  descriptionMargin: "0 0 5px",
+  infoSuffixPadding: "5px 0 0",
+  infoSuffixSize: "11px",
+  counterColor: "#858585",
+  counterSize: "11px",
+  counterPadding: "5px 0 0"
 });
 
 export const DefaultInputContainer = styled.div`
@@ -72,6 +81,35 @@ export const InputDefault = styled.input`
   ${props => props.inputStyle}
 `;
 
+/**
+ * Only works in styled-components v4+
+ */
+// export const InputTextArea = styled(InputDefault).attrs({ as: "textarea" })`
+//   resize: none;
+// `;
+
+export const InputTextArea = styled.textarea`
+  /// Equals to InputDefault
+  width: 100%;
+  padding: ${inputSettings.inputPadding};
+  color: ${inputSettings.inputColor};
+  font-size: ${inputSettings.inputFontSize};
+  border: none;
+  background-color: #fff;
+  border: ${inputSettings.inputBorder};
+  border-radius: ${inputSettings.inputBorderRadius};
+  &:focus{
+    outline: none;
+  }
+  ${props =>
+    props.error ? `border-color: ${inputSettings.errorColor};` : null}
+  ${props => (props.disabled ? "opacity: 0.8;" : null)}
+  ${props => props.inputStyle}
+
+  /// Own props
+  resize: none;
+`;
+
 export const InputField = styled.div`
   display: flex;
   align-items: center;
@@ -79,7 +117,8 @@ export const InputField = styled.div`
 `;
 
 export const ErrorLabel = styled.div`
-  min-height: ${inputSettings.inputPaddingError};
+  min-height: ${inputSettings.errorMinHeight};
+  padding: ${inputSettings.errorPadding};
   color: ${inputSettings.errorColor};
   font-size: ${inputSettings.inputErrorSize};
 `;
@@ -95,4 +134,31 @@ export const ClearebleIcon = styled.span`
   user-select: none;
   ${props =>
     props.clearablePosition ? `right: ${props.clearablePosition};` : null}
+`;
+
+export const Description = styled.div`
+  color: #7d7d7d;
+  font-size: ${inputSettings.descriptionSize};
+  margin: ${inputSettings.descriptionMargin};
+`;
+
+export const InputSuffix = styled.div`
+  display: flex;
+`;
+
+export const InputSuffixLabel = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+export const InfoSuffixLabel = styled.div`
+  padding: ${inputSettings.infoSuffixPadding};
+  font-size: ${inputSettings.infoSuffixSize};
+`;
+
+export const InputSuffixCounter = styled.div`
+  font-size: ${inputSettings.counterSize};
+  color: ${inputSettings.counterColor};
+  padding: ${inputSettings.counterPadding};
 `;
