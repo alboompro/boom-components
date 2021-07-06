@@ -1,35 +1,34 @@
 ---
-name: Input
+name: Textarea
 menu: Data Entry
 ---
 
 import { Playground, Props } from 'docz'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 
-import Input, { DefaultInput } from './Input'
+import Textarea, { DefaultTextArea } from './Textarea'
 import { DefaultDataEntryText } from "../../shared/data-entry-text";
 import Icon from '../../general/icon/Icon'
 import Button from '../../general/button/Button'
 
-# Input
+# Textarea
 
-Inputs são campos usados para entrada de dados em forma de texto. Inputs geralmente são usados em conjunto dentro de um Form, e podem conter uma label, o campo input e um retorno de erro.
-
-## Quando utilizar
-* Construir Forms
+Textareas são campos usados para entrada de dados em forma de texto, aceitando multiplas linhas.
 
 ## Dependências
-O DefaultInput não possui dependências.
-O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
+O DefaultTextArea não possui dependências.<br/>
+O Textarea possui o [Formik](https://github.com/jaredpalmer/formik) como dependência.
 
 ## Exemplos
 
-### exemplo de input simples
+De forma geral, o Textarea aceita todos os parâmetros vistos na [sessão do Textarea](./data-entry-textarea-index), com excessão de propriedades que são exclusivas do textarea, como a `type`.
+
+### exemplo de textarea simples
 ```jsx
-<DefaultInput
+<DefaultTextArea
   name="simpleInput"
-  value="simple input default value"
-  label="Simple input example"
+  value="simple textarea default value"
+  label="Simple textarea example"
   onChange={(e,instance) => {
     console.log(e.target.value);
     instance.setState({ value: e.target.value });
@@ -37,30 +36,30 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
 />
 ```
 
-### exemplo de input com formik implementado
+### exemplo de textarea com formik implementado
 ```jsx
-<Input
+<Textarea
   name="formikInputField"
-  value="simple input using formik"
-  label="Simple input formik example"
+  value="simple textarea using formik"
+  label="Simple textarea formik example"
 />
 ```
 
 ### Uso básico
 <Playground>
   <div>
-  <DefaultInput
+  <DefaultTextArea
     name="fieldName"
-    label="Basic input example"
+    label="Basic textarea example"
     error={false}
     value={"teste"}
     onChange={(e,instance) => {
       instance.setState({ value: e.target.value });
     }}
   />
-  <DefaultInput
+  <DefaultTextArea
     name="fieldName"
-    label="Basic input example"
+    label="Basic textarea example"
     error={false}
     onChange={(e,instance) => {
       instance.setState({ value: e.target.value });
@@ -74,22 +73,22 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
   >
   {({handleChange, setFieldValue, values}) => (
     <Form>
-      <Input
+      <Textarea
         name="field1"
         onChange={handleChange}
-        label="Basic usage input field"
+        label="Basic usage textarea field"
         clearable
       />
-       <Input
+       <Textarea
         name="field2"
         onChange={handleChange}
-        label="Basic usage input field disabled"
+        label="Basic usage textarea field disabled"
         disabled
       />
-      <Input
+      <Textarea
         name="field3"
         onChange={handleChange}
-        label="Basic usage input field with readonly"
+        label="Basic usage textarea field with readonly"
         readonly
       />
       <Button htmlType="submit" type={"primary"} style={{ marginTop: 10, fontSize: 12 }}>Submit</Button>
@@ -110,10 +109,10 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
   >
   {({handleChange, setFieldValue, values}) => (
     <Form> 
-      <Input 
+      <Textarea 
         name="field1"
         value={values.field1}
-        label="Input using Prefix" 
+        label="Textarea using Prefix" 
         onChange={handleChange}
         inputStyle={{"paddingLeft": 25}}
         prefix={<Icon
@@ -125,10 +124,10 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
           color="45AE70"
         />} 
       />
-      <Input 
+      <Textarea 
         name="field2"
         value={values.field2}
-        label="Input using Suffix" 
+        label="Textarea using Suffix" 
         onChange={handleChange}
         inputStyle={{"paddingRight": 25}}
         suffix={<Icon
@@ -140,10 +139,10 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
           color="45AE70"
         />} 
       />
-      <Input 
+      <Textarea 
         name="field3"
         value={values.field3}
-        label="Input using Suffix and clearable" 
+        label="Textarea using Suffix and clearable" 
         onChange={handleChange}
         inputStyle={{"paddingRight": 50}}
         clearablePosition={"30px"}
@@ -157,10 +156,10 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
           color="45AE70"
         />} 
       />
-      <Input 
+      <Textarea 
         name="field4"
         value={values.field4}
-        label="Input using clearable" 
+        label="Textarea using clearable" 
         onChange={handleChange}
         inputStyle={{"paddingRight": 25}}
         clearablePosition={"7px"}
@@ -183,17 +182,17 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
   >
   {({handleChange, setFieldValue, values}) => (
     <Form> 
-      <Input 
+      <Textarea 
         name="field1"
         value={values.field1}
-        label="Input using error with message" 
+        label="Textarea using error with message" 
         onChange={handleChange}
         error={{message: "Message error example"}}
       />
-      <Input 
+      <Textarea 
         name="field2"
         value={values.field2}
-        label="Input using default error"
+        label="Textarea using default error"
         onChange={handleChange}
         error
       />
@@ -203,7 +202,7 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
   </Formik>
 </Playground>
 
-### Input style customizado
+### Textarea style customizado
 
 <Playground>
   <Formik
@@ -214,10 +213,10 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
   >
   {({handleChange, setFieldValue, values}) => (
     <Form> 
-      <Input 
+      <Textarea 
         name="field1"
         value={values.field1}
-        label="Input with custom style"
+        label="Textarea with custom style"
         inputStyle={{borderColor: "#45ae70", fontSize: 20, color: "#FF5252"}} 
         labelStyle={{fontSize: 10, color: "#45ae70"}}
         onChange={handleChange}
@@ -229,49 +228,49 @@ O Input tem o [Formik](https://github.com/jaredpalmer/formik) como dependência.
   </Formik>
 </Playground>
 
-### Input com descrição
+### Textarea com descrição
 
 Podemos passar tanto uma string quanto um elemento Node para nossa descrição. Basta utilizarmos a propriedade `description`
 
 ```jsx
-<DefaultInput
-  label="Input com descrição"
-  placeholder="Esse input tem uma descrição node"
+<DefaultTextArea
+  label="Textarea com descrição"
+  placeholder="Esse textarea tem uma descrição node"
   description={
-    <div>Essa é uma descrição com um Node. <a href="#input-com-descrição">Saiba mais.</a></div>
+    <div>Essa é uma descrição com um Node. <a href="#textarea-com-descrição">Saiba mais.</a></div>
   }
-  infoSuffix="Podemos colocar alguma informação aqui, como um preview do input, ou um contador personalizado"
+  infoSuffix="Podemos colocar alguma informação aqui, como um preview do textarea, ou um contador personalizado"
 />
 ```
 
 <Playground>
-  <DefaultInput
-    label="Input com descrição"
-    placeholder="Esse input tem uma descrição"
-    description={<div>Essa é uma descrição com um Node. <a href="#input-com-descrição">Saiba mais.</a></div>}
+  <DefaultTextArea
+    label="Textarea com descrição"
+    placeholder="Esse textarea tem uma descrição"
+    description={<div>Essa é uma descrição com um Node. <a href="#textarea-com-descrição">Saiba mais.</a></div>}
     onChange={(e,instance) => {
       instance.setState({ value: e.target.value });
     }}
   />
 </Playground>
 
-### Input com limite de caracteres
+### Textarea com limite de caracteres
 
-Podemos definir um limite máximo de caracteres para o nosso input, passando as props `maxLength` e `showCounter={true}`
+Podemos definir um limite máximo de caracteres para o nosso textarea, passando as props `maxLength` e `showCounter={true}`
 
 ```jsx
-<DefaultInput
-  label="Input com limite de caracteres"
-  placeholder="Esse input tem limite máximo de caracteres"
+<DefaultTextArea
+  label="Textarea com limite de caracteres"
+  placeholder="Esse textarea tem limite máximo de caracteres"
   showCounter={true}
   maxLength={25}
 />
 ```
 
 <Playground>
-  <DefaultInput
-    label="Input com limite de caracteres"
-    placeholder="Esse input tem limite máximo de caracteres"
+  <DefaultTextArea
+    label="Textarea com limite de caracteres"
+    placeholder="Esse textarea tem limite máximo de caracteres"
     showCounter={true}
     maxLength={25}
     onChange={(e,instance) => {
@@ -280,22 +279,22 @@ Podemos definir um limite máximo de caracteres para o nosso input, passando as 
   />
 </Playground>
 
-### Input com informação em seu sufixo
+### Textarea com informação em seu sufixo
 
-Caso precisemos definir um sufixo para nosso input, podemos passá-lo utilizando a propriedade `infoSuffix`
+Caso precisemos definir um sufixo para nosso textarea, podemos passá-lo utilizando a propriedade `infoSuffix`
 
 ```jsx
-<DefaultInput
-  label="Input com sufixo"
-  placeholder="Esse input tem um sufixo"
+<DefaultTextArea
+  label="Textarea com sufixo"
+  placeholder="Esse textarea tem um sufixo"
   infoSuffix="Podemos definir um sufixo dessa forma."
 />
 ```
 
 <Playground>
-  <DefaultInput
-    label="Input com sufixo"
-    placeholder="Esse input tem um sufixo"
+  <DefaultTextArea
+    label="Textarea com sufixo"
+    placeholder="Esse textarea tem um sufixo"
     infoSuffix="Podemos definir um sufixo dessa forma."
     onChange={(e,instance) => {
       instance.setState({ value: e.target.value });
@@ -305,9 +304,9 @@ Caso precisemos definir um sufixo para nosso input, podemos passá-lo utilizando
 
 Em caso de erro, o sufixo ficará abaixo da mensagem de erro:
 <Playground>
-  <DefaultInput
-    label="Input com sufixo"
-    placeholder="Esse input tem um sufixo"
+  <DefaultTextArea
+    label="Textarea com sufixo"
+    placeholder="Esse textarea tem um sufixo"
     infoSuffix="Podemos definir um sufixo dessa forma."
     error={{message: "Nesse caso, temos um erro"}}
     onChange={(e,instance) => {
@@ -316,7 +315,57 @@ Em caso de erro, o sufixo ficará abaixo da mensagem de erro:
   />
 </Playground>
 
+### Textarea como textarea
+
+Se for necessário, podemos trocar nosso textarea por um textarea, passando a flag `textAreaMode={true}`
+
+```jsx
+<DefaultTextArea
+  label="Textarea como text area"
+  placeholder="Esse textarea é um textarea"
+/>
+```
+
+<Playground>
+  <DefaultTextArea
+    label="Textarea como text area"
+    placeholder="Esse textarea é um textarea"
+    onChange={(e,instance) => {
+      instance.setState({ value: e.target.value });
+    }}
+  />
+</Playground>
+
+Também pode ser implementado com o Formik
+
+<Playground>
+  <Formik
+    initialValues={{ "field1": "", "field2": "" }}
+    onSubmit={(values) => {
+      console.log(values)
+    }}
+  >
+    {({handleChange, setFieldValue, values}) => (
+      <Form>
+        <Textarea
+          name="field1"
+          onChange={handleChange}
+          label="Esse é um textarea comum"
+          clearable
+        />
+        <DefaultTextArea
+          name="field2"
+          onChange={handleChange}
+          label="Esse é um textarea"
+          clearable
+        />
+        <Button htmlType="submit" type={"primary"} style={{ marginTop: 10, fontSize: 12 }}>Submit</Button>
+      </Form>
+    )} 
+  </Formik>
+</Playground>
+
 ## API
 
-<Props of={Input} />
+<Props of={Textarea} />
 <Props of={DefaultDataEntryText} />
