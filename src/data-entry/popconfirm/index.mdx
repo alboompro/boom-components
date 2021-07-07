@@ -1,0 +1,70 @@
+---
+name: Popconfirm
+menu: Data Entry
+---
+
+import { Playground, Props } from 'docz'
+
+import Popconfirm from './popConfirm'
+
+# Popconfirm
+
+The Popconfirm component is a tool to open a confirmation popover on any button or anchor that you would like.
+
+## When to use 
+
+It's most used for asking for user confirmation and it's more lightweight than the usual confirmation modal.
+
+## Basic example
+
+<Playground>
+    {() => {
+        const title = "Whatever you want to display" || null;
+        const okText = "OK" || null;
+        const cancelText = "Cancel" || null;
+        const placement = "rightTop" || null;
+
+        return(
+        <Popconfirm 
+            placement={placement} 
+            title={title} 
+            okText={okText} 
+            cancelText={cancelText}
+            containerWidth="400px"
+            placement={{
+                top:"0",
+                right:"0"
+            }}
+        >
+        </Popconfirm>
+        )
+    }}
+</Playground>
+
+```jsx
+    {() => {
+        const title = "Whatever you want to display" || null;
+        const okText = "OK" || null;
+        const cancelText = "Cancel" || null;
+        const placement = "rightTop" || null;
+
+        return(
+        <Popconfirm 
+            placement={placement} 
+            title={title} 
+            okText={okText} 
+            cancelText={cancelText}
+            containerWidth="400px"
+            placement={{
+                top:"0",
+                right:"0"
+            }}
+        >
+        </Popconfirm>
+        )
+    }}
+```
+
+## API
+
+<Props of={Popconfirm} />
