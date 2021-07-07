@@ -52,15 +52,6 @@ export const TitleStyle = styled.div`
   font-size: ${HeadProps => (HeadProps.size == "small" ? "14px" : "16px")};
 `;
 
-export const ExtraStyle = styled.div`
-  float: right;
-  margin-left: auto;
-  padding: ${HeadProps => (HeadProps.size == "small" ? "8px" : "16px")};
-  color: #000000d9;
-  font-weight: 400;
-  font-size: 14px;
-`;
-
 export const ActionStyle = styled.ul`
   display: flex;
   align-items: center;
