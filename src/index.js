@@ -22,6 +22,7 @@ export { default as Radio } from "./data-entry/radio";
 export { default as Slider } from "./data-entry/slider";
 export { default as Select } from "./data-entry/select";
 export { default as Switch } from "./data-entry/switch";
+export { default as popConfirm } from "./data-entry/popconfirm";
 
 export { default as Alert } from "./feedback/alert";
 export { default as Dialog } from "./feedback/dialog";
