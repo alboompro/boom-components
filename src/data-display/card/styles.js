@@ -1,6 +1,4 @@
-import styled, { css } from "styled-components";
-
-const borderStyle = "1px solid #d9d9d9";
+import styled from "styled-components";
 
 export const CardStyle = styled.div`
   box-sizing: border-box;
@@ -20,7 +18,6 @@ export const CardStyle = styled.div`
   ${StyleProps =>
     StyleProps.hoverable
       ? `&:hover { cursor: pointer;
-        border-color: transparent;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;}
         transition: box-shadow 0.3s, border-color 0.3s;
         `
@@ -102,48 +99,5 @@ export const BodyStyle = styled.div`
 
   p {
     margin: 0px;
-  }
-`;
-
-// MetaStyles
-
-export const AvatarStyle = styled.span`
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  color: #000000d9;
-  font-size: 14px;
-  font-variant: tabular-nums;
-  line-height: 1.5715;
-  list-style: none;
-  font-feature-settings: "tnum";
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  color: #fff;
-  white-space: nowrap;
-  text-align: center;
-  vertical-align: middle;
-  background: #ccc;
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
-  border-radius: 50%;
-`;
-
-export const MetaTitleStyle = styled.div`
-  overflow: hidden;
-  color: #000000d9;
-  font-weight: bold;
-  font-size: 16px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-`;
-
-export const DetailStyle = styled.div`
-  overflow: hidden;
-
-  & > div:not(:last-child) {
-    margin-bottom: 8px;
   }
 `;

@@ -1,27 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Tabs from "../tabs/Tabs";
 
-import {
-  CardStyle,
-  HeadStyle,
-  BodyStyle,
-  TitleStyle,
-  ExtraStyle,
-  ActionStyle
-} from "./styles";
-import { Props } from "docz";
+import { CardStyle, HeadStyle, BodyStyle, TitleStyle } from "./styles";
 
-const Card = ({
-  children,
-  title,
-  style,
-  cover,
-  extra,
-  actions,
-  tabs,
-  ...props
-}) => {
+const Card = ({ children, title, style, cover, footer, ...props }) => {
   const StyleProps = {
     bordered: props.bordered,
     hoverable: props.hoverable,
@@ -37,76 +19,41 @@ const Card = ({
     cover: cover
   };
 
-  let getAction = actions => {
-    const actionList = actions.map((action, index) => (
-      <li style={{ width: `${100 / actions.length}%` }} key={index}>
-        <span>{action}</span>
-      </li>
-    ));
-    return actionList;
-  };
-
   return (
     <CardStyle {...StyleProps} style={{ ...style }}>
-      {title || extra || tabs ? (
-        <div>
-          {tabs && tabs.length ? (
-            <div>
-              <Tabs tabs={tabs} />
-            </div>
-          ) : null}
-          {title || extra ? (
-            <HeadStyle {...HeadProps}>
-              {title && <TitleStyle {...HeadProps}>{title}</TitleStyle>}
-              {extra && <ExtraStyle {...HeadProps}>{extra}</ExtraStyle>}
-            </HeadStyle>
-          ) : null}
-        </div>
-      ) : null}
+      {title && (
+        <HeadStyle {...HeadProps}>
+          <TitleStyle {...HeadProps}>{title}</TitleStyle>
+        </HeadStyle>
+      )}
       {cover}
       {children && <BodyStyle {...BodyProps}>{children}</BodyStyle>}
-      {actions && actions.length ? (
-        <ActionStyle>{getAction(actions)}</ActionStyle>
-      ) : null}
+      {footer}
     </CardStyle>
   );
 };
 
 Card.propTypes = {
-  /** actions list which shows at the bottom of the card */
-  actions: PropTypes.arrayOf(PropTypes.node),
-  /** whether card will have a border around of it */
-  bordered: PropTypes.bool,
-  /** lift up card when hovering */
-  hoverable: PropTypes.bool,
-  /** show a skeleton instead of content */
-  loading: PropTypes.bool,
+  /** card title */
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** size of the card */
   size: PropTypes.oneOf(["default", "small"]),
   /** card cover */
   cover: PropTypes.node,
-  /** card title */
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  /** content to render in the top-right corner of the card */
-  extra: PropTypes.node,
-  /** props tab */
-  tabs: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      component: PropTypes.element.isRequired
-    })
-  )
+  /** node that will stay in the footer of the card */
+  footer: PropTypes.node,
+  /** whether card will have a border around of it */
+  bordered: PropTypes.bool,
+  /** lift up card when hovering */
+  hoverable: PropTypes.bool
 };
 
 Card.defaultProps = {
-  actions: null,
+  footer: null,
   bordered: true,
   hoverable: false,
-  loading: false,
   size: "default",
   cover: null,
-  extra: null,
-  tabs: null,
   title: null
 };
 
