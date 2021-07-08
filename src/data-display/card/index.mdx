@@ -3,14 +3,174 @@ name: Card
 menu: Data Display
 ---
 
-import { Playground, Props } from 'docz'
+import { Playground, Props } from "docz";
 
-import Card from './Card'
+import Card from "./Card";
+import Button from "../../general/button/Button.js";
 
 # Card
 
-Card component.
+Uma área de conteúdo retangular simples.
+
+## Quando utilizar
+
+- Quando o conteúdo possa consistir em vários elementos de diversos tipos e tamanhos.
+
+## Exemplos
+
+### Uso Básico
+
+Um cartão básico contendo um título e conteúdo. Suportando dois tamanhos diferentes `default` e `small`.
+
+<Playground>
+  <div>
+    <Card title="Default size card" style={{ width: 300 }}>
+      <p>Card content</p>
+      <p>Card content</p>
+    </Card>
+
+    <Card title="Small size card" size="small">
+      <p>Card content</p>
+      <p>Card content</p>
+      <p>Card content</p>
+    </Card>
+
+  </div>
+
+</Playground>
+
+### Cartão sem `Bordered`
+
+É possível definir e criar um cartão sem ou com cortorno, característica a ser avaliada em fundos em que a borda não faz contraste.
+
+<Playground
+  style={{
+    backgroundColor: "#ddd",
+    margin: "-2em",
+    padding: "2em",
+    width: "auto"
+  }}
+>
+  <Card title="Card title" bordered={false}>
+    <p>Card content</p>
+    <p>Card content</p>
+  </Card>
+</Playground>
+
+### Cartão simples
+
+Eventualmente é desejável criar um cartão somente com o conteúdo sendo possível na seguinte maneira:
+
+<Playground
+  style={{
+    backgroundColor: "#ddd",
+    margin: "-2em",
+    padding: "2em",
+    width: "auto"
+  }}
+>
+  <Card>
+    <p>Card content</p>
+  </Card>
+</Playground>
+
+### Cartão `Hoverable`
+
+Cartão com sentença de sopreposição.  
+Usado para quando o cartão possa ser utilizado(por exemplo, acessar um link).
+
+<Playground>
+  <a href="#" style={{ textDecoration: "none" }}>
+    <Card title="card with link" hoverable>
+      <p>Card content</p>
+      <p>Card content</p>
+    </Card>
+  </a>
+</Playground>
+
+### Cartão com `Cover`
+
+É possível adicionar um ou mais `node` usando `cover`.
+
+<Playground>
+  <Card
+    style={{ width: 240 }}
+    cover={
+      <img
+        alt="image example"
+        src="https://images.pexels.com/photos/1252983/pexels-photo-1252983.jpeg?cs=srgb&dl=pexels-lisa-1252983.jpg&fm=jpg"
+      />
+    }
+    title="Card title with cover"
+    size="small"
+    hoverable
+  >
+    <p> Card Content </p>
+  </Card>
+</Playground>
+
+### Mais configurações ao conteúdo
+
+Ademais você ainda pode adicionar `footer` suportando um conteúdo ainda mais flexível.  
+Como os exemplos abaixo, utilizando um `node` completo no conteúdo e rodapé com botões:
+
+<Playground>
+  <Card
+    title="This is small card title"
+    style={{ width: 300 }}
+    cover={
+      <img
+        alt="example"
+        src="https://images.unsplash.com/photo-1599147983579-b645239a5bf5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"
+      />
+    }
+    size="small"
+    footer={
+      <div
+        style={{
+          display: "flex",
+          margin: "1em",
+          justifyContent: "space-around",
+          alignItems: "center"
+        }}
+      >
+        <Button type="primary">OK</Button>
+        <a href="#" style={{ color: "#000", textDecoration: "none" }}>
+          Cancelar
+        </a>
+      </div>
+    }
+  >
+    <div style={{ margin: "0 1em" }}>
+      <span
+        style={{
+          position: "relative",
+          display: "inline-flex",
+          overflow: "hidden",
+          alignItems: "center"
+        }}
+      >
+        <img
+          style={{
+            width: "32px",
+            height: "32px",
+            overflow: "hidden",
+            background: "#ccc",
+            borderRadius: "50%"
+          }}
+          src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZmlsZSUyMHBpY3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        />
+        <h2 style={{ margin: "1em" }}>Name Example</h2>
+      </span>
+      <hr style={{ marginTop: "-1em" }} />
+      Qui aute ea occaecat irure deserunt id nostrud cupidatat minim ut proident
+      labore amet aliquip.
+    </div>
+  </Card>
+</Playground>
 
 ## API
+
+### Card
 
 <Props of={Card} />
