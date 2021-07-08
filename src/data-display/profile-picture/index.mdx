@@ -3,13 +3,95 @@ name: Profile Picture
 menu: Data Display
 ---
 
-import { Playground, Props } from 'docz'
+import { Playground, Props } from "docz";
 
-import ProfilePicture from './ProfilePicture'
+import ProfilePicture from "./ProfilePicture";
+import Icon from "../../general/icon";
 
 # Profile Picture
 
 Profile Picture component.
+
+## Exemplos
+
+### Uso Básico
+
+```jsx
+import ProfilePicture from "@alboom/boom-components/data-display/profile-picture";
+
+const MyComponent = () => {
+  return (
+    <p style={{ margin: "0px 0px 5px" }}>Without src, with icon: </p>
+
+    <ProfilePicture
+      alt="Boom Components Profile Picture"
+      fontSize="19px"
+      fullName="Boom Components"
+      size="60px"
+      src={null}
+      badge={
+        <Icon
+          kind="bold"
+          group="interface-essential"
+          category="form-validation"
+          file="check-circle-1.svg"
+          color="#1B9DFA"
+          size={20}
+        />
+      }
+      badgePosition={{
+        right: 0,
+        bottom: 0
+      }}
+    />
+
+    <p style={{ margin: "0px 0px 5px" }}>With valid src, without icon: </p>
+
+    <ProfilePicture
+      alt="Alboom Pro Profile Picture"
+      fontSize="19px"
+      fullName="Alboom Pro"
+      size="60px"
+      src="https://github.com/alboompro.png"
+    />
+  );
+};
+```
+
+<Playground>
+  <p style={{ margin: "0px 0px 5px" }}>Without src, with icon: </p>
+  <ProfilePicture
+    alt="Boom Components Profile Picture"
+    fontSize="19px"
+    fullName="Boom Components"
+    size="60px"
+    src={null}
+    badge={
+      <Icon
+        kind="bold"
+        group="interface-essential"
+        category="form-validation"
+        file="check-circle-1.svg"
+        color="#1B9DFA"
+        size="20px"
+      />
+    }
+    badgePosition={{
+      right: 0,
+      bottom: 0
+    }}
+  />
+  <br />
+  <br />
+  <p style={{ margin: "0px 0px 5px" }}>With valid src, without icon: </p>
+  <ProfilePicture
+    alt="Alboom Pro Profile Picture"
+    fontSize="19px"
+    fullName="Alboom Pro"
+    size="60px"
+    src="https://github.com/alboompro.png"
+  />
+</Playground>
 
 ## API
 
