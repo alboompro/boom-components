@@ -20,7 +20,6 @@ export const Breadcrumbs = styled.ul`
   list-style: none;
   padding: 0;
   & > li:after {
-    content: "${props => props.separator || "/"}";
     padding: 0 8px;
   }
 `;

@@ -6,6 +6,7 @@ menu: Data Display
 import { Playground, Props } from 'docz'
 
 import Breadcrumb from './Breadcrumb'
+import Icon from '../../general/icon'
 
 # Breadcrumb
 
@@ -18,24 +19,27 @@ O breadcrumb deve ser utilizado quando o site possui um sistema de hierarquias, 
 
 ### Exemplos
 
-#### Uso Básico
+### Uso Básico
 
 <Playground>
     {() => {
-
+        
         const selected = crumb => {console.log(crumb);};
         const crumbs = [
             {
                 name: 'Home', 
-                link: '#'
+                link: '#',
+                icon: <Icon kind="bold" group="arrows-diagrams" category="arrows" file="arrow-button-right.svg" size="10" color="#000000" />,
             },
             {
-                name: 'Category', 
-                link: '#'
+                name: 'Busca', 
+                link: '#',
+                icon: <Icon kind="bold" group="arrows-diagrams" category="arrows" file="arrow-button-right.svg" size="10" color="#000000" />,
             },
             {
-                name: 'Sub-Category', 
-                link: '#'
+                name: 'Nuvem', 
+                link: '#',
+                separator: "/"
             }
         ];
         return(
@@ -55,15 +59,18 @@ import Breadcrumb from "@alboom/boom-components/data-display/breadcrumb";
         const crumbs = [
             {
                 name: 'Home', 
-                link: '#'
+                link: '#',
+                icon: <Icon kind="bold" group="arrows-diagrams" category="arrows" file="arrow-button-right.svg" size="10" color="#000000" />,
             },
             {
-                name: 'Category', 
-                link: '#'
+                name: 'Busca', 
+                link: '#',
+                icon: <Icon kind="bold" group="arrows-diagrams" category="arrows" file="arrow-button-right.svg" size="10" color="#000000" />,
             },
             {
-                name: 'Sub-Category', 
-                link: '#'
+                name: 'Nuvem', 
+                link: '#',
+                separator: "/"
             }
         ];
         return(

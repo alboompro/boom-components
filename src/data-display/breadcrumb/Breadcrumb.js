@@ -15,7 +15,7 @@ const Breadcrumb = ({crumbs, selected}) => {
               return (
                 <Crumb key={crumb.name}>
                   <a href={crumb.link} onClick={ () => selected(crumb) }>
-                    { crumb.name }
+                  { crumb.icon ? "" : crumb.separator }{crumb.icon && crumb.icon}{ crumb.name }
                   </a>
                 </Crumb>
               );
@@ -33,13 +33,16 @@ Breadcrumb.propTypes = {
   /** item separator */
   separator: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** current selected crumb */
-  selected: PropTypes.func
+  selected: PropTypes.func,
+  /** option to add an icon or leave without one */
+  icon: PropTypes.element 
 };
 
 Breadcrumb.defaultProps = {
   crumbs: {},
   separator: "/",
-  selected: noop
+  selected: noop,
+  icon: null
 };
 
 export default Breadcrumb;
