@@ -3,13 +3,50 @@ name: Drawer
 menu: Data Display
 ---
 
-import { Playground, Props } from 'docz'
+import { Playground, Props } from "docz";
 
-import Drawer from './Drawer'
+import Drawer from "./Drawer.js";
+import Button from "../../general/button/Button.js";
 
 # Drawer
 
-Drawer component.
+Um painel que desliza a partir da borda da janela.
+
+## Quando utilizar
+
+Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página com um conjunto de informações. E uma vez que o usuário pode interagir com o `Drawer` sem sair da aplicação/página atual, tarefas podem ser realizadas de forma eficiente.
+
+- Quando necessário um formulário para criar/editar um conjunto de informações.
+- Quando o mesmo formulário é necessário em vários lugares.
+
+## Uso básico
+
+<Playground>
+  <Drawer title="Drawer title">
+    <div>
+      <h2>Content title</h2>
+      <p>More Content</p>
+      <Button type="primary">Confirm</Button>
+    </div>
+  </Drawer>
+  <br />
+  <Drawer title="Drawer title without backdrop close" backdropClosable={false}>
+    <div>
+      <h2>Content title</h2>
+      <p>More Content</p>
+      <div style={{ display: "flex" }}>
+        <Button type="primary">OK</Button>
+        <button
+          style={{ marginLeft: "1em", background: "none", border: "none" }}
+        >
+          <span>Cancelar</span>
+        </button>
+      </div>
+    </div>
+  </Drawer>
+</Playground>
+
+## Exemplos
 
 ## API
 
