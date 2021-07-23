@@ -167,6 +167,38 @@ Como os exemplos abaixo, utilizando um `node` completo no conteúdo e rodapé co
       labore amet aliquip.
     </div>
   </Card>
+  <div style={{ display: "flex", alignItems: "center" }}>
+    <Card>
+      <table style={{ width: "100%" }}>
+        <thead style={{ textAlign: "left" }}>
+          <th>Execution date</th>
+          <th>Total invoices to process</th>
+          <th>Processed invoices</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>22/07/2021</td>
+            <td>27.000</td>
+            <td>27.000</td>
+            <td>
+              <span
+                style={{
+                  backgroundColor: "limegreen",
+                  color: "white",
+                  padding: 4,
+                  borderRadius: 2
+                }}
+              >
+                Sucess
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </Card>
+    <Button type="primary">Other element</Button>
+  </div>
 </Playground>
 
 ## API
