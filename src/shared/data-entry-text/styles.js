@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { update } from "../../settings";
 
-const inputSettings = update("input", {
+export const inputSettings = update("input", {
   labelMargin: "0 0 5px",
   labelColor: "#000",
   labelSize: "14px",
@@ -19,14 +19,32 @@ const inputSettings = update("input", {
   errorPadding: "5px 0 0",
   descriptionSize: "12px",
   descriptionMargin: "0 0 5px",
-  infoSuffixPadding: "5px 0 0",
-  infoSuffixSize: "11px",
+  helpTextPadding: "5px 0 0",
+  helpTextSize: "11px",
   counterColor: "#858585",
   counterSize: "11px",
   counterPadding: "5px 0 0"
 });
 
-export const DefaultInputContainer = styled.div`
+export const DefaultDataEntryCSS = css`
+  width: 100%;
+  padding: ${inputSettings.inputPadding};
+  color: ${inputSettings.inputColor};
+  font-size: ${inputSettings.inputFontSize};
+  border: none;
+  background-color: #fff;
+  border: ${inputSettings.inputBorder};
+  border-radius: ${inputSettings.inputBorderRadius};
+  &:focus{
+    outline: none;
+  } 
+  ${props =>
+    props.error ? `border-color: ${inputSettings.errorColor};` : null}
+  ${props => (props.disabled ? "opacity: 0.8;" : null)}
+  ${props => props.inputStyle}
+`;
+
+export const DefaultDataEntryTextContainer = styled.div`
   * {
     box-sizing: border-box;
   }
@@ -61,53 +79,6 @@ export const InputIcon = styled.span`
   user-select: none;
   ${props => props.prefix && "left: 7px;"}
   ${props => props.suffix && "right: 7px;"}
-`;
-
-export const InputDefault = styled.input`
-  width: 100%;
-  padding: ${inputSettings.inputPadding};
-  color: ${inputSettings.inputColor};
-  font-size: ${inputSettings.inputFontSize};
-  border: none;
-  background-color: #fff;
-  border: ${inputSettings.inputBorder};
-  border-radius: ${inputSettings.inputBorderRadius};
-  &:focus{
-    outline: none;
-  }
-  ${props =>
-    props.error ? `border-color: ${inputSettings.errorColor};` : null}
-  ${props => (props.disabled ? "opacity: 0.8;" : null)}
-  ${props => props.inputStyle}
-`;
-
-/**
- * Only works in styled-components v4+
- */
-// export const InputTextArea = styled(InputDefault).attrs({ as: "textarea" })`
-//   resize: none;
-// `;
-
-export const InputTextArea = styled.textarea`
-  /// Equals to InputDefault
-  width: 100%;
-  padding: ${inputSettings.inputPadding};
-  color: ${inputSettings.inputColor};
-  font-size: ${inputSettings.inputFontSize};
-  border: none;
-  background-color: #fff;
-  border: ${inputSettings.inputBorder};
-  border-radius: ${inputSettings.inputBorderRadius};
-  &:focus{
-    outline: none;
-  }
-  ${props =>
-    props.error ? `border-color: ${inputSettings.errorColor};` : null}
-  ${props => (props.disabled ? "opacity: 0.8;" : null)}
-  ${props => props.inputStyle}
-
-  /// Own props
-  resize: none;
 `;
 
 export const InputField = styled.div`
@@ -152,9 +123,9 @@ export const InputSuffixLabel = styled.div`
   width: 100%;
 `;
 
-export const InfoSuffixLabel = styled.div`
-  padding: ${inputSettings.infoSuffixPadding};
-  font-size: ${inputSettings.infoSuffixSize};
+export const HelpTextLabel = styled.div`
+  padding: ${inputSettings.helpTextPadding};
+  font-size: ${inputSettings.helpTextSize};
 `;
 
 export const InputSuffixCounter = styled.div`
