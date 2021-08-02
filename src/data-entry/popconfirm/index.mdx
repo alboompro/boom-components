@@ -7,6 +7,8 @@ import { Playground, Props } from 'docz'
 
 import Popconfirm from './popConfirm'
 
+import {useState} from 'react'
+
 # Popconfirm
 
 The Popconfirm component is a tool to open a confirmation popover on any button or anchor that you would like.
@@ -18,23 +20,42 @@ It's most used for asking for user confirmation and it's more lightweight than t
 ## Basic example
 
 <Playground>
-    {() => {
-        const title = "Whatever you want to display" || null;
-        const okText = "OK" || null;
-        const cancelText = "Cancel" || null;
-        const placement = "rightTop" || null;
+    {() => { 
+        const [visible, setVisible] = useState(false);
+
+        const showPopconfirm = () => {
+            setVisible(!visible);
+        };
+
+        const confirm = (e) => {
+            console.log(e, "success");
+        };
+
+        const cancel = (e) => {
+            console.log(e, "cancel");
+        };
+
+        const position = {
+            top:"20px",
+            left:"50px"
+        };
+        const title = <p>Whatever you want to display</p>;
+        const okText = "OK";
+        const cancelText = "Cancel";
+        const actionHandler = <a style={{cursor:'pointer'}} onClick={showPopconfirm}>Delete</a>
+        
 
         return(
         <Popconfirm 
-            placement={placement} 
             title={title} 
             okText={okText} 
             cancelText={cancelText}
             containerWidth="400px"
-            placement={{
-                top:"0",
-                right:"0"
-            }}
+            position={position}
+            confirm={confirm}
+            cancel={cancel}
+            visible={visible}
+            actionHandler={actionHandler}
         >
         </Popconfirm>
         )
@@ -42,23 +63,42 @@ It's most used for asking for user confirmation and it's more lightweight than t
 </Playground>
 
 ```jsx
-    {() => {
-        const title = "Whatever you want to display" || null;
-        const okText = "OK" || null;
-        const cancelText = "Cancel" || null;
-        const placement = "rightTop" || null;
+    {() => { 
+        const [visible, setVisible] = useState(false);
+
+        const showPopconfirm = () => {
+            setVisible(!visible);
+        };
+
+        const confirm = (e) => {
+            console.log(e, "success");
+        };
+
+        const cancel = (e) => {
+            console.log(e, "cancel");
+        };
+
+        const position = {
+            top:"20px",
+            left:"50px"
+        };
+        const title = <p>Whatever you want to display</p>;
+        const okText = "OK";
+        const cancelText = "Cancel";
+        const actionHandler = <a style={{cursor:'pointer'}} onClick={showPopconfirm}>Delete</a>
+        
 
         return(
         <Popconfirm 
-            placement={placement} 
             title={title} 
             okText={okText} 
             cancelText={cancelText}
             containerWidth="400px"
-            placement={{
-                top:"0",
-                right:"0"
-            }}
+            position={position}
+            confirm={confirm}
+            cancel={cancel}
+            visible={visible}
+            actionHandler={actionHandler}
         >
         </Popconfirm>
         )

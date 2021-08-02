@@ -24,10 +24,11 @@ export const Popover = styled.div`
   padding: 1.5rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   width: auto;
-  top: ${props => props.placement.top};
-  right: ${props => props.placement.right};
-  left: ${props => props.placement.left};
-  bottom: ${props => props.placement.bottom};
+  top: ${props => props.position.top};
+  right: ${props => props.position.right};
+  left: ${props => props.position.left};
+  bottom: ${props => props.position.bottom};
+  z-index: 5;
 
   &.popover-show{
     visibility: visible;

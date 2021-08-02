@@ -1,29 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { noop } from "../../helpers";
 import { Container, Popover, Button } from "./styles";
 
-const Popconfirm = ({placement, title, okText, cancelText, containerWidth}) => {
-  const [visible, setVisible] = useState(false);
+const Popconfirm = ({actionHandler, position, title, okText, cancelText, containerWidth, confirm, cancel, visible}) => {
   
-  function confirm(e){
-    console.log(e, "success");
-  };
-
-  function cancel(e){
-    console.log(e, "cancel");
-  };
-
-
-
   return(
     <Container style={{width:containerWidth}}>
-      <a style={{cursor:"pointer"}} onClick={() => setVisible(!visible)}>Delete</a>
-      <Popover placement={{top:placement.top, right:placement.right, left:placement.left, bottom:placement.bottom}} className={visible ? "popover-show" : "popover-hidden"}>
-        <p className="popover__message">{title}</p>
+      {actionHandler}
+      <Popover position={{top:position.top, right:position.right, left:position.left, bottom:position.bottom}} className={visible ? "popover-show" : "popover-hidden"}>
+        <div className="popover-message">
+          {title}
+        </div>
         <section>
-          <Button onClick={confirm}><span>{okText}</span></Button>
-          <Button style={{backgroundColor:"red"}} onClick={cancel}><span>{cancelText}</span></Button>
+          <Button onClick={confirm}>{okText}</Button>
+          <Button style={{backgroundColor:"red"}} onClick={cancel}>{cancelText}</Button>
         </section>
       </Popover>
     </Container>
@@ -31,18 +21,23 @@ const Popconfirm = ({placement, title, okText, cancelText, containerWidth}) => {
 }
 
 Popconfirm.propTypes = {
+  /** Tag that's gonna display the message to use the popover */
+  actionHandler: PropTypes.element.isRequired,
+  /** Property to make the popover hide and show */
+  visible:PropTypes.bool.isRequired,
   /** Text displayed on the confirmation */
-  title: PropTypes.string,
+  title: PropTypes.element.isRequired,
   /** Callback on confirmation button click */
-  confirm: PropTypes.func,
+  confirm: PropTypes.func.isRequired,
   /** Callback on cancel button click */
-  cancel: PropTypes.func,
+  cancel: PropTypes.func.isRequired,
   /** Text that goes inside of ok button */
   okText: PropTypes.string,
   /** Text that goes inside of cancel button */
   cancelText: PropTypes.string,
+
   /** Defines the top, right, bottom, left of the popover */
-  placement: PropTypes.shape({
+  position: PropTypes.shape({
     top: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     right: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     bottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -53,15 +48,16 @@ Popconfirm.propTypes = {
 };
 
 Popconfirm.defaultProps = {
-  title: "Confirmation text",
+  actionHandler: <a href="#">Delete</a>,
+  title: <p>Confirmation text</p>,
   confirm: null,
   cancel: null,
   okText: "OK",
   cancelText:"Cancel",
-  placement: {
-    top: null,
+  position: {
+    top: "20px",
     right: null,
-    left: null,
+    left: "50px",
     bottom: null
   },
   containerWidth: null
