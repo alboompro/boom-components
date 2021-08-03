@@ -23,15 +23,13 @@ const fadeOut = keyframes`
 
 // -> slide animations for the drawer
 const leftSlideIn = keyframes`
-  animationName: slideInLeft;
   from { transform: translateX(-100%); }
   to { transform: translateX(0); }
 `;
 
-const rigthSlideIn = keyframes`
-  animationName: slideInRight;
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
+const rightSlideIn = keyframes`
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0%); }
 `;
 
 const topSlideIn = keyframes`
@@ -73,9 +71,8 @@ export const Backdrop = styled.div`
   left: 0;
   z-index: auto;
   background-color: #000;
-  animation: ${props => props.visible && (props.visible ? fadeIn : fadeOut)}
-    0.5s ease-in-out;
-  ${props => props.visible && (props.visible ? "opacity: 0.8;" : "opacity: 0;")}
+  animation: ${props => (props.visible ? fadeIn : fadeOut)} 0.5s ease-in-out;
+  ${props => (props.visible ? "opacity: 0.8;" : "opacity: 0;")}
 `;
 
 // Drawer Style
@@ -83,11 +80,11 @@ export const DrawerStyle = styled.div`
   position: fixed;
   z-index: ${props => props.zIndex};
   top: 0;
-  ${props => {
+  /* ${props => {
     if (props.placement === "left" || props.placement === "top")
       return `left: 0;`;
     else return `right: 0;`;
-  }}
+  }} */
   height: 100%;
   width: 100%;
   color: #000000d9;
@@ -96,21 +93,35 @@ export const DrawerStyle = styled.div`
 export const DrawerWrapper = styled.div`
   // Add size change by prop and swipe location (top and bottom)
   display: block;
-  ${props => (props.placement === "top" ? "top: 0;" : "bottom: 0;")}
+  position: absolute;
+  right: 0;
+  ${props => {
+    console.log(`placement: ${props.placement} | visible: ${props.visible}`);
+    if (props.placement) {
+      switch (props.placement) {
+        case "left":
+          return "left: 0";
+        case "right":
+          return "right: 0";
+
+        default:
+          break;
+      }
+    }
+  }}
   ${props => {
     if (props.placement !== "top" && props.placement !== "bottom")
       return `width: ${props.width}px; height: 100%`;
     return `height: ${props.height}px; width: 100%`;
   }}
   animation: ${props => {
-    console.log(`placement: ${props.placement} | visible: ${props.visible}`);
     if (props.visible) {
       if (props.placement) {
         switch (props.placement) {
           case "left":
             return leftSlideIn;
           case "right":
-            return rigthSlideIn;
+            return rightSlideIn;
           case "top":
             return topSlideIn;
           case "bottom":

@@ -49,7 +49,7 @@ const Drawer = ({
   useEffect(() => () => clearTimeout(timeoutRef.current), []);
 
   const backdropProps = {
-    backdropClosable: props.backdropProps,
+    backdropClosable: props.backdropProps, // Verificar isso
     backdrop: props.backdrop,
     backdropStyle: props.backdropStyle,
     visible: debouncedVisible
@@ -93,7 +93,11 @@ const Drawer = ({
 
   const renderBackdrop = () => {
     return props.backdropClosable ? (
-      <Backdrop {...backdropProps} onClick={() => handleClose()} />
+      <Backdrop
+        {...backdropProps}
+        className="backdrop"
+        onClick={() => handleClose()}
+      />
     ) : (
       <Backdrop {...backdropProps} />
     );
