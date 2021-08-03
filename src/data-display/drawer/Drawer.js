@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { noop } from "../../helpers";
 import Portal from "../../shared/portal";
@@ -25,39 +25,28 @@ const Drawer = ({
   ...props
 }) => {
   const animationdelay = 1000;
-  const [debouncedVisible, setDebouncedVisible] = useState(false);
+  const [debouncedVisible, setDebouncedVisible] = useState(visible);
+  const [hide, setHide] = useState(!visible);
+  const timeoutRef = useRef(null);
 
-  /* mostrar drawer nÃ£o tem delay, mas para remover tem um delay (animationdelay),
+  /* mostrar drawer não tem delay, mas para remover tem um delay (animationdelay),
    * usando o useEffect e visible
    */
 
   useEffect(() => {
-    let timeoutId;
     if (visible) {
       setDebouncedVisible(true);
-    } else if (!visible) {
-      timeoutId = setTimeout(() => setDebouncedVisible(false), animationdelay);
-    }
-    return () => clearTimeout(timeoutId);
-  }, [visible, animationdelay]);
-
-  /* initial teste
-  useEffect(() => {
-    if (visible) {
-      window.DrawerDebouncedVisibleTimeout &&
-        clearTimeout(window.DrawerDebouncedVisibleTimeout);
-
-      setDebouncedVisible(true);
-      delete window.DrawerDebouncedVisibleTimeout;
-      console.log(debouncedVisible, visible);
+      setHide(false);
+      clearTimeout(timeoutRef.current);
     } else {
-      window.DrawerDebouncedVisibleTimeout = setTimeout(() => {
-        setDebouncedVisible(false);
-      }, animationdelay);
-      delete window.DrawerDebouncedVisibleTimeout;
-      console.log(debouncedVisible, visible);
+      setDebouncedVisible(false);
+      timeoutRef.current = setTimeout(() => {
+        setHide(true);
+      }, animationdelay); // Adicionar prop.delay para controle de animação
     }
-  }, [visible]); */
+  }, [visible]);
+
+  useEffect(() => () => clearTimeout(timeoutRef.current), []);
 
   const backdropProps = {
     backdropClosable: props.backdropProps,
@@ -123,14 +112,14 @@ const Drawer = ({
   };
 
   return (
-    debouncedVisible && (
+    !hide && (
       <Portal>
         {
           <DrawerStyle
             {...StyleProps}
-            visible={visible}
-            animationdelay={animationdelay}
+            visible={debouncedVisible}
             onClick={handleClose}
+            animationdelay={animationdelay}
           >
             {renderBackdrop()}
             <DrawerWrapper {...WrapperProps}>

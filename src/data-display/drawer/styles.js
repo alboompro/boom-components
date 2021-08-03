@@ -30,7 +30,7 @@ const leftSlideIn = keyframes`
 
 const rigthSlideIn = keyframes`
   animationName: slideInRight;
-  from { transform: translateX(-100%); }
+  from { transform: translateX(100%); }
   to { transform: translateX(0); }
 `;
 
@@ -46,7 +46,7 @@ const bottomSlideIn = keyframes`
 
 const leftSlideOut = keyframes`
   from { transform: translateX(0%); }
-  to { visibility: hidden; transform: translateX(-100%); }
+  to { transform: translateX(-100%); }
 `;
 
 const rightSlideOut = keyframes`
@@ -103,6 +103,7 @@ export const DrawerWrapper = styled.div`
     return `height: ${props.height}px; width: 100%`;
   }}
   animation: ${props => {
+    console.log(`placement: ${props.placement} | visible: ${props.visible}`);
     if (props.visible) {
       if (props.placement) {
         switch (props.placement) {
