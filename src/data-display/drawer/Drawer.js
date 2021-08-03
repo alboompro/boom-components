@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { noop } from "../../helpers";
 import Portal from "../../shared/portal";
@@ -9,10 +9,9 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerBody,
-  DrawerFooter,
-  DrawerWrapper
+  DrawerWrapper,
+  DrawerDialog
 } from "./styles";
-import { DrawerDialog } from "./styles";
 
 const Drawer = ({
   title,
@@ -21,37 +20,65 @@ const Drawer = ({
   onClose,
   children,
   backdrop,
+  visible,
+  handleClose,
   ...props
 }) => {
-  // Drawer state
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const animationdelay = 1000;
+  const [debouncedVisible, setDebouncedVisible] = useState(false);
+
+  /* mostrar drawer nÃ£o tem delay, mas para remover tem um delay (animationdelay),
+   * usando o useEffect e visible
+   */
+
+  useEffect(() => {
+    let timeoutId;
+    if (visible) {
+      setDebouncedVisible(true);
+    } else if (!visible) {
+      timeoutId = setTimeout(() => setDebouncedVisible(false), animationdelay);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [visible, animationdelay]);
+
+  /* initial teste
+  useEffect(() => {
+    if (visible) {
+      window.DrawerDebouncedVisibleTimeout &&
+        clearTimeout(window.DrawerDebouncedVisibleTimeout);
+
+      setDebouncedVisible(true);
+      delete window.DrawerDebouncedVisibleTimeout;
+      console.log(debouncedVisible, visible);
+    } else {
+      window.DrawerDebouncedVisibleTimeout = setTimeout(() => {
+        setDebouncedVisible(false);
+      }, animationdelay);
+      delete window.DrawerDebouncedVisibleTimeout;
+      console.log(debouncedVisible, visible);
+    }
+  }, [visible]); */
 
   const backdropProps = {
     backdropClosable: props.backdropProps,
     backdrop: props.backdrop,
-    backdropStyle: props.backdropStyle
+    backdropStyle: props.backdropStyle,
+    visible: debouncedVisible
   };
 
   const StyleProps = {
     zIndex: props.zIndex,
     hoverable: props.hoverable,
+    placement: props.placement,
     ...props
   };
 
-  // useEffect(() => {
-  //   isDrawerOpen ? (
-  //     render()}
-  //   ) : null;
-  // }, [isDrawerOpen]);
-
-  // Function to close drawer
-  const closeDrawer = () => {
-    setIsDrawerOpen(false);
-  };
-
-  // Function to toggle Drawer
-  const toggleDrawer = () => {
-    setIsDrawerOpen(true);
+  const WrapperProps = {
+    width: props.width,
+    height: props.height,
+    visible: debouncedVisible,
+    placement: props.placement,
+    ...props
   };
 
   const renderCloseButton = () => {
@@ -61,16 +88,15 @@ const Drawer = ({
           type="button"
           aria-label="close"
           style={{
-            fontSize: "14px",
-            fontWeight: "bold",
+            fontSize: "13.5px",
             cursor: "pointer",
             width: "20px",
             background: "none",
             borderStyle: "none"
           }}
-          onClick={e => closeDrawer()}
+          onClick={() => handleClose()}
         >
-          x
+          X
         </button>
       )
     );
@@ -78,7 +104,7 @@ const Drawer = ({
 
   const renderBackdrop = () => {
     return props.backdropClosable ? (
-      <Backdrop {...backdropProps} onClick={e => closeDrawer()} />
+      <Backdrop {...backdropProps} onClick={() => handleClose()} />
     ) : (
       <Backdrop {...backdropProps} />
     );
@@ -89,39 +115,36 @@ const Drawer = ({
       title &&
       closeButton && (
         <DrawerHeader>
-          {title && <h1>{title}</h1>}
+          {title && <h4>{title}</h4>}
           {closeButton && renderCloseButton()}
         </DrawerHeader>
       )
     );
   };
 
-  const renderFooter = () => {
-    return footer && <DrawerFooter>{footer}</DrawerFooter>;
-  };
-
-  const render = () => {
-    return (
-      <DrawerStyle {...StyleProps}>
-        {renderBackdrop()}
-        <DrawerWrapper>
-          <DrawerDialog>
-            <DrawerContent>
-              {renderHeader()}
-              <DrawerBody>{children}</DrawerBody>
-              <div>{renderFooter()}</div>
-            </DrawerContent>
-          </DrawerDialog>
-        </DrawerWrapper>
-      </DrawerStyle>
-    );
-  };
-
   return (
-    <Fragment>
-      <button onClick={e => toggleDrawer()}>SHOW ME</button>
-      {isDrawerOpen && <Portal>{render()}</Portal>}
-    </Fragment>
+    debouncedVisible && (
+      <Portal>
+        {
+          <DrawerStyle
+            {...StyleProps}
+            visible={visible}
+            animationdelay={animationdelay}
+            onClick={handleClose}
+          >
+            {renderBackdrop()}
+            <DrawerWrapper {...WrapperProps}>
+              <DrawerDialog>
+                <DrawerContent>
+                  {renderHeader()}
+                  <DrawerBody>{children}</DrawerBody>
+                </DrawerContent>
+              </DrawerDialog>
+            </DrawerWrapper>
+          </DrawerStyle>
+        }
+      </Portal>
+    )
   );
 };
 
@@ -150,6 +173,8 @@ Drawer.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** whether drawer is visible or not */
   visible: PropTypes.bool,
+  /** CHANGE THIS */
+  onVisibleChange: PropTypes.func,
   /** width of drawer while its placement is right or left */
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** z-index property of drawer */
@@ -164,12 +189,13 @@ Drawer.defaultProps = {
   closeButton: true,
   destroyOnClose: false,
   getContainer: () => document.body,
-  height: 256,
+  height: 310,
   onVisibleChange: noop,
   placement: "right",
   title: null,
   visible: false,
-  width: 256,
+  handleClose: noop,
+  width: 310,
   zIndex: 1000
 };
 

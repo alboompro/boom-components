@@ -5,7 +5,7 @@ menu: Data Display
 
 import { Playground, Props } from "docz";
 
-import Drawer from "./Drawer.js";
+import Drawer from "./Parent.js";
 import Button from "../../general/button/Button.js";
 
 # Drawer
@@ -14,7 +14,7 @@ Um painel que desliza a partir da borda da janela.
 
 ## Quando utilizar
 
-Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página com um conjunto de informações. E uma vez que o usuário pode interagir com o `Drawer` sem sair da aplicação/página atual, tarefas podem ser realizadas de forma eficiente.
+Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página com um conjunto de informações. E uma vez que o usuário pode interagir com o Drawer sem sair da aplicação/página atual, tarefas podem ser realizadas de forma eficiente.
 
 - Quando necessário um formulário para criar/editar um conjunto de informações.
 - Quando o mesmo formulário é necessário em vários lugares.
@@ -22,26 +22,50 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
 ## Uso básico
 
 <Playground>
-  <Drawer title="Drawer title">
+  <Drawer title={"Drawer Title"} placement={"right"}>
     <div>
-      <h2>Content title</h2>
-      <p>More Content</p>
-      <Button type="primary">Confirm</Button>
+      <h3>Title inside the drawer</h3>
+      <img
+        alt="example"
+        style={{ width: "100%", borderRadius: "4px" }}
+        src="https://images.unsplash.com/photo-1523597020744-b68b1edd3e1c"
+      />
+      <p>You can assign a div with a footer on Body</p>
+    </div>
+    <div
+      style={{
+        display: "inline-flex",
+        position: "absolute",
+        bottom: "8px",
+        margin: "0 20px"
+      }}
+    >
+      <Button type="primary">OK</Button>
+      <button
+        style={{
+          cursor: "pointer",
+          marginLeft: "1em",
+          background: "none",
+          border: "none"
+        }}
+      >
+        <span>Cancelar</span>
+      </button>
     </div>
   </Drawer>
   <br />
-  <Drawer title="Drawer title without backdrop close" backdropClosable={false}>
+  <Drawer title={"Drawer Title"} placement={"bottom"}>
     <div>
-      <h2>Content title</h2>
-      <p>More Content</p>
-      <div style={{ display: "flex" }}>
-        <Button type="primary">OK</Button>
-        <button
-          style={{ marginLeft: "1em", background: "none", border: "none" }}
-        >
-          <span>Cancelar</span>
-        </button>
-      </div>
+      <h3>Title inside the drawer</h3>
+      <img
+        alt="example"
+        style={{ width: "100%", borderRadius: "4px" }}
+        src="https://images.unsplash.com/photo-1523597020744-b68b1edd3e1c"
+      />
+      <p>
+        Esse anim duis nisi nisi officia irure culpa id consequat cupidatat sunt
+        aliqua dolore.
+      </p>
     </div>
   </Drawer>
 </Playground>
