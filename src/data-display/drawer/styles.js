@@ -28,8 +28,8 @@ const leftSlideIn = keyframes`
 `;
 
 const rightSlideIn = keyframes`
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(0%); }
+  from { transform: translateX(100%); }
+  to { transform: translateX(0%); }
 `;
 
 const topSlideIn = keyframes`
@@ -80,11 +80,6 @@ export const DrawerStyle = styled.div`
   position: fixed;
   z-index: ${props => props.zIndex};
   top: 0;
-  /* ${props => {
-    if (props.placement === "left" || props.placement === "top")
-      return `left: 0;`;
-    else return `right: 0;`;
-  }} */
   height: 100%;
   width: 100%;
   color: #000000d9;
@@ -94,19 +89,19 @@ export const DrawerWrapper = styled.div`
   // Add size change by prop and swipe location (top and bottom)
   display: block;
   position: absolute;
-  right: 0;
   ${props => {
-    console.log(`placement: ${props.placement} | visible: ${props.visible}`);
-    if (props.placement) {
-      switch (props.placement) {
-        case "left":
-          return "left: 0";
-        case "right":
-          return "right: 0";
+    switch (props.placement) {
+      case "left":
+        return "left: 0";
+      case "right":
+        return "right: 0";
+      case "bottom":
+        return "bottom: 0";
+      case "top":
+        return "top: 0";
 
-        default:
-          break;
-      }
+      default:
+        break;
     }
   }}
   ${props => {
@@ -116,36 +111,32 @@ export const DrawerWrapper = styled.div`
   }}
   animation: ${props => {
     if (props.visible) {
-      if (props.placement) {
-        switch (props.placement) {
-          case "left":
-            return leftSlideIn;
-          case "right":
-            return rightSlideIn;
-          case "top":
-            return topSlideIn;
-          case "bottom":
-            return bottomSlideIn;
+      switch (props.placement) {
+        case "left":
+          return leftSlideIn;
+        case "right":
+          return rightSlideIn;
+        case "top":
+          return topSlideIn;
+        case "bottom":
+          return bottomSlideIn;
 
-          default:
-            break;
-        }
+        default:
+          break;
       }
     } else {
-      if (props.placement) {
-        switch (props.placement) {
-          case "left":
-            return leftSlideOut;
-          case "right":
-            return rightSlideOut;
-          case "top":
-            return topSlideOut;
-          case "bottom":
-            return bottomSlideOut;
+      switch (props.placement) {
+        case "left":
+          return leftSlideOut;
+        case "right":
+          return rightSlideOut;
+        case "top":
+          return topSlideOut;
+        case "bottom":
+          return bottomSlideOut;
 
-          default:
-            break;
-        }
+        default:
+          break;
       }
     }
   }}
@@ -163,7 +154,8 @@ export const DrawerContent = styled.div`
   background-color: #fff;
   outline: 0;
   width: 100%;
-  height: 100%; // Add size change by swipe location
+  height: 100%;
+
   -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12),
     0 0 10px rgba(0, 0, 0, 0.06);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06);
@@ -187,7 +179,23 @@ export const DrawerHeader = styled.div`
 `;
 
 export const DrawerBody = styled.div`
-  display: table;
+  position: relative;
   overflow: auto;
   margin: 30px 20px;
+
+  ${props => {
+    switch (props.placement) {
+      case "left":
+        return `height: 100vh;`;
+      case "right":
+        return `height: 100vh;`;
+      case "top":
+        return `height: calc(${props.height}px - 100px);`; // - 30 - 20 - 20 - 20 - 10
+      case "bottom":
+        return `height: calc(${props.height}px - 100px);`; // - 30 - 20 - 20 - 20 - 10
+
+      default:
+        break;
+    }
+  }}
 `;

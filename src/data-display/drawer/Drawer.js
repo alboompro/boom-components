@@ -122,15 +122,16 @@ const Drawer = ({
           <DrawerStyle
             {...StyleProps}
             visible={debouncedVisible}
-            onClick={handleClose}
             animationdelay={animationdelay}
           >
             {renderBackdrop()}
-            <DrawerWrapper {...WrapperProps}>
-              <DrawerDialog>
-                <DrawerContent>
+            <DrawerWrapper {...WrapperProps} className="Drawer-Wrapper">
+              <DrawerDialog className="Drawer-Dialog">
+                <DrawerContent className="Drawer-Content">
                   {renderHeader()}
-                  <DrawerBody>{children}</DrawerBody>
+                  <DrawerBody {...props} className="Drawer-Body">
+                    {children}
+                  </DrawerBody>
                 </DrawerContent>
               </DrawerDialog>
             </DrawerWrapper>
