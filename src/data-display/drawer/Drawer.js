@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { noop } from "../../helpers";
 import Portal from "../../shared/portal";
@@ -22,6 +22,7 @@ const Drawer = ({
   backdrop,
   visible,
   handleClose,
+  onVisibleChange,
   ...props
 }) => {
   const animationdelay = 1000;
@@ -35,10 +36,12 @@ const Drawer = ({
 
   useEffect(() => {
     if (visible) {
+      onVisibleChange(visible);
       setDebouncedVisible(true);
       setHide(false);
       clearTimeout(timeoutRef.current);
     } else {
+      onVisibleChange(visible);
       setDebouncedVisible(false);
       timeoutRef.current = setTimeout(() => {
         setHide(true);
@@ -48,8 +51,8 @@ const Drawer = ({
 
   useEffect(() => () => clearTimeout(timeoutRef.current), []);
 
-  const backdropProps = {
-    backdropClosable: props.backdropProps, // Verificar isso
+  const BackdropProps = {
+    backdropClosable: props.backdropProps,
     backdrop: props.backdrop,
     backdropStyle: props.backdropStyle,
     visible: debouncedVisible
@@ -69,6 +72,8 @@ const Drawer = ({
     placement: props.placement,
     ...props
   };
+
+  const BodyProps = { width: props.width, height: props.height, ...props };
 
   const renderCloseButton = () => {
     return (
@@ -94,12 +99,17 @@ const Drawer = ({
   const renderBackdrop = () => {
     return props.backdropClosable ? (
       <Backdrop
-        {...backdropProps}
+        {...BackdropProps}
         className="backdrop"
+        style={{ ...props.backdropStyle }}
         onClick={() => handleClose()}
       />
     ) : (
-      <Backdrop {...backdropProps} />
+      <Backdrop
+        {...BackdropProps}
+        className="backdrop"
+        style={{ ...props.backdropStyle }}
+      />
     );
   };
 
@@ -115,6 +125,15 @@ const Drawer = ({
     );
   };
 
+  // Check if it is good to implement the footer
+  // const renderFooter = () => {
+  //   return footer && (
+  //     <DrawerFooter>
+  //       {footer}
+  //     </DrawerFooter>
+  //   );
+  // };
+
   return (
     !hide && (
       <Portal>
@@ -125,11 +144,11 @@ const Drawer = ({
             animationdelay={animationdelay}
           >
             {renderBackdrop()}
-            <DrawerWrapper {...WrapperProps} className="Drawer-Wrapper">
-              <DrawerDialog className="Drawer-Dialog">
-                <DrawerContent className="Drawer-Content">
+            <DrawerWrapper {...WrapperProps}>
+              <DrawerDialog>
+                <DrawerContent>
                   {renderHeader()}
-                  <DrawerBody {...props} className="Drawer-Body">
+                  <DrawerBody {...BodyProps} style={{ ...props.bodyStyle }}>
                     {children}
                   </DrawerBody>
                 </DrawerContent>
@@ -167,8 +186,6 @@ Drawer.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** whether drawer is visible or not */
   visible: PropTypes.bool,
-  /** CHANGE THIS */
-  onVisibleChange: PropTypes.func,
   /** width of drawer while its placement is right or left */
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** z-index property of drawer */

@@ -5,7 +5,7 @@ menu: Data Display
 
 import { Playground, Props } from "docz";
 
-import Drawer from "./Parent.js";
+import Drawer from "./Parent.js"; // For initial tests only
 import Button from "../../general/button/Button.js";
 
 # Drawer
@@ -41,6 +41,7 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
     >
       <Button type="primary">OK</Button>
       <button
+        type="button"
         style={{
           cursor: "pointer",
           marginLeft: "1em",
@@ -70,6 +71,21 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
 </Playground>
 
 ## Exemplos
+
+### Exemplo 1
+
+<Playground>
+  <Drawer
+    title={"Drawer Title"}
+    placement={"right"}
+    onVisibleChange={visible => console.log(visible)}
+  >
+    <div>
+      <h3>Title inside the drawer</h3>
+      <p>You can assign a div with a footer on Body</p>
+    </div>
+  </Drawer>
+</Playground>
 
 ## API
 
