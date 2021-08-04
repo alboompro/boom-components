@@ -148,6 +148,19 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
 
 Há a possibilidade de utilizar um Drawer com múltiplos níveis de abas.
 
+<Playground>
+  <Drawer
+    title={"One-level Drawer"}
+    placement={"right"}
+    width={'25em'}
+    >
+    <div style={{ margin: "1em" }}>
+      <Drawer title={"Two-level Drawer"} width={250}></Drawer>
+    </div>
+  </Drawer>
+
+</Playground>
+
 ## API
 
 <Props of={Drawer} />

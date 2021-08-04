@@ -118,7 +118,9 @@ export const DrawerWrapper = styled.div`
   }}
   ${props => {
     if (props.placement !== "top" && props.placement !== "bottom")
-      return `width: ${props.width}px; height: 100%`;
+      return `width: ${
+        isNaN(props.width) ? props.width : `${props.width}px`
+      }; height: 100%`;
     return `height: ${props.height}px; width: 100%`;
   }}
   animation: ${props => {
