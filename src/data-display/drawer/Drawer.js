@@ -10,7 +10,8 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerWrapper,
-  DrawerDialog
+  DrawerDialog,
+  DrawerContainer
 } from "./styles";
 
 const Drawer = ({
@@ -36,20 +37,28 @@ const Drawer = ({
 
   useEffect(() => {
     if (visible) {
-      onVisibleChange(visible);
+      onVisibleChange(); // Prop type: onVisibleChange = () => {};
       setDebouncedVisible(true);
+      disableNavegation(true);
       setHide(false);
       clearTimeout(timeoutRef.current);
     } else {
-      onVisibleChange(visible);
+      onVisibleChange(); // Prop type: onVisibleChange = () => {};
       setDebouncedVisible(false);
       timeoutRef.current = setTimeout(() => {
+        disableNavegation(false);
         setHide(true);
       }, animationdelay); // Adicionar prop.delay para controle de animação
     }
   }, [visible]);
 
   useEffect(() => () => clearTimeout(timeoutRef.current), []);
+
+  const disableNavegation = disable => {
+    backdrop && disable
+      ? (document.querySelector(":root").style.overflow = "hidden")
+      : (document.querySelector(":root").style.overflow = "auto");
+  };
 
   const BackdropProps = {
     backdropClosable: props.backdropProps,
@@ -60,8 +69,8 @@ const Drawer = ({
 
   const StyleProps = {
     zIndex: props.zIndex,
-    hoverable: props.hoverable,
     placement: props.placement,
+    backdrop: backdrop,
     ...props
   };
 
@@ -97,20 +106,22 @@ const Drawer = ({
   };
 
   const renderBackdrop = () => {
-    return props.backdropClosable ? (
-      <Backdrop
-        {...BackdropProps}
-        className="backdrop"
-        style={{ ...props.backdropStyle }}
-        onClick={() => handleClose()}
-      />
-    ) : (
-      <Backdrop
-        {...BackdropProps}
-        className="backdrop"
-        style={{ ...props.backdropStyle }}
-      />
-    );
+    return props.backdropClosable
+      ? backdrop && (
+          <Backdrop
+            {...BackdropProps}
+            className="backdrop"
+            style={{ ...props.backdropStyle }}
+            onClick={() => handleClose()}
+          />
+        )
+      : backdrop && (
+          <Backdrop
+            {...BackdropProps}
+            className="backdrop"
+            style={{ ...props.backdropStyle }}
+          />
+        );
   };
 
   const renderHeader = () => {
@@ -138,12 +149,14 @@ const Drawer = ({
     !hide && (
       <Portal>
         {
-          <DrawerStyle
-            {...StyleProps}
-            visible={debouncedVisible}
-            animationdelay={animationdelay}
-          >
-            {renderBackdrop()}
+          <DrawerContainer>
+            <DrawerStyle
+              {...StyleProps}
+              visible={debouncedVisible}
+              animationdelay={animationdelay}
+            >
+              {renderBackdrop()}
+            </DrawerStyle>
             <DrawerWrapper {...WrapperProps}>
               <DrawerDialog>
                 <DrawerContent>
@@ -154,7 +167,7 @@ const Drawer = ({
                 </DrawerContent>
               </DrawerDialog>
             </DrawerWrapper>
-          </DrawerStyle>
+          </DrawerContainer>
         }
       </Portal>
     )

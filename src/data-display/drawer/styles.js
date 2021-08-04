@@ -64,15 +64,23 @@ const bottomSlideOut = keyframes`
 
 // Backdrop Style
 export const Backdrop = styled.div`
+  content: "";
+  ${props => (props.backdrop ? "display: none;" : "display: block;")}
   position: fixed;
+  width: 100vw;
+  height: 100vh;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: auto;
   background-color: #000;
   animation: ${props => (props.visible ? fadeIn : fadeOut)} 0.5s ease-in-out;
   ${props => (props.visible ? "opacity: 0.8;" : "opacity: 0;")}
+`;
+
+// Drawer Container Style
+export const DrawerContainer = styled.div`
+  display: flex;
 `;
 
 // Drawer Style
@@ -80,25 +88,30 @@ export const DrawerStyle = styled.div`
   position: fixed;
   z-index: ${props => props.zIndex};
   top: 0;
-  height: 100%;
-  width: 100%;
+  ${props =>
+    !props.backdrop ? "pointer-events: none;" : "pointer-events: all;"};
   color: #000000d9;
 `;
 
 export const DrawerWrapper = styled.div`
   // Add size change by prop and swipe location (top and bottom)
-  display: block;
-  position: absolute;
+  // display: block;
+  position: fixed;
+  z-index: ${props => props.zIndex};
   ${props => {
     switch (props.placement) {
       case "left":
-        return "left: 0";
+        return `top: 0;
+                left: 0;`;
       case "right":
-        return "right: 0";
+        return `top: 0;
+                right: 0`;
       case "bottom":
-        return "bottom: 0";
+        return `left: 0;
+                bottom: 0`;
       case "top":
-        return "top: 0";
+        return `left: 0;
+                top: 0`;
 
       default:
         break;

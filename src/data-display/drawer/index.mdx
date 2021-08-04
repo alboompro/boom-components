@@ -22,7 +22,7 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
 ## Uso básico
 
 <Playground>
-  <Drawer title={"Drawer Title"} placement={"right"}>
+  <Drawer title={"Drawer Title"} placement={"right"} backdrop={false}>
     <div>
       <h3>Title inside the drawer</h3>
       <img
@@ -55,7 +55,7 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
   </Drawer>
   <br />
   <Drawer title={"Drawer Title"} placement={"bottom"}>
-    <div>
+    <div style={{ margin: "1em" }}>
       <h3>Title inside the drawer</h3>
       <img
         alt="example"
@@ -80,7 +80,7 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
     placement={"right"}
     onVisibleChange={visible => console.log(visible)}
   >
-    <div>
+    <div style={{ margin: "1em" }}>
       <h3>Title inside the drawer</h3>
       <p>You can assign a div with a footer on Body</p>
     </div>
