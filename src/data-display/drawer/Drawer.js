@@ -202,7 +202,9 @@ Drawer.propTypes = {
   /** width of drawer while its placement is right or left */
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** z-index property of drawer */
-  zIndex: PropTypes.number
+  zIndex: PropTypes.number,
+  /** amount of time to wait from applying the animation */
+  animationDelay: PropTypes.number
 };
 
 Drawer.defaultProps = {
@@ -220,7 +222,8 @@ Drawer.defaultProps = {
   visible: false,
   handleClose: noop,
   width: 310,
-  zIndex: 1000
+  zIndex: 1000,
+  animationDelay: 1000
 };
 
 export default Drawer;

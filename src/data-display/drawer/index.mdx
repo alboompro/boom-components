@@ -72,20 +72,81 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
 
 ## Exemplos
 
-### Exemplo 1
+### Inserindo formulário
+
+É possível inserir um formulário dentro do Drawer.
 
 <Playground>
   <Drawer
-    title={"Drawer Title"}
+    title={"Create your account"}
     placement={"right"}
     onVisibleChange={visible => console.log(visible)}
   >
-    <div style={{ margin: "1em" }}>
-      <h3>Title inside the drawer</h3>
-      <p>You can assign a div with a footer on Body</p>
+    <div
+      style={{
+        margin: "1em",
+        padding: "20px",
+        border: "2px solid #eee",
+        borderRadius: "6px"
+      }}
+    >
+      <h3>Get Started</h3>
+      <p>Lets us create your account</p>
+      <div style={{ width: "100%" }}>
+        <input
+          type="text"
+          placeholder="Full Name"
+          style={{
+            width: "100%",
+            border: 0,
+            borderBottom: "2px solid #eee",
+            lineHeight: "30px"
+          }}
+        />
+        <input
+          type="text"
+          placeholder="E-mail"
+          style={{
+            width: "100%",
+            border: 0,
+            borderBottom: "2px solid #eee",
+            lineHeight: "30px"
+          }}
+        />
+        <input
+          type="text"
+          placeholder="Password"
+          style={{
+            width: "100%",
+            border: 0,
+            borderBottom: "2px solid #eee",
+            lineHeight: "30px"
+          }}
+        />
+        <div>
+          <Button type="primary" style={{ width: "100%", margin: "10px 0" }}>
+            Get started
+          </Button>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            fontSize: "13px"
+          }}
+        >
+          <p>
+            Not registered? <a href="#">Create an account</a>
+          </p>
+        </div>
+      </div>
     </div>
   </Drawer>
 </Playground>
+
+### MultiLevel Drawer
+
+Há a possibilidade de utilizar um Drawer com múltiplos níveis de abas.
 
 ## API
 

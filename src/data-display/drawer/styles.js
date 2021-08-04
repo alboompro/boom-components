@@ -93,9 +93,8 @@ export const DrawerStyle = styled.div`
   color: #000000d9;
 `;
 
+// Drawer Wrapper Style
 export const DrawerWrapper = styled.div`
-  // Add size change by prop and swipe location (top and bottom)
-  // display: block;
   position: fixed;
   z-index: ${props => props.zIndex};
   ${props => {
