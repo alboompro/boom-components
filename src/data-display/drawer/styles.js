@@ -123,6 +123,7 @@ export const DrawerWrapper = styled.div`
     }
   }}
   ${props => {
+    debugger;
     if (props.placement !== "top" && props.placement !== "bottom")
       return `width: ${
         patternSize(props.width) ? props.width : `${props.width}px`

@@ -102,8 +102,8 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
         </Drawer>
       </div>
     );
-  }
-}
+
+} }
 
 </Playground>
 
@@ -236,6 +236,7 @@ Há a possibilidade de utilizar um Drawer com múltiplos níveis de abas.
           visible={isDrawerOpen}
           handleClose={closeDrawer}
           backdrop={false}
+          width={370}
         >
           <Button onClick={() => toggleChildrenDrawer()}>Two-Level Drawer</Button>
           <Drawer
