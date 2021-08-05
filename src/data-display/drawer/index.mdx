@@ -6,7 +6,6 @@ menu: Data Display
 import { Playground, Props } from "docz";
 
 import Drawer from "./Drawer.js"; // For initial tests only
-import PropTypes from "prop-types";
 import Button from "../../general/button/Button.js";
 
 # Drawer
@@ -225,12 +224,14 @@ Há a possibilidade de utilizar um Drawer com múltiplos níveis de abas.
           title="Multi-Level Drawer"
           visible={isDrawerOpen}
           handleClose={closeDrawer}
+          backdrop={false}
         >
-          <Button onClick={() => toggleDrawer()}>Two-Level Drawer</Button>
+          <Button onClick={() => toggleChildrenDrawer()}>Two-Level Drawer</Button>
           <Drawer
             title="Two-Level Drawer"
-            visible={toggleDrawer}
-            handleClose={closeDrawer}
+            visible={isDrawerChildrenOpen}
+            handleClose={closeChildrenDrawer}
+            isChild
           >
             <p>This is two-level drawer</p>
           </Drawer>

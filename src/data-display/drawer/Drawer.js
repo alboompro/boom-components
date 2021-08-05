@@ -18,6 +18,7 @@ const Drawer = ({
   title,
   footer,
   closeButton,
+  isChild,
   onClose,
   children,
   backdrop,
@@ -46,7 +47,10 @@ const Drawer = ({
       onVisibleChange(); // Prop type: onVisibleChange = () => {};
       setDebouncedVisible(false);
       timeoutRef.current = setTimeout(() => {
-        disableNavegation(false);
+        if (isChild && backdrop)
+          disableNavegation(false);
+        else
+          disableNavegation(true);
         setHide(true);
       }, animationdelay); // Adicionar prop.delay para controle de animação
     }
@@ -199,6 +203,8 @@ Drawer.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** whether drawer is visible or not */
   visible: PropTypes.bool,
+  /** When Drawer is the son of another drawer */
+  isChild: PropTypes.bool,
   /** width of drawer while its placement is right or left */
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** z-index property of drawer */
@@ -220,6 +226,7 @@ Drawer.defaultProps = {
   placement: "right",
   title: null,
   visible: false,
+  isChild: false,
   handleClose: noop,
   width: 310,
   zIndex: 1000,

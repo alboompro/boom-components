@@ -1,9 +1,10 @@
 import styled, { keyframes } from "styled-components";
 
-// RegEx to validate the size format
-let patternSize = RegExp(
-  "/[0-9]+(.[0-9]+)?(ch|cm|em|ex|fr|in|mm|pc|pt|rem|vh|vmax|vmin|vw|px|%|em)/g"
-);
+// function that tests a RegEx to validate the size format
+const patternSize = (string) => {
+  const regex = /^[0-9]+(\.[0-9]+)?(px|em|rem|vh|vw|vmin|vmax|mm|cm|in|pt|pc)$/;
+  return regex.test(string);
+};
 
 // -> fade animations for the backdrop
 const fadeIn = keyframes`
@@ -124,11 +125,11 @@ export const DrawerWrapper = styled.div`
   ${props => {
     if (props.placement !== "top" && props.placement !== "bottom")
       return `width: ${
-        patternSize.test(props.width) ? props.width : `${props.width}px`
+        patternSize(props.width) ? props.width : `${props.width}px`
       }; height: 100%`;
     else
       return `height: ${
-        patternSize.test(props.height) ? props.height : `${props.height}px`
+        patternSize(props.height) ? props.height : `${props.height}px`
       }; width: 100%`;
   }}
   animation: ${props => {
