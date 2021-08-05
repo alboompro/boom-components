@@ -38,8 +38,11 @@ export const Popover = styled.div`
     visibility: hidden;
   }
 
-  &.popover-message{
+  .popover-message{
+    display: flex;
+    justify-content: center;
     position: relative;
+    align-items: center;
   }
 
   >section{

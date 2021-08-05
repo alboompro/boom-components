@@ -1,41 +1,44 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container, Popover, Button } from "./styles";
+import { Button, Container, Popover } from "./styles";
 
-const Popconfirm = ({actionHandler, position, title, okText, cancelText, containerWidth, confirm, cancel, visible}) => {
+const Popconfirm = ({
+  children, 
+  position,
+  containerStyle,
+  visible,
+  popoverContent,
+  footerContent
+  }) => {
   
-  return(
-    <Container style={{width:containerWidth}}>
-      {actionHandler}
-      <Popover position={{top:position.top, right:position.right, left:position.left, bottom:position.bottom}} className={visible ? "popover-show" : "popover-hidden"}>
+  return (
+    <Container style={{containerStyle}}>
+      {children}
+      <Popover position={{top:position.top, right:position.right, left:position.left, bottom:position.bottom}}
+        className={visible ? "popover-show" : "popover-hidden"}>
         <div className="popover-message">
-          {title}
+          { popoverContent }
         </div>
-        <section>
-          <Button onClick={confirm}>{okText}</Button>
-          <Button style={{backgroundColor:"red"}} onClick={cancel}>{cancelText}</Button>
-        </section>
+          { footerContent ? footerContent :
+            <section>
+              <Button style={{"marginRight":"10px", "backgroundColor":"green", "color":"white"}}
+                onClick={() => {alert("Sucesso!")}}>Accept</Button>
+              <Button style={{"backgroundColor":"Red", "color":"white"}} 
+                onClick={() => {alert("Cancelado!")}}>Deny</Button>
+            </section>
+          }
       </Popover>
     </Container>
   )
 }
 
 Popconfirm.propTypes = {
-  /** Tag that's gonna display the message to use the popover */
-  actionHandler: PropTypes.element.isRequired,
   /** Property to make the popover hide and show */
-  visible:PropTypes.bool.isRequired,
-  /** Text displayed on the confirmation */
-  title: PropTypes.element.isRequired,
-  /** Callback on confirmation button click */
-  confirm: PropTypes.func.isRequired,
-  /** Callback on cancel button click */
-  cancel: PropTypes.func.isRequired,
-  /** Text that goes inside of ok button */
-  okText: PropTypes.string,
-  /** Text that goes inside of cancel button */
-  cancelText: PropTypes.string,
-
+  visible: PropTypes.bool.isRequired,
+  /** Content placeable in the body of the popover*/
+  popoverContent: PropTypes.node.isRequired,
+  /** Popover footer content (buttons recommended to place your desirable actions)*/
+  footerContent: PropTypes.node,
   /** Defines the top, right, bottom, left of the popover */
   position: PropTypes.shape({
     top: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -44,23 +47,19 @@ Popconfirm.propTypes = {
     left: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }),
   /** Defines the width from the Container */
-  containerWidth: PropTypes.string
+  containerStyle: PropTypes.object
 };
 
 Popconfirm.defaultProps = {
-  actionHandler: <a href="#">Delete</a>,
-  title: <p>Confirmation text</p>,
-  confirm: null,
-  cancel: null,
-  okText: "OK",
-  cancelText:"Cancel",
+  visible: false,
   position: {
     top: "20px",
     right: null,
-    left: "50px",
+    left: "70px",
     bottom: null
   },
-  containerWidth: null
+  containerStyle: {width:"800px"},
+  footerContent: null
 };
 
 export default Popconfirm;

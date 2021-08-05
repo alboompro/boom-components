@@ -17,92 +17,69 @@ The Popconfirm component is a tool to open a confirmation popover on any button 
 
 It's most used for asking for user confirmation and it's more lightweight than the usual confirmation modal.
 
-## Basic example
+## Basic examples
 
 <Playground>
-    {() => { 
-        const [visible, setVisible] = useState(false);
+  {() => { 
+    const [visible, setVisible] = useState(false);
 
-        const showPopconfirm = () => {
-            setVisible(!visible);
-        };
+    const position = {
+        top:"20px",
+        right:"50px"
+    };   
 
-        const confirm = (e) => {
-            console.log(e, "success");
-        };
 
-        const cancel = (e) => {
-            console.log(e, "cancel");
-        };
+    const footerContent= (
+      <section>
+        <button style={{"marginRight":"10px", "backgroundColor":"green", "color":"white"}}
+          onClick={() => {alert("Sucesso!")}}>Aceitar</button>
+        <button style={{"backgroundColor":"Red", "color":"white"}} 
+          onClick={() => {alert("Cancelado!")}}>Recusar</button>
+      </section>
+    );
 
-        const position = {
-            top:"20px",
-            left:"50px"
-        };
-        const title = <p>Whatever you want to display</p>;
-        const okText = "OK";
-        const cancelText = "Cancel";
-        const actionHandler = <a style={{cursor:'pointer'}} onClick={showPopconfirm}>Delete</a>
-        
-
-        return(
-        <Popconfirm 
-            title={title} 
-            okText={okText} 
-            cancelText={cancelText}
-            containerWidth="400px"
-            position={position}
-            confirm={confirm}
-            cancel={cancel}
-            visible={visible}
-            actionHandler={actionHandler}
-        >
-        </Popconfirm>
-        )
-    }}
+    return(
+      <Popconfirm 
+        visible={ visible }
+        popoverContent={ <p>Confirmation</p> }
+        footerContent= { footerContent }
+      >
+        <a href="#" onClick={() => {setVisible(!visible)}}> Clique aqui! </a>
+      </Popconfirm>
+    )
+  }}
 </Playground>
 
 ```jsx
-    {() => { 
-        const [visible, setVisible] = useState(false);
+  {() => { 
+    const [visible, setVisible] = useState(false);
 
-        const showPopconfirm = () => {
-            setVisible(!visible);
-        };
+    const position = {
+        top:"20px",
+        right:"50px"
+    };   
 
-        const confirm = (e) => {
-            console.log(e, "success");
-        };
+    const popoverContent= <p>Confirmation</p>;
 
-        const cancel = (e) => {
-            console.log(e, "cancel");
-        };
+    const footerContent= (
+      <section>
+        <button style={{"marginRight":"10px", "backgroundColor":"green", "color":"white"}}
+          onClick={() => {alert("Sucesso!")}}>Accept</button>
+        <button style={{"backgroundColor":"Red", "color":"white"}} 
+          onClick={() => {alert("Cancelado!")}}>Deny</button>
+      </section>
+    );
 
-        const position = {
-            top:"20px",
-            left:"50px"
-        };
-        const title = <p>Whatever you want to display</p>;
-        const okText = "OK";
-        const cancelText = "Cancel";
-        const actionHandler = <a style={{cursor:'pointer'}} onClick={showPopconfirm}>Delete</a>
-        
-
-        return(
-        <Popconfirm 
-            title={title} 
-            okText={okText} 
-            cancelText={cancelText}
-            containerWidth="400px"
-            position={position}
-            confirm={confirm}
-            cancel={cancel}
-            visible={visible}
-            actionHandler={actionHandler}
-        >
-        </Popconfirm>
-        )
-    }}
+    return(
+      <Popconfirm 
+        visible={ visible }
+        popoverContent={ popoverContent }
+        footerContent= { footerContent }
+      >
+        <a href="#" onClick={() => {setVisible(!visible)}}> Clique aqui! </a>
+      </Popconfirm>
+    )
+  }}
 ```
 
 ## API
