@@ -6,10 +6,79 @@ menu: Data Display
 import { Playground, Props } from 'docz'
 
 import Breadcrumb from './Breadcrumb'
+import Icon from '../../general/icon'
 
 # Breadcrumb
 
-Breadcrumb component.
+O breadcrumb é utilizado para orientar o usuário no caminho que foi percorrido pelas categorias, até chegar ao seu destino atual dentro do site. Sua tradução, ao pé da letra, significa migalhas de pão,
+sendo uma analogia aos contos de João e Maria, que deixavam rastros de migalhas de pão para lembrar o caminho de casa.
+
+## Quando Utilizar
+
+O breadcrumb deve ser utilizado quando o site possui um sistema de hierarquias, para facilitar a navegação e localização do usuário.
+
+### Exemplos
+
+### Uso Básico
+
+<Playground>
+    {() => {
+        
+        const selected = crumb => {console.log(crumb);};
+        const crumbs = [
+            {
+                name: 'Home', 
+                link: '#',
+                icon: <Icon kind="bold" group="arrows-diagrams" category="arrows" file="arrow-button-right.svg" size="10" color="#000000" />,
+            },
+            {
+                name: 'Busca', 
+                link: '#',
+                icon: <Icon kind="bold" group="arrows-diagrams" category="arrows" file="arrow-button-right.svg" size="10" color="#000000" />,
+            },
+            {
+                name: 'Nuvem', 
+                link: '#',
+                separator: "/"
+            }
+        ];
+        return(
+        <Breadcrumb crumbs={crumbs} selected={selected} />     
+        )
+        }
+    }
+
+</Playground>
+
+```jsx
+import Breadcrumb from "@alboom/boom-components/data-display/breadcrumb";
+
+    {() => {
+
+        const selected = crumb => {console.log(crumb)};
+        const crumbs = [
+            {
+                name: 'Home', 
+                link: '#',
+                icon: <Icon kind="bold" group="arrows-diagrams" category="arrows" file="arrow-button-right.svg" size="10" color="#000000" />,
+            },
+            {
+                name: 'Busca', 
+                link: '#',
+                icon: <Icon kind="bold" group="arrows-diagrams" category="arrows" file="arrow-button-right.svg" size="10" color="#000000" />,
+            },
+            {
+                name: 'Nuvem', 
+                link: '#',
+                separator: "/"
+            }
+        ];
+        return(
+        <Breadcrumb crumbs={crumbs} selected={selected} />     
+        )
+        }
+    }
+```
 
 ## API
 
