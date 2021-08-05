@@ -31,6 +31,7 @@ export { default as Placeholder } from "./feedback/placeholder";
 export { default as Spin } from "./feedback/spin";
 export { default as Skeleton } from "./feedback/skeleton";
 export { default as Tooltip } from "./feedback/tooltip";
+export { default as Popconfirm } from "./data-entry/popconfirm";
 
 export { default as Button } from "./general/button";
 export { default as Icon } from "./general/icon";

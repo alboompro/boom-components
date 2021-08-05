@@ -1,0 +1,87 @@
+---
+name: Popconfirm
+menu: Data Entry
+---
+
+import { Playground, Props } from 'docz'
+
+import Popconfirm from './popConfirm'
+
+import {useState} from 'react'
+
+# Popconfirm
+
+The Popconfirm component is a tool to open a confirmation popover on any button or anchor that you would like.
+
+## When to use 
+
+It's most used for asking for user confirmation and it's more lightweight than the usual confirmation modal.
+
+## Basic examples
+
+<Playground>
+  {() => { 
+    const [visible, setVisible] = useState(false);
+
+    const position = {
+        top:"20px",
+        right:"50px"
+    };   
+
+
+    const footerContent= (
+      <section>
+        <button style={{"marginRight":"10px", "backgroundColor":"green", "color":"white"}}
+          onClick={() => {alert("Sucesso!")}}>Aceitar</button>
+        <button style={{"backgroundColor":"Red", "color":"white"}} 
+          onClick={() => {alert("Cancelado!")}}>Recusar</button>
+      </section>
+    );
+
+    return(
+      <Popconfirm 
+        visible={ visible }
+        popoverContent={ <p>Confirmation</p> }
+        footerContent= { footerContent }
+      >
+        <a href="#" onClick={() => {setVisible(!visible)}}> Clique aqui! </a>
+      </Popconfirm>
+    )
+  }}
+</Playground>
+
+```jsx
+  {() => { 
+    const [visible, setVisible] = useState(false);
+
+    const position = {
+        top:"20px",
+        right:"50px"
+    };   
+
+    const popoverContent= <p>Confirmation</p>;
+
+    const footerContent= (
+      <section>
+        <button style={{"marginRight":"10px", "backgroundColor":"green", "color":"white"}}
+          onClick={() => {alert("Sucesso!")}}>Accept</button>
+        <button style={{"backgroundColor":"Red", "color":"white"}} 
+          onClick={() => {alert("Cancelado!")}}>Deny</button>
+      </section>
+    );
+
+    return(
+      <Popconfirm 
+        visible={ visible }
+        popoverContent={ popoverContent }
+        footerContent= { footerContent }
+      >
+        <a href="#" onClick={() => {setVisible(!visible)}}> Clique aqui! </a>
+      </Popconfirm>
+    )
+  }}
+```
+
+## API
+
+<Props of={Popconfirm} />
