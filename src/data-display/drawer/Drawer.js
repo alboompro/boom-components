@@ -47,10 +47,7 @@ const Drawer = ({
       onVisibleChange(); // Prop type: onVisibleChange = () => {};
       setDebouncedVisible(false);
       timeoutRef.current = setTimeout(() => {
-        if (isChild && backdrop)
-          disableNavegation(false);
-        else
-          disableNavegation(true);
+        disableNavegation(false);
         setHide(true);
       }, animationdelay); // Adicionar prop.delay para controle de animação
     }
@@ -59,9 +56,14 @@ const Drawer = ({
   useEffect(() => () => clearTimeout(timeoutRef.current), []);
 
   const disableNavegation = disable => {
-    backdrop && disable
+    if (!isChild)
+     backdrop && disable
       ? (document.querySelector(":root").style.overflow = "hidden")
       : (document.querySelector(":root").style.overflow = "auto");
+    else
+      backdrop && disable
+        ? (document.querySelector(":root").style.overflow = "hidden")
+        : (document.querySelector(":root").style.overflow = "auto");
   };
 
   const BackdropProps = {
