@@ -7,6 +7,7 @@ import { Playground, Props } from "docz";
 
 import Drawer from "./Drawer.js"; // For initial tests only
 import Button from "../../general/button/Button.js";
+import Radio from "../../data-entry/radio/Radio.js";
 
 # Drawer
 
@@ -53,14 +54,13 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
 
 </Playground>
 
-É possível alterar a localização do Drawer com o atributo "placement".
-
-<!-- To do: change to radio button -->
+É possível alterar a localização do Drawer com o atributo "placement", podendo aparecer em qualquer borda da tela.
 
 <Playground>
 {
   () => {
     const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+    const [placement, setPlacement] = React.useState("right");
 
     const closeDrawer = () => {
       setIsDrawerOpen(false);
@@ -71,13 +71,23 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
     };
 
     return (
-      <>
+      <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '1em' }}>
+        <div style={{ display: 'flex', marginBottom: '1em' }}>
+          <Radio id="1" name="radio-simples" value="right" label="Direita"
+            defaultChecked onChange={e =>  setPlacement(e.target.value)} />
+          <Radio id="2" name="radio-simples" value="left" label="Esquerda"
+            onChange={e => setPlacement(e.target.value) } />
+          <Radio id="3" name="radio-simples" value="top" label="Topo"
+            onChange={e => setPlacement(e.target.value) } />
+          <Radio id="4" name="radio-simples" value="bottom" label="Baixo"
+          onChange={e => setPlacement(e.target.value) } />
+        </div>
         <Button onClick={() => toggleDrawer()}>Open Drawer</Button>
         <Drawer
           visible={isDrawerOpen}
           handleClose={closeDrawer}
           title={"Drawer Title"}
-          placement={"top"}
+          placement={placement}
         >
           <div>
             <h3>Title inside the drawer</h3>
@@ -89,10 +99,10 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
             <p>You can assign a div with a footer on Body</p>
           </div>
         </Drawer>
-      </>
+      </div>
     );
-
-} }
+  }
+}
 
 </Playground>
 
