@@ -1,5 +1,10 @@
 import styled, { keyframes } from "styled-components";
 
+// RegEx to validate the size format
+let patternSize = RegExp(
+  "/[0-9]+(.[0-9]+)?(ch|cm|em|ex|fr|in|mm|pc|pt|rem|vh|vmax|vmin|vw|px|%|em)/g"
+);
+
 // -> fade animations for the backdrop
 const fadeIn = keyframes`
   from {
@@ -119,9 +124,12 @@ export const DrawerWrapper = styled.div`
   ${props => {
     if (props.placement !== "top" && props.placement !== "bottom")
       return `width: ${
-        isNaN(props.width) ? props.width : `${props.width}px`
+        patternSize.test(props.width) ? props.width : `${props.width}px`
       }; height: 100%`;
-    return `height: ${props.height}px; width: 100%`;
+    else
+      return `height: ${
+        patternSize.test(props.height) ? props.height : `${props.height}px`
+      }; width: 100%`;
   }}
   animation: ${props => {
     if (props.visible) {
@@ -204,9 +212,13 @@ export const DrawerBody = styled.div`
       case "right":
         return `height: 100vh;`;
       case "top":
-        return `height: calc(${props.height}px - 100px);`; // - 30 - 20 - 20 - 20 - 10
+        return `height: calc(${
+          patternSize(props.height) ? props.height : `${props.height}px`
+        } - 100px);`; // 30 + 20 + 20 + 20 + 10 = 100px
       case "bottom":
-        return `height: calc(${props.height}px - 100px);`; // - 30 - 20 - 20 - 20 - 10
+        return `height: calc(${
+          patternSize(props.height) ? props.height : `${props.height}px`
+        } - 100px);`; // 30 + 20 + 20 + 20 + 10 = 100px
 
       default:
         break;
