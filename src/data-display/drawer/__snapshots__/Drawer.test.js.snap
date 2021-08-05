@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Drawer - Snapshot Renders the component correctly 1`] = `
+<Portal>
+  <styled.div>
+    <styled.div
+      animationDelay={777}
+      animationdelay={1000}
+      backdrop={false}
+      backdropClosable={false}
+      backdropStyle={
+        Object {
+          "backgroundColor": "red",
+        }
+      }
+      bodyStyle={Object {}}
+      destroyOnClose={false}
+      getContainer={[Function]}
+      height={450}
+      placement="top"
+      visible={true}
+      width={600}
+      zIndex={1001}
+    />
+    <styled.div
+      animationDelay={777}
+      backdropClosable={false}
+      backdropStyle={
+        Object {
+          "backgroundColor": "red",
+        }
+      }
+      bodyStyle={Object {}}
+      destroyOnClose={false}
+      getContainer={[Function]}
+      height={450}
+      placement="top"
+      visible={true}
+      width={600}
+      zIndex={1001}
+    >
+      <styled.div>
+        <styled.div>
+          <styled.div
+            animationDelay={777}
+            backdropClosable={false}
+            backdropStyle={
+              Object {
+                "backgroundColor": "red",
+              }
+            }
+            bodyStyle={Object {}}
+            destroyOnClose={false}
+            getContainer={[Function]}
+            height={450}
+            placement="top"
+            style={Object {}}
+            width={600}
+            zIndex={1001}
+          >
+            <div>
+              Drawer Content
+            </div>
+          </styled.div>
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </styled.div>
+</Portal>
+`;
