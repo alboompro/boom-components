@@ -90,14 +90,21 @@ Tendo o comportamento de um painel que desliza lateralmente sobrepondo a página
           title={"Drawer Title"}
           placement={placement}
         >
-          <div>
-            <h3>Title inside the drawer</h3>
-            <img
-              alt="example"
-              style={{ width: "100%", borderRadius: "4px" }}
-              src="https://images.unsplash.com/photo-1523597020744-b68b1edd3e1c"
-            />
-            <p>You can assign a div with a footer on Body</p>
+          <div style={{ display: 'flex', flexDirection: 'column', height: '90%' }}>
+            <div style={{ flex: '1' }}>
+              <h3>Title inside the drawer</h3>
+              <img
+                alt="example"
+                style={{ width: "100%", borderRadius: "4px" }}
+                src="https://images.unsplash.com/photo-1523597020744-b68b1edd3e1c"
+              />
+              <p>You can assign content to Drawer, containing a footer with buttons.</p>
+              <p>As this example</p>
+            </div>
+            <div id="footer" style={{ display: 'flex', padding: '1em', justifyContent: 'space-between' }}>
+              <Button onClick={closeDrawer} type="primary">OK</Button>
+              <Button onClick={closeDrawer} type="secundary">Cancel</Button>
+            </div>
           </div>
         </Drawer>
       </div>
