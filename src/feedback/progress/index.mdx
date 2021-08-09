@@ -1,0 +1,52 @@
+---
+name: Progress
+menu: Feedback
+---
+
+import { Playground, Props } from "docz";
+
+import Progress from "./Progress.js";
+import Button from "../../general/button/Button.js";
+
+# Progress
+
+Uma barra de progresso de uma tarefa.
+
+## Quando usar?
+
+Quando você precisa mostrar o progresso de uma tarefa.
+
+## Exemplos
+
+### Uso Básico
+
+<Playground>
+{
+  () => {
+    const [value, setValue] = React.useState(0);
+
+    increment = () => setValue(prev => (prev < 100) ? prev + 10 : prev);
+    decrement = () => setValue(prev => (prev > 0) ? prev - 10 : prev);
+    reset = () => setValue(0);
+
+    return (
+      <>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+          <Button onClick={increment}>Aumentar</Button>
+          <Button onClick={decrement}>Diminuir</Button>
+          <Button onClick={reset}>Resetar</Button>
+        </div>
+        <Progress current={value} text={true} />
+      </>
+    );
+
+  }
+}
+
+</Playground>
+
+## API
+
+### Progress
+
+<Props of={Progress} />
