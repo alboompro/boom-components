@@ -40,8 +40,35 @@ Quando você precisa mostrar o progresso de uma tarefa.
       </>
     );
 
-  }
-}
+} }
+
+</Playground>
+
+### Progresso de Tarefa
+
+Como propósito principal do componente é mostrar o progresso de uma tarefa.
+Observe a simulação do comportamento do componente.
+
+<Playground>
+{
+  () => {
+    const [value, setValue] = React.useState(0);
+
+    useTimer = () => {
+      setTimeout(() => {
+        setValue(prev => (prev < 100) ? prev + 1 : prev);
+        useTimer();
+      }, Math.floor(Math.random() * (20000 - 200) + 700));
+    };
+    useTimer();
+
+    return (
+      <>
+        <Progress current={value} text={true} />
+      </>
+    );
+
+} }
 
 </Playground>
 
