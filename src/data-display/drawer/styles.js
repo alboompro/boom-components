@@ -68,7 +68,6 @@ const bottomSlideOut = keyframes`
   to { transform: translateY(100%); }
 `;
 
-// Backdrop Style
 export const Backdrop = styled.div`
   content: "";
   ${props => (props.backdrop ? "display: none;" : "display: block;")}
@@ -84,12 +83,10 @@ export const Backdrop = styled.div`
   ${props => (props.visible ? "opacity: 0.8;" : "opacity: 0;")}
 `;
 
-// Drawer Container Style
 export const DrawerContainer = styled.div`
   display: flex;
 `;
 
-// Drawer Style
 export const DrawerStyle = styled.div`
   position: fixed;
   z-index: ${props => props.zIndex};
@@ -99,7 +96,6 @@ export const DrawerStyle = styled.div`
   color: #000000d9;
 `;
 
-// Drawer Wrapper Style
 export const DrawerWrapper = styled.div`
   position: fixed;
   z-index: ${props => props.zIndex};
