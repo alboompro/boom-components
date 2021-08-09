@@ -32,9 +32,9 @@ Quando você precisa mostrar o progresso de uma tarefa.
     return (
       <>
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-          <Button onClick={increment}>Aumentar</Button>
-          <Button onClick={decrement}>Diminuir</Button>
-          <Button onClick={reset}>Resetar</Button>
+          <Button onClick={increment} style={{ margin: '5px' }}>Aumentar</Button>
+          <Button onClick={decrement} style={{ margin: '5px' }}>Diminuir</Button>
+          <Button onClick={reset} style={{ margin: '5px' }}>Resetar</Button>
         </div>
         <Progress current={value} text={true} />
       </>
@@ -46,7 +46,7 @@ Quando você precisa mostrar o progresso de uma tarefa.
 
 ### Progresso de Tarefa
 
-Como propósito principal do componente é mostrar o progresso de uma tarefa.
+O propósito principal do componente é mostrar o progresso de uma tarefa.  
 Observe a simulação do comportamento do componente.
 
 <Playground>
@@ -54,17 +54,20 @@ Observe a simulação do comportamento do componente.
   () => {
     const [value, setValue] = React.useState(0);
 
-    useTimer = () => {
+    timer = useTimer = () => {
       setTimeout(() => {
         setValue(prev => (prev < 100) ? prev + 1 : prev);
         useTimer();
-      }, Math.floor(Math.random() * (20000 - 200) + 700));
+      }, Math.floor(Math.random() * 2000 + 700));
     };
     useTimer();
 
     return (
       <>
-        <Progress current={value} text={true} />
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+          <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Resetar</Button>
+        </div>
+        <Progress current={value} showText={true} />
       </>
     );
 
