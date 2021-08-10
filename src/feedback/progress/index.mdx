@@ -86,6 +86,10 @@ O propósito principal do componente é mostrar o progresso de uma tarefa.   O
     decrement = () => setValue(prev => (prev > 0) ? prev - 25 : prev);
     reset = () => setValue(0);
 
+    const customStyle = () => {
+      return value >= 100 ? { backgroundColor: '#54b14f' } : { backgroundColor: '#87CEEB' }
+    }
+
     return (
       <>
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
@@ -99,7 +103,7 @@ O propósito principal do componente é mostrar o progresso de uma tarefa.   O
             <Icon kind="bold" group="interface-essential" category="alerts" file="alert-diamond.svg" size="16" color="#F9C318" />,
             <Icon kind="bold" group="interface-essential" category="form-validation" file="check-circle-1.svg" size="16" color="#54B14F" />
           ]}
-          styleProgress={{ backgroundColor: '#87CEEB' }} />
+          styleProgress={customStyle()} />
       </>
     );
 
