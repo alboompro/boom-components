@@ -14,9 +14,9 @@ const Progress = ({
   min,
   total,
   current,
-  showIcon,
-  showText,
+  showLabel,
   unitMeasurement,
+  customLabel,
   styleProgress,
   color,
   icons,
@@ -50,23 +50,20 @@ const Progress = ({
     }
   }, [current, total, min]);
 
-  const renderIcon = () => showIcon && <span>{icons && icons[status]}</span>;
+  const getLabel = () =>
+    customLabel ? (
+      <span>{customLabel[status]}</span>
+    ) : (
+      <span>{`${current}${unitMeasurement}`}</span>
+    );
 
-  const renderLabel = () => {
-    if (showText || showIcon) {
-      return (
-        <ProgressText {...textProps}>
-          <span>{`${current}${unitMeasurement}`}</span>
-          {renderIcon()}
-        </ProgressText>
-      );
-    }
-  };
+  const renderLabel = () =>
+    showLabel && <ProgressText {...textProps}>{getLabel()}</ProgressText>;
 
   return (
     <ProgressWrapper>
       <ContainerBar className="outer">
-        <Bar className="inner"> 
+        <Bar className="inner">
           <ProgressBar {...progressProps} />
         </Bar>
       </ContainerBar>
@@ -84,14 +81,12 @@ Progress.propTypes = {
   current: PropTypes.number,
   /** Current progress bar color */
   color: PropTypes.string,
-  /** Show/Hide icon on progress bar label */
-  showIcon: PropTypes.bool,
-  /** Array of icons for progress bar label */
-  icons: PropTypes.object,
-  /** Show/Hide text on progress bar label */
-  showText: PropTypes.bool,
+  /** Show/Hide progress bar label */
+  showLabel: PropTypes.bool,
   /** Measuring unit used on progress bar label */
   unitMeasurement: PropTypes.string,
+  /** Custom Nodes Array for Progress Bar Label [Start,In progress,Finish] */
+  customLabel: PropTypes.array,
   /** Style object for progress bar */
   styleProgress: PropTypes.object,
   /** Style object for progress bar label */
@@ -103,8 +98,7 @@ Progress.defaultProps = {
   total: 100,
   current: 0,
   color: "royalblue",
-  showIcon: false,
-  showText: false,
+  showLabel: false,
   unitMeasurement: "%",
   styleProgress: {},
   styleText: {}

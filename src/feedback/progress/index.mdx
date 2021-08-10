@@ -37,11 +37,11 @@ Quando você precisa mostrar o progresso de uma tarefa.
           <Button onClick={decrement} style={{ margin: '5px' }}>Diminuir</Button>
           <Button onClick={reset} style={{ margin: '5px' }}>Resetar</Button>
         </div>
-        <Progress current={value} showText={true} />
+        <Progress current={value} showLabel />
       </>
     );
-  }
-}
+
+} }
 
 </Playground>
 
@@ -67,11 +67,11 @@ O propósito principal do componente é mostrar o progresso de uma tarefa.   O
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
           <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Resetar</Button>
         </div>
-        <Progress current={value} showText={true} />
+        <Progress current={value} showLabel />
       </>
     );
-  }
-}
+
+} }
 
 </Playground>
 
@@ -93,13 +93,43 @@ O propósito principal do componente é mostrar o progresso de uma tarefa.   O
           <Button onClick={decrement} style={{ margin: '5px' }}>-</Button>
           <Button onClick={reset} style={{ margin: '5px' }}>Resetar</Button>
         </div>
-        <Progress current={value} showIcon
-          icons={[ <Icon name="check" />, <Icon name="close" />, <Icon name="refresh" /> ]}
+        <Progress current={value} showLabel
+          customLabel={[
+            <Icon kind="bold" group="interface-essential" category="alerts" file="alert-diamond.svg" size="16" color="#F9C318" />,
+            <Icon kind="bold" group="interface-essential" category="alerts" file="alert-diamond.svg" size="16" color="#F9C318" />,
+            <Icon kind="bold" group="interface-essential" category="form-validation" file="check-circle-1.svg" size="16" color="#54B14F" />
+          ]}
           styleProgress={{ backgroundColor: '#87CEEB' }} />
       </>
     );
-  }
-}
+
+} }
+
+</Playground>
+
+<Playground>
+{
+  () => {
+    const [value, setValue] = React.useState(0);
+
+    increment = () => setValue(prev => (prev < 100) ? prev + 25 : prev);
+    decrement = () => setValue(prev => (prev > 0) ? prev - 25 : prev);
+    reset = () => setValue(0);
+
+    return (
+      <>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+          <Button onClick={increment} style={{ margin: '5px' }}>+</Button>
+          <Button onClick={decrement} style={{ margin: '5px' }}>-</Button>
+          <Button onClick={reset} style={{ margin: '5px' }}>Resetar</Button>
+        </div>
+        <Progress current={value} showLabel
+          customLabel={[<span>Iniciando tarefa</span>, <span>{value}%</span>, <span>Concluído!</span>]}
+          styleProgress={{ backgroundColor: '#BC8F8F' }} />
+      </>
+    );
+
+} }
 
 </Playground>
 
