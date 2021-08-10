@@ -29,6 +29,7 @@ const Progress = ({
     max: total,
     value: current,
     color,
+    loading: props.loading,
     styleProgress
   };
 
@@ -81,12 +82,14 @@ Progress.propTypes = {
   current: PropTypes.number,
   /** Current progress bar color */
   color: PropTypes.string,
-  /** Show/Hide progress bar label */
+  /** Enables progress bar label */
   showLabel: PropTypes.bool,
   /** Measuring unit used on progress bar label */
   unitMeasurement: PropTypes.string,
-  /** Custom Nodes Array for Progress Bar Label [Start,In progress,Finish] */
+  /** Custom Nodes Array for Progress bar Label */
   customLabel: PropTypes.array,
+  /** Enables progress bar with charging animation */
+  loading: PropTypes.bool,
   /** Style object for progress bar */
   styleProgress: PropTypes.object,
   /** Style object for progress bar label */

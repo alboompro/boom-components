@@ -8,6 +8,7 @@ import { Playground, Props } from "docz";
 import Progress from "./Progress.js";
 import Button from "../../general/button/Button.js";
 import Icon from "../../general/icon/Icon.js";
+import { useEffect } from "react";
 
 # Progress
 
@@ -15,7 +16,8 @@ Uma barra de progresso de uma tarefa.
 
 ## Quando usar?
 
-Quando você precisa mostrar o progresso de uma tarefa.
+- Quando você precisa mostrar o progresso de uma tarefa.
+- Quando uma operação não deve interromper a interface do usuário.
 
 ## Exemplos
 
@@ -35,19 +37,19 @@ Quando você precisa mostrar o progresso de uma tarefa.
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
           <Button onClick={increment} style={{ margin: '5px' }}>Aumentar</Button>
           <Button onClick={decrement} style={{ margin: '5px' }}>Diminuir</Button>
-          <Button onClick={reset} style={{ margin: '5px' }}>Resetar</Button>
+          <Button onClick={reset} style={{ margin: '5px' }}>Reiniciar</Button>
         </div>
         <Progress current={value} showLabel />
       </>
     );
-
-} }
+  }
+}
 
 </Playground>
 
 ### Simulação
 
-O propósito principal do componente é mostrar o progresso de uma tarefa.  
+O propósito principal do componente é mostrar o progresso de uma tarefa.
 Observe a simulação do comportamento do componente.
 
 <Playground>
@@ -55,24 +57,31 @@ Observe a simulação do comportamento do componente.
   () => {
     const [value, setValue] = React.useState(0);
 
-    timer = useTimer = () => {
-      setTimeout(() => {
-        setValue(prev => (prev < 100) ? prev + 1 : prev);
-        useTimer();
-      }, Math.floor(Math.random() * 2000 + 700));
+    const init = () => {
+      const timer = useTimer = () => {
+        value < 100 &&
+        setTimeout(() => {
+          setValue(prev => (prev + 15 < 100) ? prev + 15 : 100);
+          useTimer();
+        }, Math.floor((Math.random() * 1000) + 200));
+      }
+      timer();
+      return () => clearTimeout(timer);
     };
-    useTimer();
+    const reset = () => { clearTimeout(timer); setValue(0); }
+    const customStyle = () => value >= 100 && { backgroundColor: '#54b14f' }
 
     return (
       <>
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-          <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Resetar</Button>
+          <Button onClick={init} style={{ margin: '5px' }}>Iniciar</Button>
+          <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Reiniciar</Button>
         </div>
         <Progress current={value} showLabel />
       </>
     );
-
-} }
+  }
+}
 
 </Playground>
 
@@ -99,7 +108,7 @@ Observe a simulação do comportamento do componente.
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
           <Button onClick={increment} style={{ margin: '5px' }}>+</Button>
           <Button onClick={decrement} style={{ margin: '5px' }}>-</Button>
-          <Button onClick={reset} style={{ margin: '5px' }}>Resetar</Button>
+          <Button onClick={reset} style={{ margin: '5px' }}>Reiniciar</Button>
         </div>
         <Progress current={value} showLabel
           customLabel={[
@@ -110,12 +119,12 @@ Observe a simulação do comportamento do componente.
           styleProgress={customStyle()} />
       </>
     );
-
-} }
+  }
+}
 
 </Playground>
 
-- É possível alternar entre texto e ícones na label da barra de progresso.
+- Alternando entre texto e ícones na label da barra de progresso.
 
 <Playground>
 {
@@ -135,19 +144,55 @@ Observe a simulação do comportamento do componente.
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
           <Button onClick={increment} style={{ margin: '5px' }}>+</Button>
           <Button onClick={decrement} style={{ margin: '5px' }}>-</Button>
-          <Button onClick={reset} style={{ margin: '5px' }}>Resetar</Button>
+          <Button onClick={reset} style={{ margin: '5px' }}>Reiniciar</Button>
         </div>
         <Progress current={value} showLabel
           customLabel={[
-            <span>Iniciando tarefa</span>,
+            <span>Aguardando...</span>,
             <span>{value}%</span>,
             <Icon kind="bold" group="interface-essential" category="form-validation" file="check-circle-1.svg" size="16" color="#54B14F" />]}
           styleProgress={customStyle()} />
       </>
     );
 
-} }
+  }
+}
 
+</Playground>
+
+- Adicionando uma animação de loading a barra de progresso.
+
+<Playground>
+{
+  () => {
+    const [value, setValue] = React.useState(0);
+
+    const init = () => {
+      const timer = useTimer = () => {
+        value < 100 &&
+        setTimeout(() => {
+          setValue(prev => (prev + 1 < 100) ? prev + 1 : 100);
+          useTimer();
+        }, Math.floor((Math.random() * 1000) + 250));
+      }
+      timer();
+      return () => clearTimeout(timer);
+    };
+    const reset = () => { clearTimeout(timer); setValue(0); }
+    const customStyle = () => value >= 100 && { backgroundColor: '#54b14f' }
+
+    return (
+      <>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+          <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Reiniciar</Button>
+          <Button onClick={init} style={{ margin: '5px' }}>Iniciar</Button>
+        </div>
+        <Progress current={value} showLabel loading
+          styleProgress={customStyle() || {}} />
+      </>
+    );
+  }
+}
 </Playground>
 
 ## API
