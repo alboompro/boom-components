@@ -7,6 +7,7 @@ import { Playground, Props } from "docz";
 
 import Progress from "./Progress.js";
 import Button from "../../general/button/Button.js";
+import Icon from "../../general/icon/Icon.js";
 
 # Progress
 
@@ -36,18 +37,17 @@ Quando você precisa mostrar o progresso de uma tarefa.
           <Button onClick={decrement} style={{ margin: '5px' }}>Diminuir</Button>
           <Button onClick={reset} style={{ margin: '5px' }}>Resetar</Button>
         </div>
-        <Progress current={value} text={true} />
+        <Progress current={value} showText={true} />
       </>
     );
-
-} }
+  }
+}
 
 </Playground>
 
 ### Progresso de Tarefa
 
-O propósito principal do componente é mostrar o progresso de uma tarefa.  
-Observe a simulação do comportamento do componente.
+O propósito principal do componente é mostrar o progresso de uma tarefa.   Observe a simulação do comportamento do componente.
 
 <Playground>
 {
@@ -70,8 +70,36 @@ Observe a simulação do comportamento do componente.
         <Progress current={value} showText={true} />
       </>
     );
+  }
+}
 
-} }
+</Playground>
+
+### É possível customizar a barra de progresso
+
+<Playground>
+{
+  () => {
+    const [value, setValue] = React.useState(0);
+
+    increment = () => setValue(prev => (prev < 100) ? prev + 25 : prev);
+    decrement = () => setValue(prev => (prev > 0) ? prev - 25 : prev);
+    reset = () => setValue(0);
+
+    return (
+      <>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+          <Button onClick={increment} style={{ margin: '5px' }}>+</Button>
+          <Button onClick={decrement} style={{ margin: '5px' }}>-</Button>
+          <Button onClick={reset} style={{ margin: '5px' }}>Resetar</Button>
+        </div>
+        <Progress current={value} showIcon
+          icons={[ <Icon name="check" />, <Icon name="close" />, <Icon name="refresh" /> ]}
+          styleProgress={{ backgroundColor: '#87CEEB' }} />
+      </>
+    );
+  }
+}
 
 </Playground>
 

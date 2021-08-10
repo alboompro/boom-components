@@ -19,6 +19,7 @@ const Progress = ({
   unitMeasurement,
   styleProgress,
   color,
+  icons,
   ...props
 }) => {
   const [status, setStatus] = React.useState(0);
@@ -49,18 +50,23 @@ const Progress = ({
     }
   }, [current, total, min]);
 
-  const renderLabel = () =>
-    showText && (
-      <ProgressText {...textProps}>
-        {/* To do: Adicionar renderização de um ícone */}
-        <span>{`${current}${unitMeasurement}`}</span>
-      </ProgressText>
-    );
+  const renderIcon = () => showIcon && <span>{icons && icons[status]}</span>;
+
+  const renderLabel = () => {
+    if (showText || showIcon) {
+      return (
+        <ProgressText {...textProps}>
+          <span>{`${current}${unitMeasurement}`}</span>
+          {renderIcon()}
+        </ProgressText>
+      );
+    }
+  };
 
   return (
     <ProgressWrapper>
       <ContainerBar className="outer">
-        <Bar className="inner">
+        <Bar className="inner"> 
           <ProgressBar {...progressProps} />
         </Bar>
       </ContainerBar>
@@ -78,10 +84,10 @@ Progress.propTypes = {
   current: PropTypes.number,
   /** Current progress bar color */
   color: PropTypes.string,
-  /** The template function of the content */
-  template: PropTypes.func,
   /** Show/Hide icon on progress bar label */
   showIcon: PropTypes.bool,
+  /** Array of icons for progress bar label */
+  icons: PropTypes.object,
   /** Show/Hide text on progress bar label */
   showText: PropTypes.bool,
   /** Measuring unit used on progress bar label */
@@ -97,7 +103,6 @@ Progress.defaultProps = {
   total: 100,
   current: 0,
   color: "royalblue",
-  template: noop,
   showIcon: false,
   showText: false,
   unitMeasurement: "%",

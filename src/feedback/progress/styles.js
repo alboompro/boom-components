@@ -30,8 +30,8 @@ export const ProgressBar = styled.div`
 
   background-color: ${props => props.color};
   width: ${props => props.value}%;
-
   height: 8px;
+  ${props => props.styleProgress};
 `;
 
 export const ProgressText = styled.div`
@@ -40,4 +40,7 @@ export const ProgressText = styled.div`
       ? props.textStyle
       : `margin-left: 8px;
         font-weight: bold;`};
+  & > span {
+    margin: 0 8px;
+  }
 `;
