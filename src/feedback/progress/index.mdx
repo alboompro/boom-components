@@ -45,9 +45,10 @@ Quando você precisa mostrar o progresso de uma tarefa.
 
 </Playground>
 
-### Progresso de Tarefa
+### Simulação
 
-O propósito principal do componente é mostrar o progresso de uma tarefa.   Observe a simulação do comportamento do componente.
+O propósito principal do componente é mostrar o progresso de uma tarefa.  
+Observe a simulação do comportamento do componente.
 
 <Playground>
 {
@@ -75,7 +76,10 @@ O propósito principal do componente é mostrar o progresso de uma tarefa.   O
 
 </Playground>
 
-### É possível customizar a barra de progresso
+### Customizando a barra de progresso
+
+- Utilizando **ícones** na label da barra de progresso.
+- Alterando a **cor** quando a tarefa é concluída.
 
 <Playground>
 {
@@ -111,6 +115,8 @@ O propósito principal do componente é mostrar o progresso de uma tarefa.   O
 
 </Playground>
 
+- É possível alternar entre texto e ícones na label da barra de progresso.
+
 <Playground>
 {
   () => {
@@ -120,6 +126,10 @@ O propósito principal do componente é mostrar o progresso de uma tarefa.   O
     decrement = () => setValue(prev => (prev > 0) ? prev - 25 : prev);
     reset = () => setValue(0);
 
+    const customStyle = () => {
+      return value >= 100 ? { backgroundColor: '#54b14f' } : { backgroundColor: '#87CEEB' }
+    }
+
     return (
       <>
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
@@ -128,8 +138,11 @@ O propósito principal do componente é mostrar o progresso de uma tarefa.   O
           <Button onClick={reset} style={{ margin: '5px' }}>Resetar</Button>
         </div>
         <Progress current={value} showLabel
-          customLabel={[<span>Iniciando tarefa</span>, <span>{value}%</span>, <span>Concluído!</span>]}
-          styleProgress={{ backgroundColor: '#BC8F8F' }} />
+          customLabel={[
+            <span>Iniciando tarefa</span>,
+            <span>{value}%</span>,
+            <Icon kind="bold" group="interface-essential" category="form-validation" file="check-circle-1.svg" size="16" color="#54B14F" />]}
+          styleProgress={customStyle()} />
       </>
     );
 
