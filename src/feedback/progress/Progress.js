@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { noop } from "../../helpers";
 
@@ -22,7 +22,7 @@ const Progress = ({
   icons,
   ...props
 }) => {
-  const [status, setStatus] = React.useState(0);
+  const [status, setStatus] = useState(0);
 
   const progressProps = {
     min,

@@ -95,9 +95,9 @@ Observe a simulação do comportamento do componente.
   () => {
     const [value, setValue] = React.useState(0);
 
-    increment = () => setValue(prev => (prev < 100) ? prev + 25 : prev);
-    decrement = () => setValue(prev => (prev > 0) ? prev - 25 : prev);
-    reset = () => setValue(0);
+    const increment = () => setValue(prev => (prev < 100) ? prev + 25 : prev);
+    const decrement = () => setValue(prev => (prev > 0) ? prev - 25 : prev);
+    const reset = () => setValue(0);
 
     const customStyle = () => {
       return value >= 100 ? { backgroundColor: '#54b14f' } : { backgroundColor: '#87CEEB' }
@@ -131,9 +131,9 @@ Observe a simulação do comportamento do componente.
   () => {
     const [value, setValue] = React.useState(0);
 
-    increment = () => setValue(prev => (prev < 100) ? prev + 25 : prev);
-    decrement = () => setValue(prev => (prev > 0) ? prev - 25 : prev);
-    reset = () => setValue(0);
+    const increment = () => setValue(prev => (prev < 100) ? prev + 25 : prev);
+    const decrement = () => setValue(prev => (prev > 0) ? prev - 25 : prev);
+    const reset = () => setValue(0);
 
     const customStyle = () => {
       return value >= 100 ? { backgroundColor: '#54b14f' } : { backgroundColor: '#87CEEB' }
