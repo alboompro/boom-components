@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Progress Renders the component correctly 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.div>
+      <styled.div
+        color="#87CEEB"
+        loading={true}
+        value={20}
+      />
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <span>
+      20%
+    </span>
+  </styled.div>
+</styled.div>
+`;

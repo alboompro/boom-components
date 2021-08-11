@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 
 import {
   ProgressWrapper,
-  ProgressBar,
-  Bar,
   ContainerBar,
-  ProgressText
+  ProgressLine,
+  ProgressTrailLine,
+  ProgressLineLabel,
+  ProgressCircle,
+  ProgressTrailCircle,
+  ProgressCircleLabel
 } from "./styles.js";
 
 const Progress = ({
@@ -15,6 +18,7 @@ const Progress = ({
   unitMeasurement,
   customLabel,
   color,
+  format,
   ...props
 }) => {
   const progressProps = {
@@ -23,21 +27,73 @@ const Progress = ({
     loading: props.loading
   };
 
+  const containerProps = {
+    format,
+    loading: props.loading
+  };
+
+  const getPath = (cx, cy, r) =>
+    "M " +
+    cx +
+    " " +
+    cy +
+    " m -" +
+    r +
+    ", 0 a " +
+    r +
+    "," +
+    r +
+    " 0 1,0 " +
+    r * 2 +
+    ",0 a " +
+    r +
+    "," +
+    r +
+    " 0 1,0 -" +
+    r * 2 +
+    ",0";
+
   const renderLabel = () =>
-    !hideLabel && (
-      <ProgressText>
-        <span>{`${current}%`}</span>
-      </ProgressText>
+    !hideLabel &&
+    (format == "linear" ? (
+      <ProgressLineLabel>{`${current}%`}</ProgressLineLabel>
+    ) : (
+      <ProgressCircleLabel>{`${current}%`}</ProgressCircleLabel>
+    ));
+
+  const renderProgressBar = () =>
+    format == "linear" ? (
+      <ProgressTrailLine>
+        <ProgressLine {...progressProps} />
+      </ProgressTrailLine>
+    ) : (
+      <svg viewBox="0 0 100 100">
+        <ProgressTrailCircle
+          d={getPath(50, 50, 47)}
+          strokeLinecap="round"
+          fill="none"
+          fillOpacity={0}
+          strokeWidth={6}
+          strokeOpacity={0.5}
+        />
+        <ProgressCircle
+          d={getPath(50, 50, 47)}
+          strokeLinecap="round"
+          fill="none"
+          fillOpacity={0}
+          strokeWidth={6}
+          strokeOpacity={0.5}
+          {...progressProps}
+        />
+      </svg>
     );
 
   return (
     <ProgressWrapper>
-      <ContainerBar>
-        <Bar>
-          <ProgressBar {...progressProps} />
-        </Bar>
+      <ContainerBar {...containerProps}>
+        {renderProgressBar()}
+        {renderLabel()}
       </ContainerBar>
-      {renderLabel()}
     </ProgressWrapper>
   );
 };
@@ -51,14 +107,18 @@ Progress.propTypes = {
   hideLabel: PropTypes.bool,
   /** Enables progress bar with charging animation */
   loading: PropTypes.bool,
+  /** Choose the format of the progress bar */
+  format: PropTypes.oneOf(["linear", "circular"]),
   /** Width of the progress bar */
-  width: PropTypes.number,
+  width: PropTypes.number
 };
 
 Progress.defaultProps = {
   current: 0,
   color: "royalblue",
+  format: "linear",
   hideLabel: false,
+  width: 120,
   loading: true
 };
 

@@ -73,8 +73,49 @@ Uma barra de progresso de uma tarefa.
           color={customStyle()} />
       </>
     );
+  }
+}
 
-}}
+</Playground>
+
+- Trocando o **formato** da barra de progresso.
+
+<Playground>
+{
+  () => {
+    const [value, setValue] = React.useState(0);
+
+    const init = () => {
+      const timer = useTimer = () => {
+        value < 100 &&
+        setTimeout(() => {
+          setValue(prev => (prev + 15 < 100) ? prev + 15 : 100);
+          useTimer();
+        }, Math.floor((Math.random() * 1000) + 200));
+      }
+      timer();
+      return () => clearTimeout(timer);
+    };
+    const reset = () => { clearTimeout(timer); setValue(0); }
+    const customStyle = () => value >= 100 && '#54b14f'
+
+    return (
+      <>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+          <Button onClick={init} style={{ margin: '5px' }}>Iniciar</Button>
+          <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Reiniciar</Button>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '120px', marginTop: '10px' }}>
+            <Progress
+              current={value}
+              format="circular" color={customStyle()} />
+          </div>
+        </div>
+      </>
+    );
+  }
+}
 
 </Playground>
 
@@ -110,8 +151,8 @@ O propósito principal do componente é mostrar o progresso de uma tarefa. Obser
         <Progress current={value} hideLabel color={customStyle()} />
       </>
     );
-
-} }
+  }
+}
 
 </Playground>
 
