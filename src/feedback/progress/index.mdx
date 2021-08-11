@@ -42,8 +42,8 @@ Uma barra de progresso de uma tarefa.
         <Progress current={value} loading={false} />
       </>
     );
-
-} }
+  }
+}
 
 </Playground>
 
@@ -85,31 +85,24 @@ Uma barra de progresso de uma tarefa.
   () => {
     const [value, setValue] = React.useState(0);
 
-    const init = () => {
-      const timer = useTimer = () => {
-        value < 100 &&
-        setTimeout(() => {
-          setValue(prev => (prev + 15 < 100) ? prev + 15 : 100);
-          useTimer();
-        }, Math.floor((Math.random() * 1000) + 200));
-      }
-      timer();
-      return () => clearTimeout(timer);
-    };
-    const reset = () => { clearTimeout(timer); setValue(0); }
-    const customStyle = () => value >= 100 && '#54b14f'
+    const increment = () => setValue(prev => (prev < 100) ? prev + 25 : prev);
+    const decrement = () => setValue(prev => (prev > 0) ? prev - 25 : prev);
+    const reset = () => setValue(0);
+
+    const customStyle = () => value >= 100 && '#54B14F'
 
     return (
       <>
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-          <Button onClick={init} style={{ margin: '5px' }}>Iniciar</Button>
-          <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Reiniciar</Button>
+          <Button onClick={increment} style={{ margin: '5px' }}>+</Button>
+          <Button onClick={decrement} style={{ margin: '5px' }}>-</Button>
+          <Button onClick={reset} style={{ margin: '5px' }}>Reiniciar</Button>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <div style={{ width: '120px', marginTop: '10px' }}>
             <Progress
               current={value}
-              format="circular" color={customStyle()} />
+              loading={false} format="circular" color={customStyle()} />
           </div>
         </div>
       </>
@@ -122,7 +115,7 @@ Uma barra de progresso de uma tarefa.
 ### Simulação
 
 O propósito principal do componente é mostrar o progresso de uma tarefa.  
-Observe a simulação do comportamento do componente.
+Observe as simulações abaixo:
 
 <Playground>
 {
@@ -150,6 +143,45 @@ Observe a simulação do comportamento do componente.
           <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Reiniciar</Button>
         </div>
         <Progress current={value} hideLabel color={customStyle()} />
+      </>
+    );
+  }
+}
+
+</Playground>
+
+<Playground>
+{
+  () => {
+    const [value, setValue] = React.useState(0);
+
+    const init = () => {
+      const timer = useTimer = () => {
+        value < 100 &&
+        setTimeout(() => {
+          setValue(prev => (prev + 15 < 100) ? prev + 15 : 100);
+          useTimer();
+        }, Math.floor((Math.random() * 1000) + 200));
+      }
+      timer();
+      return () => clearTimeout(timer);
+    };
+    const reset = () => { clearTimeout(timer); setValue(0); }
+    const customStyle = () => value >= 100 && '#54b14f'
+
+    return (
+      <>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+          <Button onClick={init} style={{ margin: '5px' }}>Iniciar</Button>
+          <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Reiniciar</Button>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '120px', marginTop: '10px' }}>
+            <Progress
+              current={value}
+              format="circular" color={customStyle()} />
+          </div>
+        </div>
       </>
     );
   }
