@@ -1,10 +1,9 @@
-import React, { useState as useStateMock } from "react";
+import React from "react";
 import { mount, shallow } from "enzyme";
 
 import Progress from "./Progress.js";
-import Icon from "../../general/icon/Icon.js";
 
-describe("Progress - Snapshot", () => {
+describe("Progress", () => {
   test("Renders the component correctly", () => {
     const wrapper = shallow(<Progress current={20} color="#87CEEB" />);
 
