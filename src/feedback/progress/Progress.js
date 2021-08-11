@@ -12,15 +12,7 @@ import {
   ProgressCircleLabel
 } from "./styles.js";
 
-const Progress = ({
-  current,
-  hideLabel,
-  unitMeasurement,
-  customLabel,
-  color,
-  format,
-  ...props
-}) => {
+const Progress = ({ current, hideLabel, color, format, ...props }) => {
   const progressProps = {
     value: current,
     color,
@@ -30,6 +22,10 @@ const Progress = ({
   const containerProps = {
     format,
     loading: props.loading
+  };
+
+  const wrapperProps = {
+    width: props.width
   };
 
   const getPath = (cx, cy, r) =>
@@ -89,7 +85,7 @@ const Progress = ({
     );
 
   return (
-    <ProgressWrapper>
+    <ProgressWrapper {...wrapperProps}>
       <ContainerBar {...containerProps}>
         {renderProgressBar()}
         {renderLabel()}
@@ -118,7 +114,6 @@ Progress.defaultProps = {
   color: "royalblue",
   format: "linear",
   hideLabel: false,
-  width: 120,
   loading: true
 };
 

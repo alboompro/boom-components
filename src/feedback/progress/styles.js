@@ -28,7 +28,7 @@ const loadingCircleAnimation = keyframes`
 
 export const ProgressWrapper = styled.div`
   display: flex;
-  width: 100%;
+  width: ${props => (props.width ? `${props.width}px` : "100%")};
 `;
 
 export const ContainerBar = styled.div`
