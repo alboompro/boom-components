@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { noop } from "../../helpers";
 
 import {
   ProgressWrapper,
@@ -11,60 +10,30 @@ import {
 } from "./styles.js";
 
 const Progress = ({
-  min,
-  total,
   current,
-  showLabel,
+  hideLabel,
   unitMeasurement,
   customLabel,
-  styleProgress,
   color,
-  icons,
   ...props
 }) => {
-  const [status, setStatus] = useState(0);
-
   const progressProps = {
-    min,
-    max: total,
     value: current,
     color,
-    loading: props.loading,
-    styleProgress
+    loading: props.loading
   };
-
-  const textProps = {
-    unitMeasurement,
-    styleText: props.styleText
-  };
-
-  useEffect(() => {
-    if (current >= total) {
-      // If the progress is 100%
-      setStatus(2);
-    } else if (current > min && current < total) {
-      // If the progress is not 100%
-      setStatus(1);
-    } else if (current == min) {
-      // If the progress is 0%
-      setStatus(0);
-    }
-  }, [current, total, min]);
-
-  const getLabel = () =>
-    customLabel ? (
-      <span>{customLabel[status]}</span>
-    ) : (
-      <span>{`${current}${unitMeasurement}`}</span>
-    );
 
   const renderLabel = () =>
-    showLabel && <ProgressText {...textProps}>{getLabel()}</ProgressText>;
+    !hideLabel && (
+      <ProgressText>
+        <span>{`${current}%`}</span>
+      </ProgressText>
+    );
 
   return (
     <ProgressWrapper>
-      <ContainerBar className="outer">
-        <Bar className="inner">
+      <ContainerBar>
+        <Bar>
           <ProgressBar {...progressProps} />
         </Bar>
       </ContainerBar>
@@ -74,37 +43,23 @@ const Progress = ({
 };
 
 Progress.propTypes = {
-  /** Minimum value of the progress bar */
-  min: PropTypes.number,
-  /** Total value for the progress bar */
-  total: PropTypes.number,
   /** Current value of the progress bar */
   current: PropTypes.number,
   /** Current progress bar color */
   color: PropTypes.string,
-  /** Enables progress bar label */
-  showLabel: PropTypes.bool,
-  /** Measuring unit used on progress bar label */
-  unitMeasurement: PropTypes.string,
-  /** Custom Nodes Array for Progress bar Label */
-  customLabel: PropTypes.array,
+  /** Disable progress bar label */
+  hideLabel: PropTypes.bool,
   /** Enables progress bar with charging animation */
   loading: PropTypes.bool,
-  /** Style object for progress bar */
-  styleProgress: PropTypes.object,
-  /** Style object for progress bar label */
-  styleText: PropTypes.object
+  /** Width of the progress bar */
+  width: PropTypes.number,
 };
 
 Progress.defaultProps = {
-  min: 0,
-  total: 100,
   current: 0,
   color: "royalblue",
-  showLabel: false,
-  unitMeasurement: "%",
-  styleProgress: {},
-  styleText: {}
+  hideLabel: false,
+  loading: true
 };
 
 export default Progress;

@@ -35,7 +35,7 @@ export const Bar = styled.div`
   overflow: hidden;
   border-radius: 100px;
 
-  background-color: #f5f5f5; // To do: add color prop
+  background-color: #f5f5f5;
 `;
 
 export const ProgressBar = styled.div`
@@ -43,14 +43,12 @@ export const ProgressBar = styled.div`
   transition: all 0.5s cubic-bezier(0.08, 0.82, 0.17, 1);
   border-radius: 100px;
 
-  background-color: ${props => props.color};
+  background-color: ${props => (props.color ? props.color : "royalblue")};
   width: ${props => props.value}%;
   height: 8px;
-  ${props => props.styleProgress};
 
   ${props =>
     props.loading &&
-    props.value != props.max &&
     css`
       &:before {
         position: absolute;
@@ -69,11 +67,8 @@ export const ProgressBar = styled.div`
 `;
 
 export const ProgressText = styled.div`
-  ${props =>
-    props.textStyle
-      ? props.textStyle
-      : `margin-left: 8px;
-        font-weight: bold;`};
+  margin-left: 8px;
+  font-weight: bold;
   & > span {
     margin: 0 8px;
   }
