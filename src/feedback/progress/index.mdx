@@ -49,7 +49,7 @@ Uma barra de progresso de uma tarefa.
 
 ### Simulação
 
-O propósito principal do componente é mostrar o progresso de uma tarefa.
+O propósito principal do componente é mostrar o progresso de uma tarefa.  
 Observe a simulação do comportamento do componente.
 
 <Playground>
@@ -184,8 +184,8 @@ Observe a simulação do comportamento do componente.
     return (
       <>
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-          <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Reiniciar</Button>
           <Button onClick={init} style={{ margin: '5px' }}>Iniciar</Button>
+          <Button onClick={() => setValue(0)} style={{ margin: '5px' }}>Reiniciar</Button>
         </div>
         <Progress current={value} showLabel loading
           styleProgress={customStyle() || {}} />
