@@ -33,7 +33,7 @@ export const ProgressWrapper = styled.div`
 
 export const ContainerBar = styled.div`
   ${props => {
-    if (props.format == "linear")
+    if (props.format == "bar")
       return `
         flex: 1;
         display: flex;
@@ -51,7 +51,7 @@ export const ContainerBar = styled.div`
       `;
   }}
   ${props =>
-    props.format == "circular" &&
+    props.format == "circle" &&
     props.loading &&
     css`
       & > svg {

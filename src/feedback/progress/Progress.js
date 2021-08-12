@@ -51,14 +51,14 @@ const Progress = ({ current, hideLabel, color, format, ...props }) => {
 
   const renderLabel = () =>
     !hideLabel &&
-    (format == "linear" ? (
+    (format == "bar" ? (
       <ProgressLineLabel>{`${current}%`}</ProgressLineLabel>
     ) : (
       <ProgressCircleLabel>{`${current}%`}</ProgressCircleLabel>
     ));
 
   const renderProgressBar = () =>
-    format == "linear" ? (
+    format == "bar" ? (
       <ProgressTrailLine>
         <ProgressLine {...progressProps} />
       </ProgressTrailLine>
@@ -104,7 +104,7 @@ Progress.propTypes = {
   /** Enables progress bar with charging animation */
   loading: PropTypes.bool,
   /** Choose the format of the progress bar */
-  format: PropTypes.oneOf(["linear", "circular"]),
+  format: PropTypes.oneOf(["bar", "circle"]),
   /** Width of the progress bar */
   width: PropTypes.number
 };
@@ -112,7 +112,7 @@ Progress.propTypes = {
 Progress.defaultProps = {
   current: 0,
   color: "royalblue",
-  format: "linear",
+  format: "bar",
   hideLabel: false,
   loading: true
 };

@@ -11,13 +11,13 @@ describe("Progress", () => {
   });
   test("Values of props are correct", () => {
     const wrapper = mount(
-      <Progress format="circular" current={20} color="#87CEEB" />
+      <Progress format="circle" current={20} color="#87CEEB" />
     );
 
     expect(wrapper.prop("current")).toBe(20);
     expect(wrapper.prop("hideLabel")).toBe(false);
     expect(wrapper.prop("color")).toEqual("#87CEEB");
-    expect(wrapper.prop("format")).toEqual("circular");
+    expect(wrapper.prop("format")).toEqual("circle");
     expect(wrapper.find("svg")).toHaveLength(1);
   });
 });
