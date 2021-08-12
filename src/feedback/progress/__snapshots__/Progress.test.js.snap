@@ -3,7 +3,7 @@
 exports[`Progress Renders the component correctly 1`] = `
 <styled.div>
   <styled.div
-    format="linear"
+    format="bar"
     loading={true}
   >
     <styled.div>
