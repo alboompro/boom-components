@@ -23,13 +23,10 @@ O breadcrumb deve ser utilizado quando o site possui um sistema de hierarquias, 
 
 <Playground>
     {() => {
-        
-        const selected = crumb => {console.log(crumb);};
+
         const crumbs = [
             {
-                name: 'Home', 
-                link: '#',
-                icon: <Icon kind="bold" group="arrows-diagrams" category="arrows" file="arrow-button-right.svg" size="10" color="#000000" />,
+                customNode: <a href="#"> Home </a>
             },
             {
                 name: 'Busca', 
@@ -43,7 +40,7 @@ O breadcrumb deve ser utilizado quando o site possui um sistema de hierarquias, 
             }
         ];
         return(
-        <Breadcrumb crumbs={crumbs} selected={selected} />     
+        <Breadcrumb crumbs={crumbs} />     
         )
         }
     }
@@ -55,12 +52,9 @@ import Breadcrumb from "@alboom/boom-components/data-display/breadcrumb";
 
     {() => {
 
-        const selected = crumb => {console.log(crumb)};
         const crumbs = [
             {
-                name: 'Home', 
-                link: '#',
-                icon: <Icon kind="bold" group="arrows-diagrams" category="arrows" file="arrow-button-right.svg" size="10" color="#000000" />,
+                customNode: <a href="#"> Home </a>
             },
             {
                 name: 'Busca', 
@@ -74,7 +68,7 @@ import Breadcrumb from "@alboom/boom-components/data-display/breadcrumb";
             }
         ];
         return(
-        <Breadcrumb crumbs={crumbs} selected={selected} />     
+        <Breadcrumb crumbs={crumbs} />     
         )
         }
     }

@@ -1,29 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { noop } from "../../helpers";
-import { Container, Breadcrumbs, Crumb } from "./styles";
+import { Breadcrumbs, Crumb } from "./styles";
 
-const Breadcrumb = ({crumbs, selected}) => {
+const Breadcrumb = ({crumbs}) => {
 
   return (
-    <Container>
-      <nav>
-        <Breadcrumbs>
-          {
-            crumbs.map((crumb) => {
+    <Breadcrumbs>
+      {
+        crumbs.map((crumb, index) => {
 
-              return (
-                <Crumb key={crumb.name}>
-                  <a href={crumb.link} onClick={ () => selected(crumb) }>
-                  { crumb.icon ? "" : crumb.separator }{crumb.icon && crumb.icon}{ crumb.name }
-                  </a>
-                </Crumb>
-              );
-            })
-          }
-        </Breadcrumbs>
-      </nav>
-    </Container>
+          return (
+            <Crumb key={index}>
+              {crumb.customNode ? crumb.customNode :
+                <a href={crumb.link}>
+                  {crumb.icon && crumb.icon}{ crumb.name }{ crumb.separator ? crumb.separator : " / " }
+                </a>
+              }
+            </Crumb>
+          );
+        })
+      }
+    </Breadcrumbs>
   );
 };
 
@@ -32,17 +30,18 @@ Breadcrumb.propTypes = {
   crumbs: PropTypes.arrayOf(PropTypes.object),
   /** item separator */
   separator: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  /** current selected crumb */
-  selected: PropTypes.func,
   /** option to add an icon or leave without one */
-  icon: PropTypes.element 
+  icon: PropTypes.element,
+  /** custom node if you want to place your style of tag and everything*/
+  customNode: PropTypes.node,
+
 };
 
 Breadcrumb.defaultProps = {
   crumbs: {},
   separator: "/",
-  selected: noop,
-  icon: null
+  icon: null,
+  customNode: null
 };
 
 export default Breadcrumb;
