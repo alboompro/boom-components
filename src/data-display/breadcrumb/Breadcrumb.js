@@ -1,25 +1,47 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { noop } from "../../helpers";
+import { Breadcrumbs, Crumb } from "./styles";
 
-const Breadcrumb = ({ ...props }) => <div />;
+const Breadcrumb = ({crumbs}) => {
+
+  return (
+    <Breadcrumbs>
+      {
+        crumbs.map((crumb, index) => {
+
+          return (
+            <Crumb key={index}>
+              {crumb.customNode ? crumb.customNode :
+                <a href={crumb.link}>
+                  {crumb.icon && crumb.icon}{ crumb.name }{ crumb.separator ? crumb.separator : " / " }
+                </a>
+              }
+            </Crumb>
+          );
+        })
+      }
+    </Breadcrumbs>
+  );
+};
 
 Breadcrumb.propTypes = {
-  /** custom item renderer: (route, params, routes, paths) => ReactNode */
-  itemRenderer: PropTypes.func,
-  /** routing parameters */
-  params: PropTypes.object,
   /** routing stack information of router */
-  routes: PropTypes.arrayOf(PropTypes.object),
+  crumbs: PropTypes.arrayOf(PropTypes.object),
   /** item separator */
-  separator: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+  separator: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  /** option to add an icon or leave without one */
+  icon: PropTypes.element,
+  /** custom node if you want to place your style of tag and everything*/
+  customNode: PropTypes.node,
+
 };
 
 Breadcrumb.defaultProps = {
-  itemRenderer: noop,
-  params: {},
-  routes: {},
-  separator: "/"
+  crumbs: {},
+  separator: "/",
+  icon: null,
+  customNode: null
 };
 
 export default Breadcrumb;
