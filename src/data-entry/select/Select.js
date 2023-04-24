@@ -120,10 +120,14 @@ export class Select extends Component {
     }
   };
 
-  selectOption = onClick => {
+  selectOption = (onClick, isButton) => {
     if (onClick) {
       onClick();
     } else {
+      if (isButton) {
+        this.closeDropdown();
+        return;
+      }
       const { options, onChange, autoUpdate } = this.props;
       const { hovered } = this.state;
 
@@ -184,6 +188,7 @@ export class Select extends Component {
       roundedBorder,
       dropdownDirection,
       selectMaxHeight,
+      hoverBgColor,
       zIndex
     } = this.props;
 
@@ -271,7 +276,10 @@ export class Select extends Component {
                   key={`option-${item.value}`}
                   onClick={() =>
                     !item.selected &&
-                    this.selectOption(item.props && item.props.onClick)
+                    this.selectOption(
+                      item.props && item.props.onClick,
+                      item.isButton
+                    )
                   }
                   onMouseEnter={() =>
                     !item.selected && this.setState({ hovered: index })
@@ -282,6 +290,7 @@ export class Select extends Component {
                   multiSelected={item.selected}
                   ref={`optionRef${index}`}
                   innerRef={`optionRef${index}`}
+                  hoverBgColor={hoverBgColor}
                   style={{ ...optionsStyle }}
                 >
                   {React.isValidElement(item) ? item : item.label}
@@ -363,13 +372,16 @@ Select.propTypes = {
   onChange: PropTypes.func,
   /**
    * set array with options value, receive a array width value and label
-   * and label and can be a string/number or node
+   * and label and can be a string/number or node. It also can receive a
+   * prop called isButton, if the option is a button and select should prevent
+   * changing the value when clicking on it.
    */
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.shape({
         label: PropTypes.string,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        isButton: PropTypes.bool
       }),
       PropTypes.node
     ])
@@ -396,6 +408,8 @@ Select.propTypes = {
   selectClassName: PropTypes.string,
   /** select style */
   selectStyle: PropTypes.object,
+  /** option background-color when on hover */
+  hoverBgColor: PropTypes.string,
   /** set dropdown arrow show */
   showArrow: PropTypes.bool,
   /** target when select is render  */
@@ -415,6 +429,7 @@ Select.defaultProps = {
   placeholder: "",
   selectClassName: null,
   selectStyle: null,
+  hoverBgColor: "#f4f4f4",
   showArrow: true,
   target: null,
   value: "",

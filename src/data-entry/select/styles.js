@@ -78,7 +78,7 @@ export const Option = styled.li`
   padding: 0 10px;
   font-size: 14px;
   font-weight: ${props => (props.selected ? "600" : "500")};
-  background-color: ${props => (props.hovered ? "#f4f4f4" : "#fff")};
+  background-color: ${props => (props.hovered ? props.hoverBgColor : "#fff")};
   ${props => props.multiSelected && "color: #b3b3b3"}
 `;
 

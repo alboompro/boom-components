@@ -61,7 +61,6 @@ O Select não possui nenhuma dependência;
               value: e.value
             })
           }
-          disabled
         />
       }
     }
@@ -116,7 +115,7 @@ O Select não possui nenhuma dependência;
           },{
             value: "20", label: <div>node item 20</div>
           },{
-            value: "21", label: <div>node item 21</div>
+            value: "21", label: <div>node item 21</div>, props: { onClick: () => console.log('click') }
           }]
         }
       }
@@ -137,6 +136,7 @@ O Select não possui nenhuma dependência;
           onChange={e => this.setState({
             value: e.value
           })}
+          hoverBgColor="#f8fab3"
         />
       }
     }
