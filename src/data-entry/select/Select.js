@@ -120,14 +120,10 @@ export class Select extends Component {
     }
   };
 
-  selectOption = (onClick, isButton) => {
+  selectOption = onClick => {
     if (onClick) {
       onClick();
     } else {
-      if (isButton) {
-        this.closeDropdown();
-        return;
-      }
       const { options, onChange, autoUpdate } = this.props;
       const { hovered } = this.state;
 
@@ -276,10 +272,7 @@ export class Select extends Component {
                   key={`option-${item.value}`}
                   onClick={() =>
                     !item.selected &&
-                    this.selectOption(
-                      item.props && item.props.onClick,
-                      item.isButton
-                    )
+                    this.selectOption(item.props && item.props.onClick)
                   }
                   onMouseEnter={() =>
                     !item.selected && this.setState({ hovered: index })
@@ -372,16 +365,13 @@ Select.propTypes = {
   onChange: PropTypes.func,
   /**
    * set array with options value, receive a array width value and label
-   * and label and can be a string/number or node. It also can receive a
-   * prop called isButton, if the option is a button and select should prevent
-   * changing the value when clicking on it.
+   * and label and can be a string/number or node.
    */
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.shape({
         label: PropTypes.string,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        isButton: PropTypes.bool
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
       }),
       PropTypes.node
     ])
